@@ -389,6 +389,56 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_cotangent.py` | $R(z)R(-z)$ table; $(-1)^sc_s^2\neq0$; trapezoidal rule passes the linear test but is not symplectic |
 | `verify/test_exotic.py` | multiplier counts loops not aromas ($\lvert DX\rvert_F^2$: no loop, $\times2$; $\langle X,X\rangle$: loopless aroma, $\times1$); the $c_A$ law for $r=2,3,4$; a **polynomial** closed method with no equivariance; gradient fields not stable under $T$ |
 
+## Appendix A. The index calculus — intuition, and what it cannot see
+
+The multipliers of §4 can be *derived* by index bookkeeping. This is worth recording because it
+reproduces every verified number from one rule; it is worth fencing off because it is a
+coordinate shadow of the algebra, not the reason.
+
+**The rule.** On $T^A\mathbb R^n=A^n$ write a real index as $I=(i,\alpha)$ with $\alpha$ the
+$\varepsilon$-level, and let $\{e_\alpha\}$ be an $\mathbb R$-basis of $A$ declared orthonormal, $\{e^\alpha\}$
+its dual. For a base-changed field the node tensor is
+$$f^{(i,\alpha)}_{(j_1\beta_1)\cdots(j_k\beta_k)}
+   =e^{\alpha}\!\left(\partial_{j_1\cdots j_k}\tilde X^{i}\cdot e_{\beta_1}\cdots e_{\beta_k}\right),$$
+because $\partial/\partial x^j=\partial_{z^j}$ while $\partial/\partial v^j=\varepsilon\,\partial_{z^j}$: a lower
+index at level $\beta$ carries $e_\beta$, an upper index at level $\alpha$ reads off $e^\alpha$.
+Summing each contracted pair over its level gives four outcomes, and only four:
+
+| pattern | sum over levels | value | over $D$ |
+|---|---|---|---|
+| **arrow** (upper·lower, distinct legs) | $\sum_\alpha e^\alpha(y)\,e_\alpha$ | $y$ — identity on $A$ | exact |
+| **loop** (upper·lower, same cycle) | $\sum_\alpha e^\alpha(e_\alpha y)$ | $\operatorname{tr}_{A/\mathbb R}(y)=N\operatorname{aug}(y)$ | $2\operatorname{aug}(y)$ |
+| **liana** $\delta^{jk}$ (lower·lower) | $\sum_\alpha e_\alpha^2$ | $c_A$ | $1+\varepsilon^2=1$ |
+| **stolon** $\delta_{jk}$ (upper·upper) | $\sum_\alpha e^\alpha\otimes e^\alpha$ | $g$ | Euclidean form |
+
+The loop entry also explains why a loop evaluated on a lifted field is *fibre-free*: $e^\alpha(e_\alpha y)$
+destroys the $\varepsilon$-part rather than merely rescaling it.
+
+**Three things the calculus cannot see.**
+
+1. *It presupposes the classification it appears to explain.* Which contraction patterns exist at
+   all is the invariant-tensor theorem plus Peetre — i.e. Munthe-Kaas–Verdier and
+   Laurent–Munthe-Kaas. Fix $H=GL$ and only upper–lower pairings exist, so "loops are the only
+   obstruction" looks like a fact about differentiation; fix $H=O(n)$ and $\delta^{jk},\delta_{jk}$
+   appear, and the same rule yields a different answer. The calculus computes *inside* an ambient
+   class; it never produces one. This is precisely why the characterisation is relative (§5).
+2. *It is jet-level.* Every index expression is a statement about a Taylor coefficient, whereas
+   (T) is an exact identity at each fixed $h$; the flat method of §6 has no index expression
+   distinguishing it from Euler.
+3. *It is per-dimension*, and that is where (T) is actually weak. By the extension theorem of §5,
+   (T) constrains no individual $\Psi_d$ at all. No monomial calculus can detect this, since
+   indices live in a fixed dimension while the phenomenon is a relation between $\Psi_n$ and
+   $\Psi_{2n}$.
+
+**What the table really says.** $A^n$ viewed over $\mathbb R$ carries strictly more structure than it
+carries over $A$: $\operatorname{End}_A(A^n)\subsetneq\operatorname{End}_\mathbb R(A^n)$, and an $\mathbb R$-bilinear form on
+$A^n$ need not be $A$-balanced. The four entries are four invariants of the pair (algebra,
+metric) — the identity, the trace form $\operatorname{tr}_{A/\mathbb R}$, the element $c_A=\mu(g^{-1})$, and $g$
+itself. The graph vocabulary merely presents *which $\mathbb R$-multilinear invariants happen to be
+base changes of $A$-multilinear ones*. The calculus reports that self-traces and
+metric-on-evaluations are forbidden; the reason they are forbidden is that base change is a
+functor and those operations are not defined over the base ring.
+
 ## References
 
 * R. I. McLachlan, K. Modin, H. Munthe-Kaas, O. Verdier, *B-series methods are exactly the affine equivariant methods*, Numer. Math. **133** (2016) 599–622. (Def. 2.1–2.3, Thm 2.4, Rmk 2.5.)
