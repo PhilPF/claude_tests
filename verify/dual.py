@@ -143,3 +143,38 @@ def report(name, lhs, rhs, expect=True):
     if not ok and expect:
         print(f"      T(Psi^X) = {lhs}\n      Psi^(TX) = {rhs}")
     return ok == expect
+
+
+class Trunc:
+    """a_0 + a_1 e + ... + a_{r-1} e^{r-1},  e^r = 0.  Generalises Jet to any order."""
+    __slots__ = ('r', 'c')
+
+    def __init__(s, r, *c):
+        s.r = r; s.c = list(c) + [0] * (r - len(c))
+    def _lift(s, o): return o if isinstance(o, Trunc) else Trunc(s.r, o)
+    def __add__(s, o):
+        o = s._lift(o); return Trunc(s.r, *[s.c[i] + o.c[i] for i in range(s.r)])
+    __radd__ = __add__
+    def __sub__(s, o):
+        o = s._lift(o); return Trunc(s.r, *[s.c[i] - o.c[i] for i in range(s.r)])
+    def __rsub__(s, o):
+        o = s._lift(o); return Trunc(s.r, *[o.c[i] - s.c[i] for i in range(s.r)])
+    def __neg__(s): return Trunc(s.r, *[-a for a in s.c])
+    def __mul__(s, o):
+        o = s._lift(o); out = [0] * s.r
+        for i in range(s.r):
+            for j in range(s.r - i):
+                out[i + j] = out[i + j] + s.c[i] * o.c[j]
+        return Trunc(s.r, *out)
+    __rmul__ = __mul__
+    def __eq__(s, o): o = s._lift(o); return s.c == o.c
+    def __repr__(s): return "+".join(f"{a}e{i}" for i, a in enumerate(s.c))
+
+
+def packA(u, r, n=2):
+    """R^{rn} -> A^n with A = R[e]/(e^r); level-major layout u[k*n + j] = x^(k)_j."""
+    return [Trunc(r, *[u[k * n + j] for k in range(r)]) for j in range(n)]
+
+
+def unpackA(w, r, n=2):
+    return [w[j].c[k] for k in range(r) for j in range(n)]

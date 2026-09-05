@@ -145,9 +145,10 @@ $3$ for $\dim_\mathbb R A=3$.
 **The multiplier counts loops, not aromas.** In the $GL$/aromatic world the two coincide: since
 $\sigma$ is a fixed-point-free involution the root's upper index is consumed by the ghost arrow,
 so every non-root component carries exactly one cycle, and a forest with $\alpha$ aromas scales by
-$(\dim_\mathbb R A)^{\alpha}$. In the exotic ($O(n)$) world they **diverge**: $\langle X,X\rangle$ is a
-loopless aroma, and $\lvert DX\rvert_F^2\,X$ — a liana feeding a stolon, with *no loop at all* —
-still has multiplier exactly $2$. So the grading automorphism $\delta_N$ and the slogan
+$(\dim_\mathbb R A)^{\alpha}$. In the exotic ($O(n)$) world they **diverge**, and both halves of that are verified on the zero
+section: $\langle X,X\rangle$ is a loopless aroma with multiplier $1$, while
+$\lvert DX\rvert_F^2\,X$ — a liana feeding a stolon, with *no loop at all* — has multiplier
+exactly $2$. So the grading automorphism $\delta_N$ and the slogan
 "$\operatorname{Fix}(\delta_2)=$ aroma-free" are valid **only within the aromatic class**; in the exotic
 class the multiplier is a count of admissible $\varepsilon$-level assignments, not a power of $N$.
 
@@ -386,6 +387,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/test_contractions.py` | liana (Laplacian) is (T)-natural and not affine equivariant; stolon fails; liana defect over $\varepsilon^3$ equals $\Delta X$ |
 | `verify/test_cotangent.py` | $R(z)R(-z)$ table; $(-1)^sc_s^2\neq0$; trapezoidal rule passes the linear test but is not symplectic |
+| `verify/test_exotic.py` | multiplier counts loops not aromas ($\lvert DX\rvert_F^2$: no loop, $\times2$; $\langle X,X\rangle$: loopless aroma, $\times1$); the $c_A$ law for $r=2,3,4$; a **polynomial** closed method with no equivariance; gradient fields not stable under $T$ |
 
 ## References
 
