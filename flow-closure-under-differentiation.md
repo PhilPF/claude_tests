@@ -118,9 +118,18 @@ $\varepsilon^k$-component. Per contracted pair:
 
 | contraction | graph name | example | real realization on lifted objects | (T)? |
 |---|---|---|---|---|
-| upper $\leftrightarrow$ lower, same factor | **loop / aroma** | $\operatorname{div}X$ | $\operatorname{tr}_{A/\mathbb R}(w)=(\dim_\mathbb R A)\cdot\operatorname{aug}(w)$ — scales by $\dim_\mathbb R A$, fibre-free | ✗ |
-| two **lower** indices, $\delta^{jk}$ | **liana** | $\Delta X$ | $\sum_k\varepsilon^{2k}=1$ **iff** $\varepsilon^2=0$; $=1+\varepsilon^2$ for $r=3$ | ✓ over $D$ only |
-| two **upper** indices, $\delta_{jk}$ | **stolon** | $\langle X,X\rangle$ | $\lvert TX\rvert^2=\lvert X\rvert^2+\lvert DXv\rvert^2$ — neither scaled nor fibre-free | ✗ |
+| one upper, one lower, **different** factors | **arrow** (tree edge) | $DX\,X$ | $\sum_\beta e^\beta(y)e_\beta=y$ — exact, metric-free, no defect | ✓ always |
+| upper $\leftrightarrow$ lower, **same** factor | **loop / aroma** | $\operatorname{div}X$ | identity replaced by $\operatorname{tr}_{A/\mathbb R}(y)=N\cdot\operatorname{aug}(y)$ — real-valued: fibre killed, scaled by $N$ | ✗ |
+| two **lower** indices, $\delta^{jk}$ | **liana** | $\Delta X$ | global factor $c_A$ | ✓ iff $c_A=1$ |
+| two **upper** indices, $\delta_{jk}$ | **stolon** | $\langle X,X\rangle$ | $A$-multiplication $\mu$ replaced by the $\mathbb R$-valued form $g$ — not $A$-bilinear | ✗ |
+
+Here $N=\dim_\mathbb R A$ and, for an $\mathbb R$-basis $\{e_\alpha\}$ of $A$ declared orthonormal (for $A=D$ the
+basis $\{1,\varepsilon\}$, giving the Sasaki metric),
+$$c_A:=\sum_\alpha e_\alpha^2=\mu(g^{-1})\in A .$$
+This single constant governs the liana row and explains everything about it:
+$$c_D=1^2+\varepsilon^2=1,\qquad c_{D^{\otimes m}}=1,\qquad c_{\mathbb R[\varepsilon]/(\varepsilon^{r+1})}=\sum_k\varepsilon^{2k}=1+\varepsilon^2+\cdots\ (r\ge2).$$
+Nor can $c_A=1$ be restored by rescaling the metric: with $g=\operatorname{diag}(1,w_1,\dots)$ one gets
+$c_A=1+w_1^{-1}\varepsilon^2+\cdots$, never $1$.
 
 *(Terminology is that of Laurent–Munthe-Kaas, Def. 2.7: a **liana** identifies two **arrows** —
 a double derivation, i.e. the Laplacian; a **stolon** identifies two **nodes** — a double
@@ -129,10 +138,18 @@ evaluation, i.e. the scalar product.)*
 **Loops.** For $M\in\operatorname{End}_D(D^n)$ one has $\operatorname{tr}_\mathbb R=\operatorname{tr}_{D/\mathbb R}\circ\operatorname{tr}_D$ with
 $\operatorname{tr}_{D/\mathbb R}(a+b\varepsilon)=2a$, because multiplication by $a+b\varepsilon$ has matrix
 $\left(\begin{smallmatrix}a&0\\b&a\end{smallmatrix}\right)$. In general $\operatorname{tr}_{A/\mathbb R}(u)=(\dim_\mathbb R A)\operatorname{aug}(u)$,
-since multiplication by a nilpotent has trace $0$. Hence an aromatic forest with $\alpha$ aromas
-scales by $(\dim_\mathbb R A)^{\alpha}$, and the $\varepsilon$-part is **discarded** — which is why an aroma
-evaluated on a lifted field is fibre-free. Verified: ratios $2,4,8$ for $A=D$ and ratio $3$ for
-$\dim_\mathbb R A=3$.
+since multiplication by a nilpotent has trace $0$. Hence the $\varepsilon$-part is **discarded** — which is why a loop evaluated on a lifted field is
+fibre-free — and each loop scales by $\dim_\mathbb R A$. Verified: ratios $2,4,8$ for $A=D$ and ratio
+$3$ for $\dim_\mathbb R A=3$.
+
+**The multiplier counts loops, not aromas.** In the $GL$/aromatic world the two coincide: since
+$\sigma$ is a fixed-point-free involution the root's upper index is consumed by the ghost arrow,
+so every non-root component carries exactly one cycle, and a forest with $\alpha$ aromas scales by
+$(\dim_\mathbb R A)^{\alpha}$. In the exotic ($O(n)$) world they **diverge**: $\langle X,X\rangle$ is a
+loopless aroma, and $\lvert DX\rvert_F^2\,X$ — a liana feeding a stolon, with *no loop at all* —
+still has multiplier exactly $2$. So the grading automorphism $\delta_N$ and the slogan
+"$\operatorname{Fix}(\delta_2)=$ aroma-free" are valid **only within the aromatic class**; in the exotic
+class the multiplier is a count of admissible $\varepsilon$-level assignments, not a power of $N$.
 
 **Stolons.** The real obstruction is not "two functionals" but **$D$-balancedness**. Any pairing
 of the form $\lambda(\langle a,b\rangle_D)$ satisfies $\langle\varepsilon a,b\rangle=\langle a,\varepsilon b\rangle$. The
@@ -141,8 +158,8 @@ Euclidean (Sasaki) form on $\mathbb R^{2n}$ has $\langle\varepsilon a,b\rangle_\
 slots therefore cannot survive base change.
 
 **Lianas survive by an accident.** The Laplacian passes *not* for a functorial reason but
-because $\sum_k\varepsilon^{2k}=1$ exactly when $\varepsilon^2=0$. This is precisely why the Laplacian
-method is (T)-natural yet not $T^A$-natural for $\dim_\mathbb R A\ge3$ (§7).
+because $c_D=1$, i.e. exactly because $\varepsilon^2=0$. This is precisely why the Laplacian method is
+(T)-natural yet not $T^A$-natural once $c_A\neq1$ (§7).
 
 ---
 
@@ -155,6 +172,19 @@ choose for each odd $m$ an arbitrary partition of $\{1,\dots,m\}$ with an arbitr
 block and propagate along each tower by the $D$-lift: every such sequence is local, consistent
 and (T)-natural, so the (T)-natural class has **the cardinality of the continuum**.
 
+Far more strongly:
+
+> **Extension theorem.** (T) is *vacuous on any single dimension*. Every local smooth $\Psi_q$ in
+> odd dimension $q$ extends to a (T)-natural sequence: $T^A$ of a merely smooth map exists by the
+> finite Taylor formula (as $\mathfrak m$ is nilpotent), and setting
+> $$\Psi_{2q}(Y)(x_0,v_0):=T\bigl(\Psi_q(Y_1(\cdot,v_0))\bigr)(x_0,v_0)$$
+> is local — note that the naive $Y_1(\cdot,0)$ would *not* be — smooth, and reduces to
+> $T(\Psi_q(X))$ when $Y=TX$, since then $Y_1(\cdot,v_0)=X$. Iterate up the tower.
+
+So the map "(T)-natural sequences $\to$ arbitrary sequences in odd dimensions" is **surjective**.
+There is also an explicit *polynomial* (T)-natural method with no equivariance at all, obtained
+by making the offending scalar ring-valued rather than real-valued.
+
 The useful statements are therefore *relative* to an equivariance class, and — because (T) is
 cross-dimensional — that class must be an affine group **scheme**, so that $H(D)$ exists and
 the group acting in dimension $2n$ is $H(D)$, not $H(\mathbb R)$ in dimension $2n$.
@@ -165,8 +195,21 @@ the group acting in dimension $2n$ is $H(D)$, not $H(\mathbb R)$ in dimension $2
 | $O(n)$ | exotic aromatic B-series (Laurent–Munthe-Kaas Thm 2.12) | **exotic B-series** — trees + lianas; loops doubled away, stolons destroyed |
 | $GL(n_1)\times GL(n_2)$ | aromatic P-series *(classification open in print)* | **P-series** *(conjectural)* |
 
+The partitioned row carries a further caveat: "blockwise" is a hypothesis, not a theorem. PRK is
+a (T)-natural family only when indexed by **partitioned** dimensions $(n_1,n_2)\mapsto(2n_1,2n_2)$;
+a family indexed by plain dimension with a fixed first-half partition is not stable under base
+change, since the induced partition of $D^{n_1}\times D^{n_2}$ interleaves. Note also that
+splitting/IMEX methods are (T)-natural and are *not* P-series — nor are they
+$GL(n_1)\times GL(n_2)$-equivariant, so there is no contradiction.
+
 Two remarks worth recording.
 
+* **A limitation not previously flagged.** In the application where exotic series actually
+  arise (Laurent–Munthe-Kaas §4.3; Laurent–Vilmart), the fields are gradients $X=\nabla V$, and
+  there the classification collapses. But **the gradient class is not stable under $T$**: if
+  $X=\nabla V$ then $TX(x,v)=(\nabla V(x),\nabla^2V(x)v)$, whereas
+  $\nabla_{(x,v)}\langle\nabla V(x),v\rangle=(\nabla^2V(x)v,\nabla V(x))$. So (T) is not even well posed
+  on $\mathfrak X^{\nabla}$, and their Thm 4.6 cannot be combined with the row above.
 * **A bridge to their categorical properties.** Laurent–Munthe-Kaas Prop. 4.3 states that
   *exotic B-series are right-orthogonal-equivariant* (equivariance under affine $A$ with
   $AA^\top=I$). So within the local, orthogonal-equivariant, trivially decoupling class, (T) is
@@ -198,6 +241,12 @@ Consequently:
   *in $x$*, after the transfer step has already replaced the method by its Taylor terms.
 * Since $X\mapsto TX$ is $\mathbb R$-linear, (T) *does* descend to every homogeneous Taylor term.
   The failure is entirely in the flat remainder.
+* The same example shows the **converse** directions of MMMV Thm 2.4 and Laurent–Munthe-Kaas
+  Thm 2.13 ("B-series map $\Rightarrow$ affine / semi-orthogonal equivariant") are false as
+  literally stated with those papers' own definitions: it is a B-series map by MMMV Def. 2.3
+  yet is not decoupling. Those implications must be read as statements about the Taylor
+  expansion, with the map identified with its series. The substantive direction
+  (equivariance $\Rightarrow$ series of the stated type) is untouched.
 
 Two distinct pathologies must be kept apart: **flatness in the field**, a $C^\infty$ artefact that
 disappears in the analytic category; and **dimension-incoherence** (§5), which analyticity does
@@ -215,11 +264,12 @@ iterated tangent bundles. It does **not** give $T^A$ for general Weil $A$.
 > for $A=\mathbb R[\varepsilon]/(\varepsilon^3)$: the defect is concentrated in the $\varepsilon^2$ block and equals
 > exactly $\Delta X$. (Verified.)
 
-The mechanism is the liana entry of the table in §4: over $A$ the liana realizes
-$(1+\varepsilon^2)\Delta_A$ instead of $\Delta_A$. Structurally, $\mathbb R[\varepsilon]/(\varepsilon^{r+1})\hookrightarrow D^{\otimes r}$
-via $\varepsilon\mapsto\varepsilon_1+\dots+\varepsilon_r$ is a **subalgebra**, not a quotient, and descent along
-sub/quotient algebra maps needs equivariance under the corresponding non-invertible linear
-maps — exactly the ingredient MMMV isolate.
+The mechanism is the liana constant of §4: $c_{D^{\otimes m}}=1$, so lianas survive every $T^m$,
+whereas $c_{\mathbb R[\varepsilon]/(\varepsilon^3)}=1+\varepsilon^2$, so the liana realizes $(1+\varepsilon^2)\Delta_A$ instead
+of $\Delta_A$ and the defect is $\varepsilon^2\,T^A(\Delta X)$ — exactly the verified $\varepsilon^2$-block
+discrepancy. This *derives* the failure rather than asserting it, and it is the operative
+reason; the observation that $\mathbb R[\varepsilon]/(\varepsilon^{r+1})\hookrightarrow D^{\otimes r}$ is a subalgebra
+rather than a quotient is a corollary, not the cause.
 
 *Positive counterpart.* (T) together with equivariance under linear permutation matrices gives
 $T^{(r)}$-naturality for all $r$ — every higher variational equation — because
@@ -265,9 +315,10 @@ $\Psi^{X^{T^*}}_h=T^*(\Psi^X_h)$.
 | RK4 | $z^6/72+z^8/576$ | ✗ |
 | implicit midpoint | $0$ | ✓ |
 
-These are instances of a theorem, not a coincidence: for a polynomial $R$ of degree $s\ge1$ with
-leading coefficient $c_s$, the top coefficient of $R(z)R(-z)$ is $(-1)^sc_s^2\neq0$, so
-**no consistent explicit Runge–Kutta method can ever satisfy cotangent closure.**
+These are instances of a theorem, not a coincidence. For polynomial $R$, $R(z)R(-z)=1$ forces
+$\deg R=0$ by a degree count — equivalently the top coefficient of $R(z)R(-z)$ is
+$(-1)^sc_s^2\neq0$ — so **no consistent explicit Runge–Kutta method can ever satisfy cotangent
+closure.**
 
 In general the discrete adjoint of RK $(A,b)$ with $b_i\neq0$ is RK with
 $\hat a_{ij}=b_j-b_ja_{ji}/b_i$, $\hat b=b$ (Hager; Sanz-Serna), and closure for a *single*
@@ -299,8 +350,26 @@ the discrete transpose of an RK method is a *different* method. In one line:
 
 ## 11. What remains open
 
-* **Necessity / definability.** Is "$T^A$-natural for every Weil $A$" equivalent to being defined by an $A$-uniform equation (a natural transformation on finite-dimensional commutative $\mathbb R$-algebras)? The $\Leftarrow$ direction is proved; $\Rightarrow$ is conjectural and, by §6, is false in $C^\infty$ without a coherence hypothesis. The natural route is Kolář–Michor–Slovák's theorem that Weil functors are exactly the product-preserving functors, in the analytic or polynomial category.
-* **The $O(n)$ row.** "(T) + orthogonal equivariance + locality + trivial decoupling $\Rightarrow$ exotic B-series" is proved modulo one lemma: linear independence of the $v$-degree-$2j$ stolon corrections, which should follow from the dual-vector-field technique of Laurent–Munthe-Kaas Prop. 4.1.
+* **Definability is impossible — settled negatively.** One might hope to characterise (T)-natural methods intrinsically, presupposing neither an equivariance class nor a series. The extension theorem of §5 rules this out in **every** category — smooth, analytic *or* algebraic — since the counterexamples are already polynomial. What is missing is not regularity but a **dimension-uniformity axiom**; the equivariance hypothesis is not a removable technical convenience, it is exactly the missing content.   The constructive replacement is to stop privileging $D$. Call $\Psi$ **algebraically natural**
+  if for *every* finite-dimensional commutative $\mathbb R$-algebra $A$, $\Psi_{n\dim A}$ restricted to
+  $A$-lifted fields is the $\mathbb R$-realization of the $A$-base change of $\Psi_n$. By
+  Kolář–Michor–Slovák this is exactly naturality with respect to **all product-preserving
+  endofunctors of $\mathbf{Mf}$** — intrinsic, series-free and equivariance-free — and the three
+  algebra types kill the three obstructions separately:
+
+  | algebra | condition it imposes | what it kills |
+  |---|---|---|
+  | $A=\mathbb R^k$ | decoupling $\varphi(f_1\oplus f_2)=\varphi(f_1)\oplus\varphi(f_2)$ | multi-aromas (disconnectedness) |
+  | $A=D$ | (T) | loops and stolons |
+  | $A=\mathbb R[\varepsilon]/(\varepsilon^3)$ | $c_A=1+\varepsilon^2\neq1$ | lianas |
+
+  **Conjecture.** For local, $f$-analytic families: algebraically natural $\iff$ affine
+  equivariant $\iff$ B-series. Here (ii)$\iff$(iii) is MMMV and (iii)$\Rightarrow$(i) is immediate
+  (trees are contractions over any base); (i)$\Rightarrow$(iii) is the open half. The honest doubt:
+  base changes produce only *block* maps $\phi\otimes\operatorname{id}_{\mathbb R^n}$, never mixing the
+  $\mathbb R^n$ directions, so they may not generate $GL(n)$-equivariance on their own — and the
+  partitioned case shows the boundary is delicate.
+* **The $O(n)$ row.** "(T) + orthogonal equivariance + locality + trivial decoupling $\Rightarrow$ exotic B-series" holds one-directionally at jet level. The *loop* half is gap-free: the operator $\Theta=\pi\circ(\cdot)\circ\zeta$ gives $\Theta(F(\gamma))=2^{\ell(\gamma)}F(\gamma)$ for all $\gamma$, and independence of exotic aromatic elementary differentials (Laurent–Munthe-Kaas Prop. 4.1) forces $b(\gamma)=0$ whenever $\gamma$ has a loop. The *stolon* half has one isolated gap: since (T) lives on the thin locus $\{TX\}$, one restricts along $s_W(x)=(x,W(x))$ and needs the **two-coloured** analogue of Prop. 4.1. Their $\theta$-parametrised dual vector fields should carry over, but this is not in the literature.
 * **The $GL(n_1)\times GL(n_2)$ row.** The ambient aromatic-P-series classification is open in print.
 * **Substitution.** $\delta_N$ is an automorphism of the aromatic Butcher *composition* group; its compatibility with the *substitution* law is unverified.
 
