@@ -370,7 +370,38 @@ the discrete transpose of an RK method is a *different* method. In one line:
   base changes produce only *block* maps $\phi\otimes\operatorname{id}_{\mathbb R^n}$, never mixing the
   $\mathbb R^n$ directions, so they may not generate $GL(n)$-equivariance on their own — and the
   partitioned case shows the boundary is delicate.
-* **The $O(n)$ row.** "(T) + orthogonal equivariance + locality + trivial decoupling $\Rightarrow$ exotic B-series" holds one-directionally at jet level. The *loop* half is gap-free: the operator $\Theta=\pi\circ(\cdot)\circ\zeta$ gives $\Theta(F(\gamma))=2^{\ell(\gamma)}F(\gamma)$ for all $\gamma$, and independence of exotic aromatic elementary differentials (Laurent–Munthe-Kaas Prop. 4.1) forces $b(\gamma)=0$ whenever $\gamma$ has a loop. The *stolon* half has one isolated gap: since (T) lives on the thin locus $\{TX\}$, one restricts along $s_W(x)=(x,W(x))$ and needs the **two-coloured** analogue of Prop. 4.1. Their $\theta$-parametrised dual vector fields should carry over, but this is not in the literature.
+* **The $O(n)$ row.** "(T) + orthogonal equivariance + locality + trivial decoupling $\Rightarrow$ exotic B-series" holds one-directionally at jet level. Two corrections to the obvious attack, both verified:
+
+  *The $\Theta$-operator does not act by $2^{\ell}$.* One is tempted to say that
+  $\Theta=\pi\circ(\cdot)\circ\zeta$ satisfies $\Theta(F(\gamma))=2^{\ell(\gamma)}F(\gamma)$ and conclude
+  $b(\gamma)=0$ for every $\gamma$ carrying a loop. This is **false in the exotic class**:
+  $\lvert DX\rvert_F^2X$ has *no loop at all* yet obstructs at base $v$-degree $0$ with multiplier $2$.
+  $\Theta$ acts by $N_0(\gamma)$, the number of zero-cost $\varepsilon$-level assignments, which is not a
+  power of two attached to any graph statistic. The $v$-degree-$0$ equation is therefore
+  $\sum_\gamma b(\gamma)\bigl(N_0(\gamma)-1\bigr)F(\gamma)=0$, killing every $\gamma$ with $N_0\neq1$ — strictly
+  more than the loop-carrying ones. That still drives the theorem (exotic trees have $N_0=1$;
+  $\Delta X$ has identically zero defect), but the surviving class must be characterised as
+  "multiplier $1$", never as "loop-free".
+
+  *The $v$-degree separation is real, but only in the base block.* Expanding the defect in
+  $v=t v_0$:
+
+  | differential | structure | base block | fibre block |
+  |---|---|---|---|
+  | $\operatorname{div}(X)X$ | one loop | $[0]$ | $[1]$ |
+  | $\Delta X$ | liana only | zero | zero |
+  | $\langle X,X\rangle X$ | stolon, no loop | $[2]$ | $[1,3]$ |
+  | $\lvert DX\rvert_F^2X$ | liana+stolon, no loop | $[0,2]$ | $[1,3]$ |
+
+  Pure loops obstruct at base $v$-degree $0$ and pure stolons only at base $v$-degree $2$, so those
+  two cannot cancel and independence is needed only *within* a fixed $v$-degree — weaker than a
+  full independence lemma. The claim that stolons have "minimal $v$-degree exactly $2$" is true of
+  the base block only: the fibre block carries a degree-$1$ defect, $-2\langle X,DXv\rangle X$, from
+  $D(\lvert X\rvert^2X)v=2\langle X,DXv\rangle X+\lvert X\rvert^2DXv$.
+
+  The remaining gap is the *stolon* half: since (T) lives on the thin locus $\{TX\}$, one restricts
+  along $s_W(x)=(x,W(x))$ and needs the **two-coloured** analogue of Laurent–Munthe-Kaas Prop. 4.1.
+  Their $\theta$-parametrised dual vector fields should carry over, but this is not in the literature.
 * **The $GL(n_1)\times GL(n_2)$ row.** The ambient aromatic-P-series classification is open in print.
 * **Substitution.** $\delta_N$ is an automorphism of the aromatic Butcher *composition* group; its compatibility with the *substitution* law is unverified.
 
@@ -387,6 +418,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/test_contractions.py` | liana (Laplacian) is (T)-natural and not affine equivariant; stolon fails; liana defect over $\varepsilon^3$ equals $\Delta X$ |
 | `verify/test_cotangent.py` | $R(z)R(-z)$ table; $(-1)^sc_s^2\neq0$; trapezoidal rule passes the linear test but is not symplectic |
+| `verify/test_vdegree.py` | $v$-degree of the defect, split base/fibre; refutes $\Theta=2^{\ell}$; loop/stolon separation at base degree $0$ vs $2$ |
 | `verify/test_exotic.py` | multiplier counts loops not aromas ($\lvert DX\rvert_F^2$: no loop, $\times2$; $\langle X,X\rangle$: loopless aroma, $\times1$); the $c_A$ law for $r=2,3,4$; a **polynomial** closed method with no equivariance; gradient fields not stable under $T$ |
 
 ## Appendix A. The index calculus — intuition, and what it cannot see
