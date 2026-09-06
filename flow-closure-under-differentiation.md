@@ -133,8 +133,12 @@ give $c_A=1$: with $g=\operatorname{diag}(1,w_1,\dots)$ one gets $c_A=1+w_1^{-1}
 non-diagonal basis can. For $A=\mathbb R[\varepsilon]/(\varepsilon^3)$ take
 $$e_0=1-\tfrac{c^2}{2}\varepsilon^2,\qquad e_1=c\varepsilon+d\varepsilon^2,\qquad e_2=f\varepsilon^2\qquad(c,f\neq0),$$
 a genuine basis (change-of-basis determinant $cf$), for which $c_A=\sum_\alpha e_\alpha^2=1$ **exactly**
-— verified over $\mathbb Q$. So the liana obstruction is a property of the pair (algebra, chosen
-orthonormal basis), not of the algebra alone, and every statement below about lianas failing over
+— verified over $\mathbb Q$. The phenomenon is not confined to that algebra: it bites already for the
+**dual numbers**, where the sheared basis $\{1+\varepsilon,\ \varepsilon\}$ (determinant $1$) gives
+$c_D=(1+\varepsilon)^2+\varepsilon^2=1+2\varepsilon\neq1$. So even "lianas are free under $T$" is relative to the
+*canonical* tangent identification $(x,v)\mapsto x+\varepsilon v$ — which is what makes the standard basis
+the right one, but which must be stated rather than assumed. The liana obstruction is a property of
+the pair (algebra, chosen orthonormal basis), not of the algebra alone, and every statement below about lianas failing over
 $\mathbb R[\varepsilon]/(\varepsilon^3)$ is relative to the standard identification $\{1,\varepsilon,\varepsilon^2\}$. Any
 basis-free formulation must quantify over all $\mathbb R$-bases of $A$. This is one instance of a
 pattern worth stating plainly: **be suspicious of any claim here that silently fixes an
@@ -151,6 +155,17 @@ $\left(\begin{smallmatrix}a&0\\b&a\end{smallmatrix}\right)$. In general $\operat
 since multiplication by a nilpotent has trace $0$. Hence the $\varepsilon$-part is **discarded** — which is why a loop evaluated on a lifted field is
 fibre-free — and each loop scales by $\dim_\mathbb R A$. Verified: ratios $2,4,8$ for $A=D$ and ratio
 $3$ for $\dim_\mathbb R A=3$.
+
+**No power-of-two law survives at all.** Sharper than the loops-vs-aromas correction below: the
+theta graph $\lvert D^2X\rvert_F^2\,X$ — two nodes joined by two lianas and one stolon — has base
+multiplier exactly $\mathbf 3$ (verified). The true multiplier is
+$$N_0(\gamma)=\#\{\text{families of vertex-disjoint \emph{generalised cycles}}\},$$
+a generalised cycle being a closed walk that traverses arrows head-to-tail and *reverses direction*
+at a liana (two lower ends) or a stolon (two upper ends). Half-edge counting gives
+$\#\text{arrows}_1+2\,\#\text{stolons}_1=\#\text{arrows}_1+2\,\#\text{lianas}_1$, so a non-empty
+circulation needs either a directed arrow-cycle **or** at least one liana *and* one stolon. On
+stolon-free forests this collapses to $N_0=2^{\#\text{aromas}}$ — which is exactly why the naive law
+looked right for so long, and exactly why it broke once stolons entered.
 
 **The multiplier counts loops, not aromas.** In the $GL$/aromatic world the two coincide: since
 $\sigma$ is a fixed-point-free involution the root's upper index is consumed by the ghost arrow,
@@ -419,49 +434,75 @@ the discrete transpose of an RK method is a *different* method. In one line:
 * **The $GL(n_1)\times GL(n_2)$ row.** The ambient aromatic-P-series classification is open in print.
 * **Substitution.** $\delta_N$ is an automorphism of the aromatic Butcher *composition* group; its compatibility with the *substitution* law is unverified.
 
-### Round-4 status (single-source; replication in progress)
+### Round-4 status (two independent passes, converging)
 
-An independent pass produced the following. Items marked *verified* were re-checked here; the
-rest are recorded with their provenance and are **not** yet corroborated by a second pass.
+Two independent agents attacked the open items; they agree on every substantive point below, and
+the starred items were re-verified here. Items still resting on a single pass are marked.
 
-* **$N_0$, characterised.** $N_0(\gamma)>1$ iff $\gamma$ carries a non-empty *$\varepsilon$-circulation*: a
-  root-avoiding vertex set decomposing into arrow-cycles together with vertex-disjoint arrow-paths
-  running from a level-1 liana end to a level-1 stolon end, with equal counts of each. In the
-  aromatic case this collapses to $N_0=2^{a(\gamma)}$. Exhaustive over the 62 exotic aromatic
-  forests with $\le3$ nodes: 28 have $N_0=1$, of which 17 are exotic trees (defect $\equiv0$) and
-  **11 are stolon-carrying survivors** — that set is precisely the gap.
-* **Route (a) closes; route (b) alone does not.** Stolon-carriers with $N_0=1$ are invisible to the
-  v-degree-0 equation, so their obstruction must be read at base v-degree 2 and some independence
-  statement is unavoidable. What the v-degree grading buys is **triangularity**: erasing the
-  $v$-leaves from a decorated forest recovers $\gamma$, so distinct $\gamma$ contribute disjoint
-  families and no cross-$\gamma$ cancellation is possible. Lemma L then kills every stolon-carrier.
-* **Lemma L, reduced.** A $v$-leaf carries no derivative, so Lemma L is exactly the bicoloured
-  Laurent–Munthe-Kaas Prop. 4.1 with the second colour confined to leaves and specialised to a
-  constant field. Not in print; the proof should be theirs verbatim with one extra colour.
-  Verified in the form needed: the 10 pairwise-distinct stolon-carrying survivors have
-  full-rank-10 obstructions over $\mathbb Q$ in $n=3,4,5$. *(Methodological note: an initial run
-  reported a spurious rank deficiency caused by two presentations of the same forest under
-  renaming of an internal index. Forests must be canonicalised before independence is tested.)*
-* **C2 closes**, and needs no Lemma L: with no metric there are no lianas or stolons, so the base
-  block yields the single equation $\sum_\gamma b(\gamma)(2^{a(\gamma)}-1)F(\gamma)=0$ and bicoloured
-  aromatic independence leaves exactly the bicoloured trees, i.e. P-series.
-* **C3: coherence is the right definition, and $n=1$ is the sharp instrument.** Requiring
-  coherence across all factorizations $m=n\dim A$ and specialising to $n=1$ forces trivial
-  partitions (so no non-trivial PRK is algebraically natural) and dimension-independent
-  coefficients (so the tower-incoherent families die). Algebraic naturality is therefore strictly
-  stronger than (T).
-* **C3: coherence does NOT recover $GL(n)$-equivariance — and my stated doubt was wrong.** I had
-  worried the group was too small, base changes giving only block maps $\phi\otimes\operatorname{id}$.
-  In fact the group is *large enough*: together with the basis changes $\operatorname{id}_n\otimes GL(N,\mathbb R)$
-  one generates $\mathfrak{gl}(n)\otimes\mathfrak{gl}(N)=\mathfrak{gl}(nN)$ (verified: Lie closure
-  $16/16$ and $36/36$ in several cases). The real obstruction is that **every such map preserves
-  the lifted locus**, so naturality only ever compares $\Psi$ at one lifted field with $\Psi$ at
-  another, whereas equivariance compares a lifted field with a generic one. The locus is thin, not
-  the group small. Consequently the conjecture "algebraically natural $\Rightarrow$ affine
-  equivariant" is *likely false* for smooth methods, by the mechanism of the extension theorem; a
-  counterexample was sketched but its gluing lemma is not proved. What would rescue it is a
-  **definability** hypothesis — one universal formula with dimension-independent coefficients —
-  not more naturality.
+* **The multiplier law, exactly.** $N_0(\gamma)$ counts families of vertex-disjoint generalised
+  cycles (§4). $N_0=2^{\#\text{aromas}}$ on stolon-free forests; $\mathbf{N_0=3}$ for the theta graph
+  $\lvert D^2X\rvert_F^2X$ ★. The $v$-degree-$0$ equation $\sum_\gamma b(\gamma)(N_0(\gamma)-1)F(\gamma)=0$
+  therefore kills $\gamma$ iff it carries an aroma **or** a liana–stolon alternating cycle.
+* **Defect characterisation.** For a single elementary differential the defect vanishes
+  identically **iff** $\gamma$ has no stolon and no directed arrow-cycle — i.e. iff $\gamma$ is an
+  exotic tree. Verified exhaustively on all 84 iso-classes with $\le4$ nodes. This matches
+  Laurent–Munthe-Kaas Thm 2.13's right-orthogonal class exactly, so the $O(n)$ target is precisely
+  *(T) $\Rightarrow$ right-orthogonal equivariance*.
+* **Parity, with a clean proof.** Base block carries only even $v$-degrees, fibre only odd —
+  because $\varphi=(\operatorname{id},-\operatorname{id})\in O(2n)$ fixes $TX$ pointwise, so $O(2n)$-equivariance
+  forces the parity. (The level-counting proof of Appendix A gives the same.) ★ consistent with the
+  measured table.
+* **Route (b) does not close; route (a) is required — but is triangular.** Trivial decoupling kills
+  disconnected forests, and $v$-degree $0$ kills $N_0\neq1$. What survives is non-empty: *connected
+  exotic aromatic forests carrying a stolon with $N_0=1$*, minimal member (3 nodes)
+  $\partial_{jk}X^i\,\partial_jX^a\,\partial_kX^a$. For these the base defect starts at $v$-degree 2 and the
+  fibre $v$-degree-1 defect vanishes identically, so no equation among undecorated differentials
+  sees them. Independence at $v$-degree 2 is unavoidable. It is however *triangular*: erasing the
+  $v$-leaves recovers $\gamma$, so distinct $\gamma$ contribute disjoint families and no cross-$\gamma$
+  cancellation is possible.
+* **Lemma L, reduced and tested.** Attaching a fresh $Y$-leaf at each $v$-slot is injective onto
+  bicoloured forests whose $Y$-nodes are sourceless derivative-free leaves, so Lemma L follows from
+  the two-colour version of Laurent–Munthe-Kaas Prop. 4.1 with $Y$ constant. The proof should be
+  theirs with one extra colour and the $\theta$-parameters retained — their Prop. 4.1 explicitly
+  notes the $\theta$-free dual field is *insufficient*. Conclusion verified on the whole residual
+  class up to 4 nodes (full rank).
+* **C2: the (T) half is proved.** With no metric there are no lianas or stolons, so $s_1=0$ forces
+  base $v$-degree $\equiv0$: a single equation, killed by bicoloured aromatic independence, leaving
+  exactly the bicoloured trees. The fibre $v$-degree-1 defect vanishes because in an aroma-free
+  forest each node has a unique path to the root. **No Lemma L needed.** Only the ambient step
+  (transcribing LMK §3 with the $GL(V_1)\times GL(V_2)$ FFT) remains open.
+* **C3, the coherence subtlety — settled, but by a different mechanism than proposed** ★. For *any*
+  finite-dimensional commutative $A$ and *any* basis, a **linear** field $M$ realises as
+  $M^A=I_N\otimes M$. Hence the $D$-lifted and $\mathbb R^2$-lifted loci coincide exactly on linear
+  fields, and demanding both prescriptions forces
+  $$D\Psi^M(x)\,v=\Psi^M(v)\quad\text{for all }x,v,$$
+  i.e. $\Psi^M$ is **linear** for every linear field. Verified: Euler ✓, RK4 ✓, and the
+  (T)-natural non-equivariant method $u+hX+h^2(X^1)^2X$ ✗. So the killing factorisation is the pair
+  $(2,D)$ vs $(2,\mathbb R^2)$ — a one-line identity — not the $n=1$ argument I had guessed.
+* **Scalar rigidity.** If $\Psi_m=u+hX+h^2q_m(j^rX(u))X(u)+O(h^3)$ with $q_m$ **real-valued** and
+  $\Psi$ is (T)-natural as a family indexed by *real dimension*, then every $q_m$ is constant
+  ($\operatorname{div}X$, $\lvert X\rvert^2$, $(X^1)^2$ all fail; $q\equiv1$ passes). A real-valued
+  contraction multiplies by a real scalar, whereas base change demands an $A$-scalar.
+* **A definitional horn dilemma.** Quantifying algebraic naturality over *all* $\mathbb R$-bases $\iota$
+  is **too strong**: taking $A=\mathbb R$ makes $\iota\in GL(n)$ arbitrary and the condition *states*
+  $GL(n)$-equivariance by fiat, trivialising the conjecture. Fixing one $\iota$ per $A$ is the right
+  definition; the resulting basis-relativity is then $GL$-conjugation, hence invisible for
+  equivariant $\Psi$ and visible only where the conjecture lives. *(This corrects the instruction I
+  gave — "quantify over all bases" — which would have been vacuous.)*
+* **Two scope corrections.** The legitimate class is Weil algebras **and their finite products**,
+  not all finite-dimensional commutative $\mathbb R$-algebras ($\mathbb C$ gives no product-preserving
+  functor on real manifolds). And $A=\mathbb R^k$ yields only *diagonal* decoupling, not
+  $\Psi^{X\oplus Y}=\Psi^X\oplus\Psi^Y$ — though that still kills every forest with a non-root
+  component.
+* **Coherence does not recover $GL(n)$-equivariance.** Both passes say no. They locate it
+  differently — one finds the group large enough ($\mathfrak{gl}(nN)$ is generated) but the lifted
+  locus too thin; the other observes that coherence is not a group action at all, being a system of
+  restriction conditions on overlapping thin loci. The disagreement traces to the horn dilemma
+  above: the "all bases" reading supplies the extra generators but trivialises the question.
+* **A trap worth recording.** Testing on a *quadratic* field makes $\Delta X$ constant and produces
+  a spurious exception; and taking $v:=X(x)$ as a shortcut in Lemma L destroys injectivity and
+  manufactures exactly the false relations one is trying to rule out. Forests must be canonicalised
+  up to renaming of internal indices before independence is tested.
 
 ## 12. Verified computations
 
