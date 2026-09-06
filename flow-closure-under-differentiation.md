@@ -128,8 +128,18 @@ basis $\{1,\varepsilon\}$, giving the Sasaki metric),
 $$c_A:=\sum_\alpha e_\alpha^2=\mu(g^{-1})\in A .$$
 This single constant governs the liana row and explains everything about it:
 $$c_D=1^2+\varepsilon^2=1,\qquad c_{D^{\otimes m}}=1,\qquad c_{\mathbb R[\varepsilon]/(\varepsilon^{r+1})}=\sum_k\varepsilon^{2k}=1+\varepsilon^2+\cdots\ (r\ge2).$$
-Nor can $c_A=1$ be restored by rescaling the metric: with $g=\operatorname{diag}(1,w_1,\dots)$ one gets
-$c_A=1+w_1^{-1}\varepsilon^2+\cdots$, never $1$.
+**$c_A$ is basis-dependent, and this matters.** Diagonal rescalings of the standard basis never
+give $c_A=1$: with $g=\operatorname{diag}(1,w_1,\dots)$ one gets $c_A=1+w_1^{-1}\varepsilon^2+\cdots$. But a
+non-diagonal basis can. For $A=\mathbb R[\varepsilon]/(\varepsilon^3)$ take
+$$e_0=1-\tfrac{c^2}{2}\varepsilon^2,\qquad e_1=c\varepsilon+d\varepsilon^2,\qquad e_2=f\varepsilon^2\qquad(c,f\neq0),$$
+a genuine basis (change-of-basis determinant $cf$), for which $c_A=\sum_\alpha e_\alpha^2=1$ **exactly**
+— verified over $\mathbb Q$. So the liana obstruction is a property of the pair (algebra, chosen
+orthonormal basis), not of the algebra alone, and every statement below about lianas failing over
+$\mathbb R[\varepsilon]/(\varepsilon^3)$ is relative to the standard identification $\{1,\varepsilon,\varepsilon^2\}$. Any
+basis-free formulation must quantify over all $\mathbb R$-bases of $A$. This is one instance of a
+pattern worth stating plainly: **be suspicious of any claim here that silently fixes an
+identification $\mathbb R^{n\dim A}\cong A^n$** — the partitioned-RK lift (§2) was the first instance,
+this is the second.
 
 *(Terminology is that of Laurent–Munthe-Kaas, Def. 2.7: a **liana** identifies two **arrows** —
 a double derivation, i.e. the Laplacian; a **stolon** identifies two **nodes** — a double
@@ -200,8 +210,11 @@ The partitioned row carries a further caveat: "blockwise" is a hypothesis, not a
 a (T)-natural family only when indexed by **partitioned** dimensions $(n_1,n_2)\mapsto(2n_1,2n_2)$;
 a family indexed by plain dimension with a fixed first-half partition is not stable under base
 change, since the induced partition of $D^{n_1}\times D^{n_2}$ interleaves. Note also that
-splitting/IMEX methods are (T)-natural and are *not* P-series — nor are they
-$GL(n_1)\times GL(n_2)$-equivariant, so there is no contradiction.
+splitting/IMEX methods are not a counterexample to the row at all: they are maps of a
+**pair** of fields on one space (additive / bicoloured B-series), a different functor, rather than
+equivariant maps of a single field on a partitioned space. The group must also be taken
+**affine**, $(GL(V_1)\ltimes V_1)\times(GL(V_2)\ltimes V_2)$: with the linear group alone, explicit
+$x$-dependence survives the classification.
 
 Two remarks worth recording.
 
@@ -262,8 +275,9 @@ $T^{A\otimes B}=T^A\circ T^B$, so (T) gives $T^{D^{\otimes m}}=T^m$-naturality f
 iterated tangent bundles. It does **not** give $T^A$ for general Weil $A$.
 
 > **Witness.** The Laplacian method satisfies (T) and every $T^m$, yet fails $T^A$-naturality
-> for $A=\mathbb R[\varepsilon]/(\varepsilon^3)$: the defect is concentrated in the $\varepsilon^2$ block and equals
-> exactly $\Delta X$. (Verified.)
+> for $A=\mathbb R[\varepsilon]/(\varepsilon^3)$ **with the standard identification**: the defect is concentrated
+> in the $\varepsilon^2$ block and equals exactly $\Delta X$. (Verified.) The qualifier is not cosmetic —
+> by §4 there is a basis of that same algebra in which $c_A=1$ and the method passes.
 
 The mechanism is the liana constant of §4: $c_{D^{\otimes m}}=1$, so lianas survive every $T^m$,
 whereas $c_{\mathbb R[\varepsilon]/(\varepsilon^3)}=1+\varepsilon^2$, so the liana realizes $(1+\varepsilon^2)\Delta_A$ instead
@@ -405,6 +419,50 @@ the discrete transpose of an RK method is a *different* method. In one line:
 * **The $GL(n_1)\times GL(n_2)$ row.** The ambient aromatic-P-series classification is open in print.
 * **Substitution.** $\delta_N$ is an automorphism of the aromatic Butcher *composition* group; its compatibility with the *substitution* law is unverified.
 
+### Round-4 status (single-source; replication in progress)
+
+An independent pass produced the following. Items marked *verified* were re-checked here; the
+rest are recorded with their provenance and are **not** yet corroborated by a second pass.
+
+* **$N_0$, characterised.** $N_0(\gamma)>1$ iff $\gamma$ carries a non-empty *$\varepsilon$-circulation*: a
+  root-avoiding vertex set decomposing into arrow-cycles together with vertex-disjoint arrow-paths
+  running from a level-1 liana end to a level-1 stolon end, with equal counts of each. In the
+  aromatic case this collapses to $N_0=2^{a(\gamma)}$. Exhaustive over the 62 exotic aromatic
+  forests with $\le3$ nodes: 28 have $N_0=1$, of which 17 are exotic trees (defect $\equiv0$) and
+  **11 are stolon-carrying survivors** — that set is precisely the gap.
+* **Route (a) closes; route (b) alone does not.** Stolon-carriers with $N_0=1$ are invisible to the
+  v-degree-0 equation, so their obstruction must be read at base v-degree 2 and some independence
+  statement is unavoidable. What the v-degree grading buys is **triangularity**: erasing the
+  $v$-leaves from a decorated forest recovers $\gamma$, so distinct $\gamma$ contribute disjoint
+  families and no cross-$\gamma$ cancellation is possible. Lemma L then kills every stolon-carrier.
+* **Lemma L, reduced.** A $v$-leaf carries no derivative, so Lemma L is exactly the bicoloured
+  Laurent–Munthe-Kaas Prop. 4.1 with the second colour confined to leaves and specialised to a
+  constant field. Not in print; the proof should be theirs verbatim with one extra colour.
+  Verified in the form needed: the 10 pairwise-distinct stolon-carrying survivors have
+  full-rank-10 obstructions over $\mathbb Q$ in $n=3,4,5$. *(Methodological note: an initial run
+  reported a spurious rank deficiency caused by two presentations of the same forest under
+  renaming of an internal index. Forests must be canonicalised before independence is tested.)*
+* **C2 closes**, and needs no Lemma L: with no metric there are no lianas or stolons, so the base
+  block yields the single equation $\sum_\gamma b(\gamma)(2^{a(\gamma)}-1)F(\gamma)=0$ and bicoloured
+  aromatic independence leaves exactly the bicoloured trees, i.e. P-series.
+* **C3: coherence is the right definition, and $n=1$ is the sharp instrument.** Requiring
+  coherence across all factorizations $m=n\dim A$ and specialising to $n=1$ forces trivial
+  partitions (so no non-trivial PRK is algebraically natural) and dimension-independent
+  coefficients (so the tower-incoherent families die). Algebraic naturality is therefore strictly
+  stronger than (T).
+* **C3: coherence does NOT recover $GL(n)$-equivariance — and my stated doubt was wrong.** I had
+  worried the group was too small, base changes giving only block maps $\phi\otimes\operatorname{id}$.
+  In fact the group is *large enough*: together with the basis changes $\operatorname{id}_n\otimes GL(N,\mathbb R)$
+  one generates $\mathfrak{gl}(n)\otimes\mathfrak{gl}(N)=\mathfrak{gl}(nN)$ (verified: Lie closure
+  $16/16$ and $36/36$ in several cases). The real obstruction is that **every such map preserves
+  the lifted locus**, so naturality only ever compares $\Psi$ at one lifted field with $\Psi$ at
+  another, whereas equivariance compares a lifted field with a generic one. The locus is thin, not
+  the group small. Consequently the conjecture "algebraically natural $\Rightarrow$ affine
+  equivariant" is *likely false* for smooth methods, by the mechanism of the extension theorem; a
+  counterexample was sketched but its gluing lemma is not proved. What would rescue it is a
+  **definability** hypothesis — one universal formula with dimension-independent coefficients —
+  not more naturality.
+
 ## 12. Verified computations
 
 All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
@@ -445,6 +503,19 @@ Summing each contracted pair over its level gives four outcomes, and only four:
 
 The loop entry also explains why a loop evaluated on a lifted field is *fibre-free*: $e^\alpha(e_\alpha y)$
 destroys the $\varepsilon$-part rather than merely rescaling it.
+
+**Level bookkeeping and a parity law.** Write $k_v$ for the upper level of a node and
+$K_v=\sum(\text{incoming arrow levels})$. Since $\partial^kX(z)=\partial^kX(x)+\varepsilon\,\partial_m\partial^kX(x)v^m$,
+the node contributes $0$ when $K_v\ge2$; $\partial^qX$ when $K_v=k_v$; and $\partial_m\partial^qX\,v^m$
+(v-degree $+1$) exactly in the state $(K_v,k_v)=(0,1)$. Counting arrow sources twice,
+$$\textstyle\sum_vK_v=\sum_{\rm arrows}k_{\rm src}+2l_1,\qquad
+  \sum_vk_v=\sum_{\rm arrows}k_{\rm src}+2s_1+k_{\rm out},$$
+so $\sum_v(k_v-K_v)=2(s_1-l_1)+k_{\rm out}$ with $l_1,s_1$ the numbers of level-1 lianas and
+stolons. On non-vanishing terms $k_v-K_v\in\{0,1\}$, giving
+$$\textbf{v-degree}=2(s_1-l_1)+[k_{\rm out}=1].$$
+**Corollary: the base block carries only even v-degrees and the fibre block only odd ones** — which
+is exactly the pattern of the measured table in §11 ($[0]$ vs $[1]$; $[2]$ vs $[1,3]$; $[0,2]$ vs
+$[1,3]$).
 
 **Three things the calculus cannot see.**
 

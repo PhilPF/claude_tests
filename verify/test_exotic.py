@@ -49,6 +49,23 @@ def main():
         print(f"    r={r}: c_A = {cA}   defect matches (c_A-1)*T^A(Delta X): {m}"
               + ("   (c_A = 1: liana is free)" if r == 2 else ""))
 
+    # --- 2b. c_A is BASIS-DEPENDENT ------------------------------------------
+    # diagonal rescalings never give c_A = 1, but a non-diagonal basis does.
+    def cA(bs, r=3):
+        t = Trunc(r)
+        for e in bs: t = t + e * e
+        return t
+    std = cA([Trunc(3, 1, 0, 0), Trunc(3, 0, 1, 0), Trunc(3, 0, 0, 1)])
+    print(f"\n  c_A for A = R[e]/(e^3):  standard basis -> {std.c}   (= 1: {std.c == [1,0,0]})")
+    allone = True
+    for c, d, f in [(F(1), F(0), F(1)), (F(2), F(-3), F(5)), (F(1,3), F(7,2), F(4))]:
+        b = [Trunc(3, 1, 0, -c * c / 2), Trunc(3, 0, c, d), Trunc(3, 0, 0, f)]
+        one = cA(b).c == [1, 0, 0]; allone &= one and (c * f != 0)
+        print(f"    basis (c={c}, d={d}, f={f}), det={c*f}:  c_A = {cA(b).c}   (= 1: {one})")
+    print(f"    -> the liana obstruction depends on the chosen orthonormal basis,"
+          f" not on A alone: {allone and std.c != [1,0,0]}")
+    ok &= allone and std.c != [1, 0, 0]
+
     # --- 3. a polynomial closed method with NO equivariance -------------------
     # Psi(u) = u + h f + h^2 (f^1)^2 f, with the scalar squared in the RING.
     def m_ring(f, u, h, n):
