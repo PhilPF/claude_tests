@@ -35,17 +35,22 @@ a settled result without new evidence is the waste this file exists to prevent.
 
 | finding | evidence | what would overturn it |
 |---|---|---|
-| The multiplier is $N_0$, counting families of vertex-disjoint generalised cycles | two independent passes; one spot-check here (theta graph $=3$) | a forest whose measured base multiplier differs from its $N_0$ |
+| The multiplier is $N_0$, counting families of vertex-disjoint generalised cycles | two independent passes; five-case stress test here (`verify/test_n0.py`), incl. the decisive pair and a multiplicative mixed case | a forest whose measured base multiplier differs from its $N_0$ |
 | Defect $\equiv0$ iff the forest is an exotic tree | exhaustive over 84 iso-classes, $\le4$ nodes | an exotic tree with non-zero defect, or a non-exotic forest with zero defect |
 | Base block even $v$-degrees, fibre odd | two proofs (level counting; $(\mathrm{id},-\mathrm{id})\in O(2n)$ fixes $TX$) plus measurement | any measured defect of the wrong parity |
 | Closure does not imply B-series | PRK and the Laplacian method, both verified | — (a counterexample stands) |
 | Closure is not a jet condition | the flat method $\theta(h\operatorname{div}X)hX$ | — |
 
-**Apply this to $N_0$ first.** It is the newest and least-corroborated item, and it is exactly the
-kind of clean combinatorial law that has already failed three times here: $2^{\text{aromas}}$, then
+**$N_0$ has now survived the test that killed its predecessors.** It is the newest item, and it is
+the kind of clean combinatorial law that failed three times here: $2^{\text{aromas}}$, then
 $2^{\text{loops}}$, then any power of two — each held in the $GL$ world where the examples live and
-broke once metric contractions entered. Treating $N_0$ as settled would repeat that mistake. It has
-not been tested on forests with several interacting lianas and stolons.
+broke once metric contractions entered. So it was stress-tested on forests with several interacting
+decorations (`verify/test_n0.py`). The decisive pair: the theta graph $\lvert D^2X\rvert_F^2X$ and the
+minimal residual forest $\partial_{jk}X^i\partial_jX^a\partial_kX^a$ carry **identical** decorations —
+two lianas and one stolon — yet measure $3$ and $1$. So $N_0$ is structural, not a tally. It is also
+multiplicative over disjoint cycles ($\operatorname{div}(X)\lvert DX\rvert_F^2X$ measures $4=2\times2$).
+Still untested: forests where three or more cycles share vertices, so that the disjointness
+condition actually bites.
 
 ## Cost discipline
 
