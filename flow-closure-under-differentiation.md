@@ -428,9 +428,33 @@ the discrete transpose of an RK method is a *different* method. In one line:
   the base block only: the fibre block carries a degree-$1$ defect, $-2\langle X,DXv\rangle X$, from
   $D(\lvert X\rvert^2X)v=2\langle X,DXv\rangle X+\lvert X\rvert^2DXv$.
 
-  The remaining gap is the *stolon* half: since (T) lives on the thin locus $\{TX\}$, one restricts
-  along $s_W(x)=(x,W(x))$ and needs the **two-coloured** analogue of Laurent–Munthe-Kaas Prop. 4.1.
-  Their $\theta$-parametrised dual vector fields should carry over, but this is not in the literature.
+  The remaining gap was the *stolon* half: since (T) lives on the thin locus $\{TX\}$, the obstruction
+  of a stolon-carrying forest with $N_0=1$ appears only at base $v$-degree 2, so an independence
+  statement there — **Lemma L** — is unavoidable.
+
+  **Lemma L is now proved** *(single source; audit in progress)*, and not by the route anyone
+  proposed. No dual vector fields and no $\theta$-parameters are needed. Set $x=0$ and pair with
+  $u$; the jet tensors $c_k=\partial^kX(0)$ are freely prescribable by a polynomial field, so the
+  relation becomes a polynomial identity and multihomogeneity separates valence profile from
+  $v$-degree. One profile then gives a slot set $H$ of size $2N$,
+  $N=1+d+\#\text{arrows}+\#\text{lianas}+\#\text{stolons}$ (upper slots $m=1+a+2s$, lower slots
+  $\sum_tk_t=a+2l+d$), and each elementary differential becomes a perfect matching $\Phi_M$ of $H$.
+  The hinge is that
+  $$\tilde G=\Bigl(\textstyle\prod_k\bigl(S_{m_k}\ltimes(S_k)^{m_k}\bigr)\Bigr)\times S_d$$
+  has orbits *exactly* the isomorphism classes of $v$-decorated forests — neither too small (which
+  would split one forest across orbits and manufacture a false relation) nor too large (which would
+  merge two). The jet data span $(V^{\otimes H})^{\tilde G}$ by polarisation, $\Phi_M$ restricted
+  there is the $\tilde G$-orbit sum, distinct forests give disjoint orbits and hence disjoint
+  supports, and matchings are linearly independent once $n\ge N$. So every coefficient vanishes.
+
+  The one external ingredient is independence of Brauer matchings for $n\ge\lvert H\rvert/2$ — the
+  **easy** half of $O(n)$ invariant theory; the argument never uses that contractions *span*. The
+  result is more general than needed: any $v$-degree, any number of colours, no restriction to the
+  residual class. The bound $n\ge N$ is probably not sharp ($n\ge\lvert V\rvert+1$ is conjectured).
+
+  This also sharpens the standing trap about the shortcut $v:=X(x)$: it enlarges $S_{m_0}\times S_d$
+  to $S_{m_0+d}$ and fuses orbits **iff** the forest already has a derivative-free node, so it is
+  invisible on profiles with $m_0=0$ — which is why it is easy to miss.
 * **The $GL(n_1)\times GL(n_2)$ row.** The ambient aromatic-P-series classification is open in print.
 * **Substitution.** $\delta_N$ is an automorphism of the aromatic Butcher *composition* group; its compatibility with the *substitution* law is unverified.
 
