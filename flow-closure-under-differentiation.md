@@ -450,7 +450,22 @@ the discrete transpose of an RK method is a *different* method. In one line:
   The one external ingredient is independence of Brauer matchings for $n\ge\lvert H\rvert/2$ — the
   **easy** half of $O(n)$ invariant theory; the argument never uses that contractions *span*. The
   result is more general than needed: any $v$-degree, any number of colours, no restriction to the
-  residual class. The bound $n\ge N$ is probably not sharp ($n\ge\lvert V\rvert+1$ is conjectured).
+  residual class.
+
+  **Audited independently; it stands, with corrections.** The bound is on $N=m-s+l+d$, *not* on the
+  node count — the theta graph has $m=3,N=4$ while $\langle X,X\rangle X$ has $m=3,N=2$; $n\ge N$ is
+  probably not sharp ($n\ge\lvert V\rvert+1$ is conjectured). The audit also found the first rank
+  drop in this project: the profile $(2,2,2)$ at $d=0$ has 16 iso-classes but rank only 15 in
+  dimension 3, becoming full at $n=4$ — so the dimension hypothesis genuinely bites rather than
+  being a formality. Theoretical and empirical ranks agree even where deficient, sharp evidence that
+  the polarisation step loses nothing. Step 1's correspondence was checked on 1690 matchings and
+  Step 3's invariant subspace against Burnside in 12 cases.
+
+  One methodological correction, now a standing trap in `CLAUDE.md`: the natural test of whether
+  $\tilde G$ is *too large* — comparing its orbits against equality classes of the computed
+  differentials — is **blind**, since $\tilde G$ fixes the jet tensor and so orbit-equality implies
+  value-equality for any subgroup at all. The hinge was instead confirmed by enumerating iso-classes
+  independently of $\tilde G$, on 11 valence profiles.
 
   This also sharpens the standing trap about the shortcut $v:=X(x)$: it enlarges $S_{m_0}\times S_d$
   to $S_{m_0+d}$ and fuses orbits **iff** the forest already has a derivative-free node, so it is
@@ -489,7 +504,11 @@ the starred items were re-verified here. Items still resting on a single pass ar
   the two-colour version of Laurent–Munthe-Kaas Prop. 4.1 with $Y$ constant. The proof should be
   theirs with one extra colour and the $\theta$-parameters retained — their Prop. 4.1 explicitly
   notes the $\theta$-free dual field is *insufficient*. Conclusion verified on the whole residual
-  class up to 4 nodes (full rank).
+  class up to 4 nodes (full rank). *Superseded: Lemma L is now proved outright — see §11.*
+  The two enumerations quoted in this project (62 forests at $\le3$ nodes; 84 iso-classes at $\le4$
+  nodes and $\le4$ slots) have been reconciled: they are different truncations and **neither
+  contains the other** (46 shared, 16 and 38 exclusive). Contrary to an earlier guess here, no
+  connectivity filter distinguishes them.
 * **C2: the (T) half is proved.** With no metric there are no lianas or stolons, so $s_1=0$ forces
   base $v$-degree $\equiv0$: a single equation, killed by bicoloured aromatic independence, leaving
   exactly the bicoloured trees. The fibre $v$-degree-1 defect vanishes because in an aroma-free
