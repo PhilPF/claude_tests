@@ -1,10 +1,22 @@
 # Working notes for this repository
 
 Research project on **flow closure under differentiation**: what the property
-$T(\Psi^X_h)=\Psi^{TX}_h$ forces on an approximation of the flow. Read
-`flow-closure-under-differentiation.md` for the state of knowledge; it is the single source of
-truth and is kept *correct* rather than append-only — claims in it have been retracted several
-times when verification contradicted them.
+$T(\Psi^X_h)=\Psi^{TX}_h$ forces on an approximation of the flow.
+
+> **Start by reading `HANDOFF.md`.** It carries the current target, what is settled, what is open,
+> and the provenance of each claim, so that a fresh session can continue without re-deriving
+> anything. **Keep it current**: update it whenever the target changes, a claim is retracted, or an
+> open item closes — before ending a session, not after.
+
+`flow-closure-under-differentiation.md` is the state of knowledge and the single source of truth; it
+is kept *correct* rather than append-only — claims in it have been retracted several times when
+verification contradicted them.
+
+**Framing discipline.** Closure is a *per-tower* condition and imposes nothing on any individual
+$\Psi_d$. Every characterisation in this area factors as
+$[\text{equivariance}]\cap[\text{closure}]$, where equivariance produces the series and closure only
+prunes it. Do not report such a result as though closure alone delivered it — that framing has
+already drifted once.
 
 ## Standing practices
 
@@ -95,6 +107,8 @@ avoids nested dual numbers.
 
 | path | contents |
 |---|---|
+| `HANDOFF.md` | **read first**: current target, open items, provenance |
 | `flow-closure-under-differentiation.md` | the result; open items in §11, index calculus in Appendix A |
+| `notes/` | full text of the Lemma L proof and its audit (rescued from ephemeral scratch) |
 | `references/literature.md` | verbatim source quotes, marked verified vs agent-reported |
 | `verify/` | exact-arithmetic checks, one module per claim family |
