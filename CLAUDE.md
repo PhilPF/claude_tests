@@ -3,57 +3,82 @@
 Research project on **flow closure under differentiation**: what the property
 $T(\Psi^X_h)=\Psi^{TX}_h$ forces on an approximation of the flow. Read
 `flow-closure-under-differentiation.md` for the state of knowledge; it is the single source of
-truth and is kept correct rather than append-only — claims there have been *retracted* several
+truth and is kept *correct* rather than append-only — claims in it have been retracted several
 times when verification contradicted them.
 
-## Ground rules
+## Standing practices
+
+Cheap precautions. Following them costs almost nothing; their *scope* may still be wrong, so
+widen or narrow them freely when a case demands it.
 
 **Verify, don't trust.** Every computational claim in the write-up is checked in exact rational
 arithmetic. `python3 verify/run_all.py` runs all of it (no dependencies; `sympy`/`numpy` are
 unavailable and pip has no index). Lines printed `FAIL` are *expected* failures — methods that
 must **not** satisfy closure; the suite passes iff every outcome matches its prediction.
 
-**Test fields must be cubic or higher.** With a quadratic field $\Delta X$ is constant and
-low-order differentials degenerate, which has produced spurious results twice.
+**Use cubic or higher test fields.** With a quadratic field $\Delta X$ is constant and low-order
+differentials degenerate. This produced spurious results twice.
 
-**Canonicalise graphs before testing independence.** Two presentations of the same forest under
-renaming of internal indices will manufacture a false linear relation.
+**Canonicalise graphs before testing independence.** Two presentations of one forest under
+renaming of internal indices manufacture a false linear relation. This happened twice.
 
 **Distrust any statement that silently fixes an identification $\mathbb R^{n\dim A}\cong A^n$.**
-This has been the source of three separate errors (the partitioned-RK lift; $c_A$ over
-$\mathbb R[\varepsilon]/(\varepsilon^3)$; $c_A$ over the dual numbers themselves).
+Source of three separate errors: the partitioned-RK lift, $c_A$ over $\mathbb R[\varepsilon]/(\varepsilon^3)$,
+and $c_A$ over the dual numbers themselves.
 
-**Clean combinatorial laws in this problem are usually wrong.** $2^{\text{aromas}}$, then
-$2^{\text{loops}}$, then any power of two — each looked right because it holds in the $GL$ world
-where the examples live, and each broke once metric contractions entered. The correct multiplier
-is $N_0$, a count of generalised cycles.
+## Findings that could be wrong — and how to overturn them
+
+These are *empirical*, not axioms. Each carries its evidence and its falsifier. **Challenging them
+is welcome and cheap**; a challenge just has to be evidenced — an exact computation, a source
+quote, or an explicit counterexample. An unevidenced objection is not a challenge, and re-deriving
+a settled result without new evidence is the waste this file exists to prevent.
+
+| finding | evidence | what would overturn it |
+|---|---|---|
+| The multiplier is $N_0$, counting families of vertex-disjoint generalised cycles | two independent passes; one spot-check here (theta graph $=3$) | a forest whose measured base multiplier differs from its $N_0$ |
+| Defect $\equiv0$ iff the forest is an exotic tree | exhaustive over 84 iso-classes, $\le4$ nodes | an exotic tree with non-zero defect, or a non-exotic forest with zero defect |
+| Base block even $v$-degrees, fibre odd | two proofs (level counting; $(\mathrm{id},-\mathrm{id})\in O(2n)$ fixes $TX$) plus measurement | any measured defect of the wrong parity |
+| Closure does not imply B-series | PRK and the Laplacian method, both verified | — (a counterexample stands) |
+| Closure is not a jet condition | the flat method $\theta(h\operatorname{div}X)hX$ | — |
+
+**Apply this to $N_0$ first.** It is the newest and least-corroborated item, and it is exactly the
+kind of clean combinatorial law that has already failed three times here: $2^{\text{aromas}}$, then
+$2^{\text{loops}}$, then any power of two — each held in the $GL$ world where the examples live and
+broke once metric contractions entered. Treating $N_0$ as settled would repeat that mistake. It has
+not been tested on forests with several interacting lianas and stolons.
 
 ## Cost discipline
 
-The binding constraint is the account's rolling token limit, and **subagents dominate it** — a
-single research agent has cost up to 240k tokens. Before spawning one, check whether the question
-can be settled by a short exact computation instead; historically, direct verification has caught
-as many errors as agent cross-checking, far more cheaply.
+The binding constraint is the account's rolling limit; **subagents dominate it** — seven completed
+research agents cost ~1.09M tokens, individually up to 240k. Before spawning, ask whether a short
+exact computation settles the question instead: historically, direct verification has caught as
+many errors as agent cross-checking, far more cheaply.
 
-When a subagent is warranted:
+**Before spawning, check the budget.** `get_session` (claude-code-remote) returns
+`external_metadata.rate_limit_info.status`. On `allowed_warning`, spawn at most one agent; if the
+window is nearly spent, do the work directly and say so.
 
-* **Two, not three.** Independent passes have converged closely; the third mostly replicates.
-* **Cap the report.** Require: *final message ≤ 400 words; write full detail to a named file.*
-  A subagent's final message is pasted verbatim into the caller's context, so long reports are
-  paid for twice.
-* **Point at `references/literature.md`** and forbid re-fetching papers. Several agents each
-  downloaded the same paper and re-read the same definitions.
-* **Forbid re-deriving settled material.** Give the settled state as given; ask exactly one open
-  question.
-* **Have them run `verify/run_all.py` rather than rebuild machinery.** `verify/dual.py` already
-  provides dual numbers, truncated jets $\mathbb R[\varepsilon]/(\varepsilon^r)$, Runge–Kutta, and
-  helpers; `verify/test_vdegree.py` differentiates by exact polynomial interpolation, which avoids
-  nested dual numbers.
+**Spawn sequentially, never concurrently.** Three agents launched together race the same budget and
+die together — that is exactly how eight agents were lost, one round losing all three at their
+first tool call. Running them one at a time preserves independence (they still cannot see each
+other) and guarantees that a budget exhaustion costs the last agent, not all of them.
+
+**Require incremental checkpointing.** The eight crashed agents produced *nothing* salvageable,
+because everything was written at the end. Instruct: *append each finding to `<file>` as soon as it
+is established, before starting the next one.* Then a crash costs the remainder, not the whole run.
+
+Also: cap the final message at ~400 words with detail routed to a file (a subagent's final message
+is pasted verbatim into the caller's context, so long reports are paid for twice); point at
+`references/literature.md` and forbid re-fetching papers; give the settled state as given and ask
+exactly one open question; have them run `verify/run_all.py` rather than rebuild machinery —
+`verify/dual.py` provides dual numbers, truncated jets $\mathbb R[\varepsilon]/(\varepsilon^r)$, Runge–Kutta
+and helpers, and `verify/test_vdegree.py` differentiates by exact polynomial interpolation, which
+avoids nested dual numbers.
 
 ## Layout
 
 | path | contents |
 |---|---|
-| `flow-closure-under-differentiation.md` | the result, with open items in §11 and Appendix A on the index calculus |
-| `references/literature.md` | verbatim source quotes, marked verified vs agent-reported — quote from here |
+| `flow-closure-under-differentiation.md` | the result; open items in §11, index calculus in Appendix A |
+| `references/literature.md` | verbatim source quotes, marked verified vs agent-reported |
 | `verify/` | exact-arithmetic checks, one module per claim family |
