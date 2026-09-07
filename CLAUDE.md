@@ -26,6 +26,14 @@ renaming of internal indices manufacture a false linear relation. This happened 
 Source of three separate errors: the partitioned-RK lift, $c_A$ over $\mathbb R[\varepsilon]/(\varepsilon^3)$,
 and $c_A$ over the dual numbers themselves.
 
+**A symmetry group cannot be validated against the values it acts on.** To check that a group $G$
+used to classify contraction diagrams is not *too large*, comparing $G$-orbits with equality classes
+of the computed differentials is **blind**: $G$ fixes the jet tensor $J$, so
+$\Phi_{gM}(J)=\Phi_M(g^{-1}J)=\Phi_M(J)$ for *any* subgroup, and orbit-equality forces
+value-equality automatically. Only an isomorphism-class count computed **independently of $G$** —
+e.g. a slot-forgetting encoding canonicalised over all relabellings — decides it. A rank test is
+equally blind in that direction.
+
 ## Findings that could be wrong — and how to overturn them
 
 These are *empirical*, not axioms. Each carries its evidence and its falsifier. **Challenging them
@@ -49,8 +57,11 @@ decorations (`verify/test_n0.py`). The decisive pair: the theta graph $\lvert D^
 minimal residual forest $\partial_{jk}X^i\partial_jX^a\partial_kX^a$ carry **identical** decorations —
 two lianas and one stolon — yet measure $3$ and $1$. So $N_0$ is structural, not a tally. It is also
 multiplicative over disjoint cycles ($\operatorname{div}(X)\lvert DX\rvert_F^2X$ measures $4=2\times2$).
-Still untested: forests where three or more cycles share vertices, so that the disjointness
-condition actually bites.
+The remaining gap has since been closed too: with three or more cycles sharing vertices,
+$\lvert D^3X\rvert_F^2X$ measures $4$ (verified here on a quartic field, and matching the count
+$1+3$: one stolon can raise exactly one of three lianas), $\lvert D^4X\rvert_F^2X$ measures $5$, and
+a four-node necklace measures $5$ — a genuine independent-set count rather than a product. $N_0$ is
+now the best-corroborated of the combinatorial claims.
 
 ## Cost discipline
 
