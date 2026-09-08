@@ -20,7 +20,9 @@ R4.  Coherence across factorizations (C3).  For ANY finite-dimensional commutati
      R-algebra A and ANY R-basis, the A-lift of a LINEAR field M is I_N (x) M.
      Hence the D-lifted and R^2-lifted loci meet in the linear fields and
      algebraic naturality forces D Psi^M(x) v = Psi^M(v), i.e. Psi^M LINEAR.
-     This kills the round-3 counterexample u + hX + h^2 (X^1)^2 X.
+     This kills u + hX + h^2 (X^1)^2 X.  (That formula is NOT itself (T)-natural --
+     see test_spectrum.py; the genuine (T)-natural non-equivariant witness is the
+     ring-valued tower method, which fails linear rigidity in the same way.)
 """
 from fractions import Fraction as F
 from poly import P
@@ -100,8 +102,9 @@ def main():
         print(f"      {name:28s} D Psi^M(x)v == Psi^M(v): {good}"
               + ("" if good==exp else "  <-- UNEXPECTED"))
         ok &= (good==exp)
-    print("      -> the round-3 (T)-natural non-equivariant method is NOT algebraically"
-          " natural,\n         because a single Psi_4 cannot serve both (2,D) and (2,R^2).")
+    print("      -> a method whose h^2 scalar is a real contraction is NOT algebraically"
+          " natural,\n         because a single Psi_4 cannot serve both (2,D) and (2,R^2)."
+          "\n         (The (T)-natural witness is the ring-valued tower method: test_spectrum.py.)")
     return ok
 
 if __name__ == "__main__": raise SystemExit(0 if main() else 1)

@@ -403,6 +403,77 @@ the sharper test: there $\dim C=3/2$, so no tensor factorization is available at
 second kind occurs. What is missing for a proof is that a lifted field determines its presentation
 up to common refinement.
 
+### The closure spectrum
+
+For a family $\Psi$ put
+$$\mathcal W(\Psi):=\{(A,\iota)\ :\ \Psi\text{ is }T^A\text{-natural}\},$$
+its **closure spectrum**. Algebraic naturality is $\mathcal W=$ everything; (T) alone is
+$D\in\mathcal W$. Asking which classes occur is the Galois-correspondence-shaped question in this
+subject, and the spectrum has real structure.
+
+> **Proposition (monoidality).** $\mathcal W(\Psi)$ is a monoid under $\otimes$.
+
+*Proof.* $\Psi^{X^{A\otimes B}}=\Psi^{(X^B)^A}=T^A\Psi^{X^B}=T^AT^B\Psi^X=T^{A\otimes B}\Psi^X$.
+$\square$
+
+Structurally this is because the three invariants of §4 are multiplicative:
+$\dim(A\otimes B)=\dim A\dim B$, $c_{A\otimes B}=c_Ac_B$, and $L_{a\otimes b}=L_a\otimes L_b$ is
+self-adjoint when both factors are. All three are verified, along with $T^{A\otimes B}=T^A\circ T^B$
+holding on the nose in the tensor basis ordered $e_\alpha\otimes f_\beta\mapsto\beta N_A+\alpha$.
+
+**The invariants are metric data, not basis data.** $c_A=\mu(g^{-1})$ and balancedness depend only
+on the pair $(A,g)$, $g$ being the inner product for which the chosen basis is declared orthonormal;
+they are therefore invariant under $O(N)$ changes of basis and nothing more. §4's warning is exactly
+this, and it is now systematic rather than anecdotal: $\mathbb R^2$ in its standard basis has $c=1$ and
+is balanced, in the unit-first basis $(1,p)$ it is neither, and the two have different spectra.
+
+**The survival law is coarser than §4's table suggests** *(correction)*. Measured on 17 based
+algebras against six methods: a **loop or a stolon** survives only for $A=\mathbb R$, while a **liana**
+survives iff $c_A=1$. Balancedness is necessary for the real form to factor as
+$\lambda\circ\langle\cdot,\cdot\rangle_A$ — which is what §4 uses to explain the failure over $D$ —
+but it is **not sufficient** for a stolon to survive: $\mathbb R^k$ in its standard basis is balanced
+*and* has $c=1$, and still kills stolons. The reason unifies the loop and stolon rows and is scalar
+rigidity: both contractions deliver a **real** scalar $r$ where base change demands the $A$-scalar
+$q$, and the defect is exactly
+$$h^2\,(r\cdot 1_A-q)\cdot X^A$$
+— verified as an identity over $\mathbb R^2$. A loop differs only in that $r=\dim_\mathbb R A\cdot\operatorname{aug}(q)$,
+which is why its defect presented as a clean multiplier.
+
+> **Corollary.** If the $h^2$-coefficient of $\Psi$ is a combination of exotic-aromatic elementary
+> differentials, $\mathcal W(\Psi)$ is everything (no decorations), $\{A:c_A=1\}$ (lianas only), or
+> $\{\mathbb R\}$ (some loop or stolon).
+
+**Not closed under subalgebras.** $\mathbb R[s]/(s^3)$ is the $S_2$-invariant subalgebra of $D\otimes D$,
+and the Laplacian method closes under $D\otimes D$ but not under it. The failure survives the obvious
+repair: with the metric *induced* from the ambient orthonormal basis, $g=\operatorname{diag}(1,2,1)$,
+one gets $c=1+\tfrac12s^2=1+xy\neq1$. So $\mathcal W$ is a $\otimes$-monoid and nothing finer — $c$
+is not inherited by subalgebras.
+
+**The realized spectra form a lattice, not a chain** — and a correction is due here. §5 obtains a
+polynomial (T)-natural method with no equivariance "by making the offending scalar ring-valued rather
+than real-valued". The round-4 notes then attached that label to $u+hX+h^2(X^1)^2X$ with the scalar
+left **real**-valued, which is **not** (T)-natural at all: its defect is the fibre term
+$2X^1(DX^1v)X$ (measured). The genuine witness follows §5 literally. Every $m$ is uniquely $2^kq$
+with $q$ odd, so set
+$$\Psi_m:=\text{the }D^{\otimes k}\text{-base change of }u+hX+h^2(X^1)^2X\text{ on }\mathbb R^{q}.$$
+This is polynomial, local, defined in every dimension, manifestly non-equivariant, and
+$T^{D^{\otimes k}}$-natural for every $k$ (verified) — and it fails linear rigidity, so the round-4
+conclusion that algebraic naturality kills it stands, now with a witness that is actually
+(T)-natural. Replacing $D$ by any based $A$ gives $\mathcal W\supseteq\langle A\rangle_\otimes$, and
+$\langle D\rangle_\otimes$, $\langle\mathbb R^2\rangle_\otimes$ are **incomparable**: each contains an
+algebra the other omits. With $\{\mathbb R\}$, $\{c_A=1\}$ and everything, the image of
+$\Psi\mapsto\mathcal W(\Psi)$ is therefore a lattice rather than a chain. Which $\otimes$-closed
+classes are realized is open; the tower construction realizes every principal one.
+
+**What the Galois analogy gives, and what it does not.** The shape is right — a correspondence
+between classes of methods and $\otimes$-closed classes of algebras, with the monoid structure in the
+role of the subgroup lattice — and it is what organises the results above. Two things it does not
+give. There is no group: $\mathcal W$ is a monoid of *objects*, not of automorphisms, and
+$\operatorname{Aut}(A)$ cannot play that role because base change preserves the lifted locus (§11's
+second trap), so it acts trivially on everything in sight. And the algebras are not differential
+rings, so no Picard–Vessiot statement is available; the genuine import from that theory is the
+functor-of-points move recorded in §7 above.
+
 ---
 
 ## 8. Naturality under all diffeomorphisms collapses to the flow
@@ -625,7 +696,10 @@ the starred items were re-verified here. Items still resting on a single pass ar
   fields, and demanding both prescriptions forces
   $$D\Psi^M(x)\,v=\Psi^M(v)\quad\text{for all }x,v,$$
   i.e. $\Psi^M$ is **linear** for every linear field. Verified: Euler ✓, RK4 ✓, and the
-  (T)-natural non-equivariant method $u+hX+h^2(X^1)^2X$ ✗. So the killing factorisation is the pair
+  method $u+hX+h^2(X^1)^2X$ ✗. *(Correction: that formula, with the scalar left real-valued, is
+  **not** (T)-natural — see §7. The R4 conclusion is unaffected and now has a genuine witness, the
+  ring-valued tower method, which is (T)-natural and also fails linear rigidity.)* So the killing
+  factorisation is the pair
   $(2,D)$ vs $(2,\mathbb R^2)$ — a one-line identity — not the $n=1$ argument I had guessed.
 * **Scalar rigidity.** If $\Psi_m=u+hX+h^2q_m(j^rX(u))X(u)+O(h^3)$ with $q_m$ **real-valued** and
   $\Psi$ is (T)-natural as a family indexed by *real dimension*, then every $q_m$ is constant
@@ -664,6 +738,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_partitioned.py` | PRK satisfies (T) for the $D$-block lift, fails for the real lifts; not affine equivariant |
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/algebra.py` | based algebras (Weil and products), base change over any of them, recognition of lifts |
+| `verify/test_spectrum.py` | the closure spectrum: monoidality under $\otimes$, the corrected survival law on 17 based algebras, the stolon-defect identity, failure of subalgebra-closure, and the incomparable tower spectra |
 | `verify/test_affine.py` | the collision trichotomy on all 41 pairs from 16 based algebras; affine rigidity and its two witness pairs; its separation from linear rigidity; functoriality of the cross-dimensional collisions |
 | `verify/test_contractions.py` | liana (Laplacian) is (T)-natural and not affine equivariant; stolon fails; liana defect over $\varepsilon^3$ equals $\Delta X$ |
 | `verify/test_cotangent.py` | $R(z)R(-z)$ table; $(-1)^sc_s^2\neq0$; trapezoidal rule passes the linear test but is not symplectic |

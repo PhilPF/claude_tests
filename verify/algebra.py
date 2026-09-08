@@ -193,8 +193,94 @@ def lift_residual(A, n, Z, shuffle=False):
     return res + [Z[t] - q for t, q in enumerate(lift_map(A, n, X, n, None, shuffle))]
 
 
+def tensor(A, B, name=None):
+    """A (x) B in the tensor basis, ordered so that the realization of (A(x)B)^n is
+    the realization of A^{(B^n)} -- i.e. e_alpha (x) f_beta sits at beta*N_A + alpha.
+    With that ordering T^{A(x)B} = T^A o T^B holds on the nose, not just up to a
+    shuffle; test_spectrum.py checks it."""
+    NA, NB = A.N, B.N
+    N = NA * NB
+    idx = lambda al, be: be * NA + al
+    table = {}
+    for a1 in range(NA):
+        for b1 in range(NB):
+            for a2 in range(NA):
+                for b2 in range(NB):
+                    i, j = idx(a1, b1), idx(a2, b2)
+                    if i > j: continue
+                    v = [F(0)] * N
+                    for a3 in range(NA):
+                        if not A.c[a1][a2][a3]: continue
+                        for b3 in range(NB):
+                            if not B.c[b1][b2][b3]: continue
+                            v[idx(a3, b3)] += A.c[a1][a2][a3] * B.c[b1][b2][b3]
+                    table[(i, j)] = v
+    one = [F(0)] * N
+    for a in range(NA):
+        for b in range(NB):
+            one[idx(a, b)] = A.one[a] * B.one[b]
+    return Alg(name or f"({A.name}) (x) ({B.name})", N, table, one)
+
+
+# ---- the three invariants of section 4 -------------------------------------
+# A contraction survives base change to (A, iota) according to these, and to
+# nothing else: a loop scales by dim_R A, a liana by c_A, a stolon needs the
+# declared-orthonormal metric to be A-balanced.
+
+def c_A(A, g=None):
+    """c_A = mu(g^{-1}) = sum_{alpha,beta} (g^{-1})^{alpha beta} e_alpha e_beta, the
+    liana factor of section 4.  g is the inner product for which the chosen basis is
+    declared orthonormal (default: the identity, i.e. the basis itself).  Lianas
+    survive base change iff c_A = 1_A -- note 1_A, not the coordinate vector e_0:
+    for a product algebra in its standard basis the unit is (1,...,1)."""
+    gi = _inverse(g) if g else None
+    out = [F(0)] * A.N
+    for al in range(A.N):
+        for be in range(A.N):
+            w = gi[al][be] if gi else (F(1) if al == be else F(0))
+            if w:
+                for gm in range(A.N): out[gm] += w * A.c[al][be][gm]
+    return out
+
+
+def balanced(A, g=None):
+    """Is multiplication by every a in A self-adjoint for g?  With g = I this reads
+    c^beta_{gamma alpha} = c^alpha_{gamma beta}.  Stolons survive iff it holds."""
+    N = A.N
+    for gm in range(N):
+        L = [[A.c[gm][al][be] for al in range(N)] for be in range(N)]   # (L_gm)_{be,al}
+        for i in range(N):
+            for j in range(N):
+                lhs = sum((g[i][k] if g else (F(1) if i == k else F(0))) * L[k][j] for k in range(N))
+                rhs = sum(L[k][i] * (g[k][j] if g else (F(1) if k == j else F(0))) for k in range(N))
+                if lhs != rhs: return False
+    return True
+
+
+def _inverse(g):
+    n = len(g)
+    M = [list(g[i]) + [F(1) if i == j else F(0) for j in range(n)] for i in range(n)]
+    for c in range(n):
+        p = next(i for i in range(c, n) if M[i][c])
+        M[c], M[p] = M[p], M[c]
+        M[c] = [x / M[c][c] for x in M[c]]
+        for i in range(n):
+            if i != c and M[i][c]:
+                f = M[i][c]; M[i] = [M[i][j] - f * M[c][j] for j in range(2 * n)]
+    return [r[n:] for r in M]
+
+
+def spectrum_invariants(A, g=None):
+    """(dim, c_A, c_A == 1_A, balanced) -- loops scale by dim, lianas by c_A,
+    stolons need balancedness.  Everything depends on (A, g) only, not on the
+    basis: two bases with the same induced inner product give the same triple."""
+    c = c_A(A, g)
+    return A.N, c, c == A.one, balanced(A, g)
+
+
 # ---- the based algebras used in the tests -------------------------------------
 
+R1   = Alg("R", 1, {}, [1])
 D2   = Alg("D = R[e]/(e^2)", 2, {(1, 1): [0, 0]}, [1, 0])
 R2s  = Alg("R^2 (standard basis)", 2, {(0, 0): [1, 0], (1, 1): [0, 1], (0, 1): [0, 0]}, [1, 1])
 R2u  = Alg("R^2 (unit-first basis 1,p)", 2, {(1, 1): [0, 1]}, [1, 0])
@@ -230,5 +316,5 @@ R4u  = Alg("R^4 (unit-first)", 4,
            {(1, 1): [0, 1, 0, 0], (2, 2): [0, 0, 1, 0], (3, 3): [0, 0, 0, 1],
             (1, 2): [0] * 4, (1, 3): [0] * 4, (2, 3): [0] * 4}, [1, 0, 0, 0])
 
-ALGEBRAS = {2: [D2, R2s, R2u], 3: [J3, W2, DxR, R3u, R3s],
+ALGEBRAS = {1: [R1], 2: [D2, R2s, R2u], 3: [J3, W2, DxR, R3u, R3s],
             4: [J4, DD, W3, Axy, DxD, J3xR, W2xR, R4u]}

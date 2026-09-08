@@ -55,6 +55,24 @@ Already established (verified, **no equivariance assumed**):
   linear rigidity is real but lives only where translation equivariance fails.
 * **Scalar rigidity.** A real-valued coefficient $q_m(j^rX)$ must be constant; base change demands an
   $A$-scalar and no real-valued contraction supplies one.
+* **The closure spectrum.** $\mathcal W(\Psi)=\{(A,\iota):\Psi\text{ is }T^A\text{-natural}\}$ is a
+  **monoid under $\otimes$** — one line, and structurally because $\dim$, $c_A$ and balancedness are
+  all multiplicative — and is **not closed under subalgebras**: the Laplacian closes under
+  $D\otimes D$ but not under its $S_2$-invariant $\mathbb R[s]/(s^3)$, even with the induced metric
+  $\operatorname{diag}(1,2,1)$, where $c=1+xy$. The invariants depend on $(A,g)$ and not on $A$, so
+  one algebra in two bases can have two spectra ($\mathbb R^2$ standard vs unit-first). For contraction
+  methods the survival law is **coarser than §4's table**: a loop *or a stolon* survives only for
+  $A=\mathbb R$, a liana iff $c_A=1$; balancedness is necessary but **not** sufficient, and the
+  unifying reason is scalar rigidity, the defect being exactly $h^2(r\cdot1_A-q)\cdot X^A$. Realized
+  spectra form a **lattice, not a chain**: the ring-valued tower realizes $\langle A\rangle_\otimes$
+  for every based $A$, and $\langle D\rangle_\otimes$, $\langle\mathbb R^2\rangle_\otimes$ are
+  incomparable. (§7, `verify/test_spectrum.py`.)
+* **Correction — the non-equivariant witness.** $u+hX+h^2(X^1)^2X$ with the scalar left
+  *real*-valued is **not** (T)-natural (defect $2X^1(DX^1v)X$, measured); earlier notes labelled it
+  so. §5's own prescription — make the scalar *ring*-valued — gives the genuine witness: for
+  $m=2^kq$ with $q$ odd, let $\Psi_m$ be the $D^{\otimes k}$-base change of that formula on
+  $\mathbb R^q$. It is polynomial, local, non-equivariant, $T^{D^{\otimes k}}$-natural for all $k$, and
+  still fails linear rigidity — so every conclusion drawn from the old witness survives.
 * No non-trivial partitioned method is algebraically natural; dimension-dependent coefficients die.
 * Separation of duties: $A=\mathbb R^k$ forces (diagonal) decoupling, killing multi-aromas; $A=D$ kills
   loops and stolons; $A=\mathbb R[\varepsilon]/(\varepsilon^3)$ kills lianas — **but that last is
@@ -78,6 +96,10 @@ The open questions, in order of interest:
 3. *(Residue of the per-dimension question, now answered — §7.)* Cross-dimensional collisions
    $X^A=Y^B$ with $n_1\neq n_2$ were found to be functorial over a bounded range only. A proof needs:
    a lifted field determines its presentation up to common refinement.
+4. **Which $\otimes$-closed classes of based algebras are realized as closure spectra?** The tower
+   construction realizes every *principal* one $\langle A\rangle_\otimes$; $\{c_A=1\}$ and
+   everything are realized by the Laplacian and by RK. Is that the whole image? This is the
+   surjectivity half of the Galois-shaped correspondence, and it is the natural next target.
 
 ## Also open
 
@@ -104,7 +126,8 @@ law, closure $\not\Rightarrow$ B-series, the non-jet property. **Single source +
 Lemma L proof. **Single source:** linear rigidity and scalar rigidity (both spot-checked here);
 affine rigidity and the collision trichotomy (one pass, but the trichotomy is proved outright and
 machine-checked on all 41 pairs from 16 based algebras — the *cross-dimensional* half is the part
-resting on a bounded enumeration).
+resting on a bounded enumeration). The closure-spectrum results are also single-source, but
+each is either a one-line proof or machine-measured on 17 based algebras.
 Treat single-source items as leads when building on them.
 
 ## Keeping this current

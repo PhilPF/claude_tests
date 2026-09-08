@@ -62,6 +62,8 @@ a settled result without new evidence is the waste this file exists to prevent.
 | Closure is not a jet condition | the flat method $\theta(h\operatorname{div}X)hX$ | — |
 | Affine fields go to affine maps | two independent witness pairs — secant vs tangent in dim 2, and $(\mathbb R[\varepsilon]/\varepsilon^3,\mathbb R[x,y]/\mathfrak m^2)$ in dim 3 (`verify/test_affine.py`) | an algebraically natural method and an affine $X$ whose $\Psi^X_h$ is not affine |
 | Collisions of two lifts cap at affine | proof (distinct based algebras differ at a product of two basis vectors) + all 41 pairs from 16 based algebras | based algebras of equal dimension whose lifts agree on a non-affine map |
+| Loops *and stolons* survive only for $A=\mathbb R$; lianas iff $c_A=1$ | 17 based algebras $\times$ 6 methods, plus the exact defect identity $h^2(r\cdot1_A-q)X^A$ (`verify/test_spectrum.py`) | a based algebra of dimension $>1$ over which a loop- or stolon-carrying differential is $T^A$-natural |
+| The closure spectrum is a $\otimes$-monoid, not subalgebra-closed | one-line proof plus multiplicativity of $\dim$, $c_A$, balancedness; Laplacian over $D\otimes D$ vs its $S_2$-invariant | a method natural over $A$ and over $B$ but not over $A\otimes B$ |
 
 **$N_0$ has now survived the test that killed its predecessors.** It is the newest item, and it is
 the kind of clean combinatorial law that failed three times here: $2^{\text{aromas}}$, then

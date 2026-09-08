@@ -136,7 +136,8 @@ def laplacian(X, n, Ms):
 
 
 def ring(X, n, Ms):
-    """u + hX + h^2 (X^1)^2 X: the round-3 (T)-natural non-equivariant method."""
+    """u + hX + h^2 (X^1)^2 X.  Not itself (T)-natural (test_spectrum.py); kept here
+    because it fails linear rigidity, which is what this table measures."""
     h = P.var(Ms, n); u = _u(n, Ms)
     s = X[0] * X[0]
     return [u[i] + h * X[i] + h * h * s * X[i] for i in range(n)]
