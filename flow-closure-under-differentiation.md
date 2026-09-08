@@ -305,6 +305,104 @@ rather than a quotient is a corollary, not the cause.
 $T^{(r)}$-naturality for all $r$ — every higher variational equation — because
 $\mathbb R[s]/(s^{r+1})\subset D^{\otimes r}$ is the $S_r$-invariant subalgebra.
 
+*What the tower of algebras is.* For $A_r=\mathbb R[\varepsilon]/(\varepsilon^{r+1})$ and
+$u=\sum_k\varepsilon^ku_k$, expanding $X(u)$ over $A_r$ gives, by Faà di Bruno,
+$$\dot u_k=\sum_{j\ge1}\frac1{j!}\sum_{\substack{i_1+\cdots+i_j=k\\ i_l\ge1}}D^jX(u_0)[u_{i_1},\dots,u_{i_j}],$$
+so the realization of $X^{A_r}$ is exactly $(X,VE_1,\dots,VE_r)$ — the higher variational equations
+along the solution, the objects of Morales–Ramis–Simó and of jet-transport integration (verified to
+$r=3$). Algebraic naturality therefore reads: *the method commutes with passing to variational
+equations*; that the exact flow does so is the fact that $VE_k$ is solved by $\partial^k\varphi$.
+Two cautions before importing anything from differential Galois theory. These algebras are **not**
+differential rings — base change is a change of scalars with $\partial_t$ acting trivially, so every
+element of $A$ is a constant and $\operatorname{Aut}(A)$ is not the Galois group of anything here;
+and the Galois group of a *discretised* system is a difference-Galois group, so a "discrete
+Morales–Ramis" transfer would compare two theories rather than assert an identity. What genuinely is
+shared is the functor-of-points move: $\operatorname{Lie}(G)=\ker\bigl(G(C[\varepsilon])\to G(C)\bigr)$
+for the Picard–Vessiot group scheme is the same use of $D$ that §5 needs in order for $H(D)$ to
+exist.
+
+### Affine rigidity, and the ceiling of the two-lift mechanism
+
+Every clause in the definition of algebraic naturality (§11) ties $\Psi_{nN}$ to $\Psi_n$; taken one
+at a time, none of them constrains a single $\Psi_n$ at all. A **per-dimension** consequence can
+therefore only come from a *collision*: two based algebras $(A,\iota)$, $(B,\kappa)$ of the same
+dimension $N$ whose lifts of one and the same field agree. Then $X^A=X^B$ is a single field, the map
+$\Psi_{nN}$ assigns to it is a single map, and both prescriptions must return it:
+$$X^A=X^B\quad\Longrightarrow\quad T^A(\Psi^X_n)=T^B(\Psi^X_n).$$
+Base change is the same Taylor formula for a vector field as for a map, so the collision locus
+$\mathcal C(A,B)=\{F:F^A=F^B\}$ is cut out by the same conditions on both sides: *algebraic
+naturality preserves every collision class.*
+
+> **Theorem (collision trichotomy).** For based algebras $(A,\iota),(B,\kappa)$ of equal dimension
+> $N$, with $1_A,1_B\in\mathbb R^N$ the coordinate vectors of the two units, and $F$ polynomial,
+> $$\mathcal C(A,B)=\begin{cases}\text{everything}&\text{if the based algebras coincide,}\\
+> \text{the affine maps}&\text{if they differ and }1_A=1_B,\\
+> \text{the linear maps}&\text{if }1_A\neq1_B.\end{cases}$$
+
+*Proof.* Base change of a polynomial map is that polynomial evaluated over $A$:
+$F^A(u)=\sum_k\frac1{k!}\partial^kF(0)[u^{\otimes k}]$, powers taken in $A$. Its $k$-th term is
+homogeneous of degree $k$ in $u\in\mathbb R^{nN}$, so $F^A=F^B$ holds degree by degree. Degree $0$ reads
+$F(0)\otimes 1_A=F(0)\otimes 1_B$; degree $1$ is $\operatorname{id}\otimes\partial F(0)$ on both sides,
+always equal. For $k\ge2$ it reads
+$\sum\delta^{\gamma}_{\alpha_1\cdots\alpha_k}\partial^kF(0)[u^{\alpha_1},\dots,u^{\alpha_k}]=0$, with
+$\delta$ the difference of the $k$-fold structure constants. If the two multiplications differ,
+choose $\gamma,\alpha,\beta$ with $\delta^\gamma_{\alpha\beta}\neq0$ and set $u^\alpha=w_1$,
+$u^\beta=w_2$, all other blocks $0$: the $k=2$ condition becomes $\partial^2F(0)[w_1,w_2]=0$ for all
+$w_1,w_2$, so $\partial^2F(0)=0$; the same at every base point, so $F$ is affine — whereupon every
+higher condition holds automatically. If the multiplications agree, the based algebras agree, units
+included. Degree $0$ then forces $F(0)=0$ exactly when $1_A\neq1_B$. $\square$
+
+> **Corollary (affine rigidity).** If $\Psi$ is algebraically natural then for every $n$, every
+> **affine** field $X$ on $\mathbb R^n$ and every $h$, the map $\Psi^X_h$ is **affine**.
+
+The cheapest witness sits in dimension **two**, and writing it in coordinates explains the earlier
+result. Realise $D$ in the basis $(1,\varepsilon)$ and $\mathbb R^2$ in the unit-first basis $(1,p)$ with
+$p=(0,1)$:
+$$X^{D}(u^0,u^1)=\bigl(X(u^0),\;DX(u^0)u^1\bigr),\qquad
+X^{\mathbb R^2}(u^0,u^1)=\bigl(X(u^0),\;X(u^0+u^1)-X(u^0)\bigr).$$
+One is a tangent, the other a **secant**, and they agree exactly on affine fields. The same identity
+applied to $\Psi^X$ reads $\Psi^X(a+b)-\Psi^X(a)=D\Psi^X(a)\,b$, so $\Psi^X$ is affine — no jet
+argument, no regularity beyond differentiability. In the **standard** basis of $\mathbb R^2$ the unit is
+$(1,1)\neq(1,0)$, the trichotomy drops to its third case, and what survives is exactly the
+previously recorded **linear rigidity**: that result was the unit-misaligned shadow of this one. No
+convention is needed at all in dimension **three**, where $\mathbb R[\varepsilon]/(\varepsilon^3)$ and
+$\mathbb R[x,y]/\mathfrak m^2$ both carry $1$ as the first vector of their standard bases and collide
+precisely on the affine maps.
+
+> **Corollary (ceiling).** No collision of two lifts of one field constrains $\Psi$ on any field
+> that is not affine.
+
+— because distinct based algebras already differ on a product of *two* basis vectors, so the
+obstruction is always second order. "Affine $\Rightarrow$ affine" is therefore the last consequence
+available from this mechanism, not merely the best one found. It is corroborated from the other
+side: every per-dimension consequence must hold for the exact flow *and* for every Runge–Kutta
+method, and RK methods raise polynomial degree ($u+hX(u+hX(u))$ is quartic on a quadratic field), so
+no statement of the form "degree $\le d$ is preserved" can survive for $d\ge2$.
+
+**Calibration — where the new content lives.** Affine rigidity is strictly stronger than linear
+rigidity *as a condition on families*: $\Psi^X_h(u)=u+hX(u)+h^2\langle X(u)-DX(u)u,\,u\rangle X(u)$ is
+local, satisfies linear rigidity — the bracket vanishes identically on linear fields by Euler's
+identity — and fails affine rigidity. That witness is not translation equivariant, and no witness
+can be: for a local method $\Psi^X_h(u)=u+\Phi(j^rX(u),h)$ the affine field $Mu+c$ occupies the same
+jet slots as the linear field $Mu$ and differs only in the value, so linear rigidity already forces
+$\Phi(\cdot,M,0;h)$ to be linear in its first argument and hence $\Psi^{Mu+c}$ affine. The gap
+between the two rigidities is exactly as wide as the failure of translation equivariance — which is
+the right size, since the point of a per-dimension consequence is that it assumes no equivariance
+whatever.
+
+**Cross-factorization adds nothing** *(evidence, not proof)*. A collision may also join *different*
+source dimensions: $X^A=Y^B$ with $X$ on $\mathbb R^{n_1}$, $Y$ on $\mathbb R^{n_2}$,
+$n_1\dim A=n_2\dim B$ and $n_1\neq n_2$, forcing $T^A\Psi^X_{n_1}=T^B\Psi^Y_{n_2}$. Over the
+enumerated range — $m=4$ pairing $(n_2,\dim B)=(1,4)$ against $(n_1,\dim A)=(2,2)$, and $m=6$ pairing
+$(2,3)$ against $(3,2)$; 16 based algebras; all homogeneous $Y$ of degree $\le3$, by exact kernel
+computation — every collision carrying a non-affine field is **functorial**, in one of exactly two
+ways: $B\cong A\otimes C$ with $X=Y^C$, so both sides are $T^A$ applied to one condition; or $X$ and
+$Y$ are both lifts of a common field $W$, so both sides are the condition at $W$. Either way the
+relation holds for every algebraically natural $\Psi$ and constrains nothing. The $m=6$ column is
+the sharper test: there $\dim C=3/2$, so no tensor factorization is available at all, and only the
+second kind occurs. What is missing for a proof is that a lifted field determines its presentation
+up to common refinement.
+
 ---
 
 ## 8. Naturality under all diffeomorphisms collapses to the flow
@@ -392,6 +490,13 @@ the discrete transpose of an RK method is a *different* method. In one line:
   | $A=\mathbb R^k$ | decoupling $\varphi(f_1\oplus f_2)=\varphi(f_1)\oplus\varphi(f_2)$ | multi-aromas (disconnectedness) |
   | $A=D$ | (T) | loops and stolons |
   | $A=\mathbb R[\varepsilon]/(\varepsilon^3)$ | $c_A=1+\varepsilon^2\neq1$ | lianas |
+
+  **What it forces on a single dimension — answered, and the answer is small (§7).** A collision
+  between two based algebras of equal dimension forces $\Psi^X_h$ to be affine whenever $X$ is, and
+  the collision trichotomy shows *nothing more is available by that route*: the obstruction between
+  two distinct based algebras is always second order, so no collision ever reaches a non-affine
+  field. Together with the extension theorem of §5 this is the honest answer to "what does closure
+  provide unaided": rigidity on the affine locus, and off it nothing that this mechanism can see.
 
   **Conjecture.** For local, $f$-analytic families: algebraically natural $\iff$ affine
   equivariant $\iff$ B-series. Here (ii)$\iff$(iii) is MMMV and (iii)$\Rightarrow$(i) is immediate
@@ -558,6 +663,8 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_aromas.py` | aromas scale by $2^{\alpha}$ (ratios 2, 4, 8); trees are natural |
 | `verify/test_partitioned.py` | PRK satisfies (T) for the $D$-block lift, fails for the real lifts; not affine equivariant |
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
+| `verify/algebra.py` | based algebras (Weil and products), base change over any of them, recognition of lifts |
+| `verify/test_affine.py` | the collision trichotomy on all 41 pairs from 16 based algebras; affine rigidity and its two witness pairs; its separation from linear rigidity; functoriality of the cross-dimensional collisions |
 | `verify/test_contractions.py` | liana (Laplacian) is (T)-natural and not affine equivariant; stolon fails; liana defect over $\varepsilon^3$ equals $\Delta X$ |
 | `verify/test_cotangent.py` | $R(z)R(-z)$ table; $(-1)^sc_s^2\neq0$; trapezoidal rule passes the linear test but is not symplectic |
 | `verify/test_vdegree.py` | $v$-degree of the defect, split base/fibre; refutes $\Theta=2^{\ell}$; loop/stolon separation at base degree $0$ vs $2$ |

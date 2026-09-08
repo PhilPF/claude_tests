@@ -45,6 +45,14 @@ Already established (verified, **no equivariance assumed**):
   $D$-lift and the $\mathbb R^2$-lift coincide *exactly* on linear fields; demanding both forces
   $D\Psi^M(x)v=\Psi^M(v)$ — the method must be **linear on linear fields**. Euler ✓, RK4 ✓, the
   coordinate-1 method ✗.
+* **Affine rigidity, and the ceiling above it.** The same comparison in the **unit-first** basis
+  $(1,p)$ of $\mathbb R^2$ realises the $\mathbb R^2$-lift as a *secant*
+  $\bigl(X(u^0),X(u^0{+}u^1)-X(u^0)\bigr)$ against the $D$-lift's *tangent*
+  $\bigl(X(u^0),DX(u^0)u^1\bigr)$; secant $=$ tangent is affineness, so **affine fields go to affine
+  maps**. Linear rigidity is the unit-misaligned shadow of this. And it is the **last** consequence
+  of the mechanism: two distinct based algebras always differ at a product of two basis vectors, so
+  a collision $X^A=X^B$ never reaches a non-affine field (collision trichotomy, §7). The gap over
+  linear rigidity is real but lives only where translation equivariance fails.
 * **Scalar rigidity.** A real-valued coefficient $q_m(j^rX)$ must be constant; base change demands an
   $A$-scalar and no real-valued contraction supplies one.
 * No non-trivial partitioned method is algebraically natural; dimension-dependent coefficients die.
@@ -63,12 +71,13 @@ Two traps specific to this target:
 
 The open questions, in order of interest:
 
-1. **Does algebraic naturality have per-dimension consequences beyond linearity on linear fields?**
-   This is the real form of "what structure does closure provide, unaided".
-2. Is "algebraically natural $\Rightarrow$ affine equivariant $\Rightarrow$ B-series" true for
+1. Is "algebraically natural $\Rightarrow$ affine equivariant $\Rightarrow$ B-series" true for
    $f$-analytic families? The first implication is the open half; conjectured **false** for smooth
    methods (1-jet loci are nowhere dense, $\dim n^2N<M^2$), blocked on gluing junk up the tower.
-3. Construct the flat, coherent, non-equivariant algebraically natural method, or prove none exists.
+2. Construct the flat, coherent, non-equivariant algebraically natural method, or prove none exists.
+3. *(Residue of the per-dimension question, now answered — §7.)* Cross-dimensional collisions
+   $X^A=Y^B$ with $n_1\neq n_2$ were found to be functorial over a bounded range only. A proof needs:
+   a lifted field determines its presentation up to common refinement.
 
 ## Also open
 
@@ -83,14 +92,19 @@ $A$-balancedness, **lianas survive** — and only over $D$, by the accident $c_D
 $N_0$, counting families of vertex-disjoint generalised cycles; closure is **not** a jet condition
 (flat counterexample); diffeomorphism-naturality collapses to $\varphi^X_{c(h)}$ with $c$ an arbitrary
 reparametrisation; reverse mode costs symplecticity, for duality rather than functoriality reasons.
-The $O(n)$ characterisation is complete — Lemma L proved (`notes/lemma-L-proof.md`) and independently
-audited (`notes/lemma-L-audit.md`).
+The per-dimension consequences of algebraic naturality stop at **affine $\Rightarrow$ affine**, by the
+collision trichotomy (not to be confused with the contraction trichotomy above). The $O(n)$
+characterisation is complete — Lemma L proved (`notes/lemma-L-proof.md`) and independently audited
+(`notes/lemma-L-audit.md`).
 
 ## Provenance
 
 Corroborated by two or more independent passes plus checks here: the trichotomy, $N_0$, the parity
 law, closure $\not\Rightarrow$ B-series, the non-jet property. **Single source + one audit:** the
-Lemma L proof. **Single source:** linear rigidity and scalar rigidity (both spot-checked here).
+Lemma L proof. **Single source:** linear rigidity and scalar rigidity (both spot-checked here);
+affine rigidity and the collision trichotomy (one pass, but the trichotomy is proved outright and
+machine-checked on all 41 pairs from 16 based algebras — the *cross-dimensional* half is the part
+resting on a bounded enumeration).
 Treat single-source items as leads when building on them.
 
 ## Keeping this current

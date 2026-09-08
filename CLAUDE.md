@@ -60,6 +60,8 @@ a settled result without new evidence is the waste this file exists to prevent.
 | Base block even $v$-degrees, fibre odd | two proofs (level counting; $(\mathrm{id},-\mathrm{id})\in O(2n)$ fixes $TX$) plus measurement | any measured defect of the wrong parity |
 | Closure does not imply B-series | PRK and the Laplacian method, both verified | — (a counterexample stands) |
 | Closure is not a jet condition | the flat method $\theta(h\operatorname{div}X)hX$ | — |
+| Affine fields go to affine maps | two independent witness pairs — secant vs tangent in dim 2, and $(\mathbb R[\varepsilon]/\varepsilon^3,\mathbb R[x,y]/\mathfrak m^2)$ in dim 3 (`verify/test_affine.py`) | an algebraically natural method and an affine $X$ whose $\Psi^X_h$ is not affine |
+| Collisions of two lifts cap at affine | proof (distinct based algebras differ at a product of two basis vectors) + all 41 pairs from 16 based algebras | based algebras of equal dimension whose lifts agree on a non-affine map |
 
 **$N_0$ has now survived the test that killed its predecessors.** It is the newest item, and it is
 the kind of clean combinatorial law that failed three times here: $2^{\text{aromas}}$, then
