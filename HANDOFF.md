@@ -67,6 +67,19 @@ Already established (verified, **no equivariance assumed**):
   spectra form a **lattice, not a chain**: the ring-valued tower realizes $\langle A\rangle_\otimes$
   for every based $A$, and $\langle D\rangle_\otimes$, $\langle\mathbb R^2\rangle_\otimes$ are
   incomparable. (§7, `verify/test_spectrum.py`.)
+* **Presentations, via the commutant.** For $Z$ on $\mathbb R^m$, the commutant
+  $\mathcal A(Z)=\{L:\ L\,D^kZ(u)[v_1,\dots]=D^kZ(u)[Lv_1,v_2,\dots]\ \forall k,u,v\}$ is a unital
+  subalgebra, computable (the conditions are linear in $L$), and contains $\rho_A(A)$ whenever
+  $Z=X^A$. Measured: $\mathcal A(X^A)=\rho_A(A)$ **exactly** for a generic field over all 17 based
+  algebras, and in both coincidence families it is the algebra of the *finest* presentation and
+  contains both coarser actions. So two presentations always refine to the commutant one, and the
+  prescription on the union of lifted loci is **consistent** by induction on dimension. (§7,
+  `verify/test_presentation.py`.)
+* **Zero-field rigidity.** $0^A=0$ for every $A$, so every pair of algebras of one dimension collides
+  on the zero field; with affine rigidity this gives $\Psi^0_h(u)=s(h)u$, and $s\equiv1$ under
+  consistency. Hence **no distinguished vector and no distinguished endomorphism**. Note
+  $u+hX+h^2e_1$ is affine on affine fields — affine rigidity misses it, the zero-field collision
+  kills it.
 * **Correction — the non-equivariant witness.** $u+hX+h^2(X^1)^2X$ with the scalar left
   *real*-valued is **not** (T)-natural (defect $2X^1(DX^1v)X$, measured); earlier notes labelled it
   so. §5's own prescription — make the scalar *ring*-valued — gives the genuine witness: for
@@ -92,10 +105,19 @@ The open questions, in order of interest:
 1. Is "algebraically natural $\Rightarrow$ affine equivariant $\Rightarrow$ B-series" true for
    $f$-analytic families? The first implication is the open half; conjectured **false** for smooth
    methods (1-jet loci are nowhere dense, $\dim n^2N<M^2$), blocked on gluing junk up the tower.
-2. Construct the flat, coherent, non-equivariant algebraically natural method, or prove none exists.
-3. *(Residue of the per-dimension question, now answered — §7.)* Cross-dimensional collisions
-   $X^A=Y^B$ with $n_1\neq n_2$ were found to be functorial over a bounded range only. A proof needs:
-   a lifted field determines its presentation up to common refinement.
+2. Construct the flat, coherent, non-equivariant algebraically natural method, or prove none
+   exists. **Now sharp.** The architecture is: $\Psi_1$ free up to affine rigidity, $\Psi_m$
+   prescribed on $L_m=\bigcup_{(n,A)}\{X^A\}$ and free off it. Consistency of that prescription is
+   settled by the commutant, so the entire question is a **simultaneous retraction** — one smooth
+   local formula restricting correctly on every $\{X^A\}$ at once. §5's retraction does one algebra;
+   the fibrewise-linear route fails because $\dim V_A(u)$ is not locally constant (it drops from 10
+   to 6 on the real locus, measured); and once $\dim A\ge7$ there are moduli of commutative algebras,
+   so $L_m$ is a continuum of loci rather than finitely many. Plausible route: support the junk near
+   a field far from every lifted locus *and* every retraction image, then propagate.
+3. *(Closed modulo one point — §7.)* Cross-dimensional collisions are functorial because the
+   commutant is the common refinement. What is left is to prove that $\mathcal A(Z)$ is always
+   commutative with $\mathbb R^m$ free over it, so the finest presentation exists; verified in all
+   19 cases here, not proved.
 4. **Which $\otimes$-closed classes of based algebras are realized as closure spectra?** The tower
    construction realizes every *principal* one $\langle A\rangle_\otimes$; $\{c_A=1\}$ and
    everything are realized by the Laplacian and by RK. Is that the whole image? This is the

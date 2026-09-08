@@ -465,6 +465,70 @@ algebra the other omits. With $\{\mathbb R\}$, $\{c_A=1\}$ and everything, the i
 $\Psi\mapsto\mathcal W(\Psi)$ is therefore a lattice rather than a chain. Which $\otimes$-closed
 classes are realized is open; the tower construction realizes every principal one.
 
+### Presentations, and where the gluing stands
+
+A *presentation* of $Z\in\mathfrak X(\mathbb R^m)$ is a triple $(n,(A,\iota),X)$ with $n\dim A=m$ and
+$Z=X^A$. Whether two presentations of one field must have a common refinement is what decides
+whether the conditions algebraic naturality places on a single $\Psi_m$ are mutually consistent.
+
+> **The commutant is the presentation.** Put
+> $$\mathcal A(Z):=\bigl\{L\in\operatorname{End}(\mathbb R^m)\ :\ L\,D^kZ(u)[v_1,\dots,v_k]=D^kZ(u)[Lv_1,v_2,\dots,v_k]\ \ \forall k\ge1,u,v_i\bigr\}.$$
+> It is a unital subalgebra of $\operatorname{End}(\mathbb R^m)$, and it is computable: the conditions are
+> linear in $L$. If $Z=X^A$ then $\rho_A(A)\subseteq\mathcal A(Z)$, because base change makes every
+> $D^kZ(u)$ an $A$-multilinear $A$-valued map.
+
+Measured: for a generic cubic field and each of the 17 based algebras, $\mathcal A(X^A)$ is
+**exactly** $\rho_A(A)$ — a generic lifted field determines its presentation outright. And in both
+coincidence families above, $\mathcal A(Z)$ is the algebra of the *finest* presentation and contains
+the actions of both coarser ones: $Z=Y^{D\otimes D}$, presented over $(1,D\otimes D)$ and $(2,D)$,
+has $\dim\mathcal A=4$; $Z=(W^{\mathbb R^2})^{\mathbb R^3}$, presented over $(2,\mathbb R^3)$ and
+$(3,\mathbb R^2)$, has $\dim\mathcal A=6=\dim(\mathbb R^3\otimes\mathbb R^2)$.
+
+> **Consequence (the overlap condition).** If $\Psi$ is natural below dimension $m$ and
+> $Z=X^A=Y^B$, both prescriptions for $\Psi_m(Z)$ factor through the commutant presentation
+> $(n_0,E,W)$: from $X=W^C$, $T^A\Psi(X)=T^AT^C\Psi(W)=T^E\Psi(W)$, and likewise for $B$. So the
+> prescription on the union of lifted loci is **consistent**, by induction on dimension.
+
+That is the input the gluing needed, and it closes open item 3 up to one point: that $\mathcal A(Z)$
+is always commutative with $\mathbb R^m$ free over it, so that the finest presentation exists.
+Verified in all 19 cases here; not proved.
+
+**Zero-field rigidity.** The zero field is lifted by *every* algebra, $0^A=0$, so every pair of based
+algebras of one dimension collides there. Affine rigidity makes $\Psi^0_h$ affine, $u\mapsto Su+w$,
+and base change of an affine map gives $S_{nN}=I_N\otimes S_n$ and $w_{nN}=1_A\otimes w_n$. Reading
+the second for $A=D$ against $\mathbb R^2$ in its standard basis ($1_D=(1,0)$ but
+$1_{\mathbb R^2}=(1,1)$) forces $w=0$; the first at $n=1$ gives $S_m=S_1I_m$.
+
+> **Corollary.** $\Psi^0_h(u)=s(h)\,u$, with $s\equiv1$ once consistency is imposed. An
+> algebraically natural family carries **no distinguished vector and no distinguished
+> endomorphism**.
+
+Note how this escapes the earlier net: $u+hX+h^2e_1$ *is* affine on affine fields, so affine rigidity
+misses it — the zero-field collision is what kills it.
+
+**Where the gluing stands.** Building a non-equivariant algebraically natural family (open item 2)
+has the shape: $\Psi_1$ is free up to affine rigidity, and for $m>1$, $\Psi_m$ is prescribed on
+$L_m=\bigcup_{(n,A),\,\dim A>1}\{X^A\}$ and free off it. Consistency is now settled, so what remains
+is a **smooth and local** extension across $L_m$.
+
+Locality makes that fibrewise: $\Psi_m$ is a function of the jet, and $V_A(u)=\{j^r(X^A)(u):X\}$ is a
+*linear* subspace of $J^r_u$, base change being linear in $X$. Inclusion–exclusion over finitely many
+subspaces with compatible projections would then give a smooth local extension — and one can say
+exactly why that route fails: $\dim V_A(u)$ is **not** locally constant. At a real point
+$u=1_A\otimes x$ the Jacobian of $X^D$ is block diagonal and the higher jet of $X$ is forgotten, so
+for $A=D$, $n=2$, $r=1$ the dimension drops from $10$ to $6$ (measured); each algebra degenerates on
+its own real locus, which is precisely where the loci meet. Two further obstacles: the projections
+would have to be compatible with locality, and once $\dim A\ge7$ there are *moduli* of commutative
+algebras, so $L_m$ is a union of a continuum of loci rather than finitely many.
+
+What survives is §5's retraction, which handles one algebra at a time:
+$\Psi_{nN}(Z)(u):=T^A\bigl(\Psi_n(X_{Z,u})\bigr)(u)$, freezing the nilpotent part of $u$, is smooth,
+local, and correct on $\{X^A\}$. So the open problem is now sharp: **is there a simultaneous
+retraction** — one smooth local formula restricting correctly on every $\{X^A\}$ at once? The
+plausible route is to support the junk near a field far from every lifted locus *and* from every
+retraction image, then propagate; that is an inductive genericity argument, and the moduli in high
+dimension are what make it delicate.
+
 **What the Galois analogy gives, and what it does not.** The shape is right — a correspondence
 between classes of methods and $\otimes$-closed classes of algebras, with the monoid structure in the
 role of the subgroup lattice — and it is what organises the results above. Two things it does not
@@ -738,6 +802,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_partitioned.py` | PRK satisfies (T) for the $D$-block lift, fails for the real lifts; not affine equivariant |
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/algebra.py` | based algebras (Weil and products), base change over any of them, recognition of lifts |
+| `verify/test_presentation.py` | the commutant recovers the algebra on 17 based algebras and is the common refinement in both coincidence families; zero-field rigidity; degeneration of the jet loci on the real locus |
 | `verify/test_spectrum.py` | the closure spectrum: monoidality under $\otimes$, the corrected survival law on 17 based algebras, the stolon-defect identity, failure of subalgebra-closure, and the incomparable tower spectra |
 | `verify/test_affine.py` | the collision trichotomy on all 41 pairs from 16 based algebras; affine rigidity and its two witness pairs; its separation from linear rigidity; functoriality of the cross-dimensional collisions |
 | `verify/test_contractions.py` | liana (Laplacian) is (T)-natural and not affine equivariant; stolon fails; liana defect over $\varepsilon^3$ equals $\Delta X$ |

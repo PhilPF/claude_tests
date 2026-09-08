@@ -64,6 +64,8 @@ a settled result without new evidence is the waste this file exists to prevent.
 | Collisions of two lifts cap at affine | proof (distinct based algebras differ at a product of two basis vectors) + all 41 pairs from 16 based algebras | based algebras of equal dimension whose lifts agree on a non-affine map |
 | Loops *and stolons* survive only for $A=\mathbb R$; lianas iff $c_A=1$ | 17 based algebras $\times$ 6 methods, plus the exact defect identity $h^2(r\cdot1_A-q)X^A$ (`verify/test_spectrum.py`) | a based algebra of dimension $>1$ over which a loop- or stolon-carrying differential is $T^A$-natural |
 | The closure spectrum is a $\otimes$-monoid, not subalgebra-closed | one-line proof plus multiplicativity of $\dim$, $c_A$, balancedness; Laplacian over $D\otimes D$ vs its $S_2$-invariant | a method natural over $A$ and over $B$ but not over $A\otimes B$ |
+| The commutant recovers the presentation | $\mathcal A(X^A)=\rho_A(A)$ on 17 based algebras, and is the common refinement in both coincidence families (`verify/test_presentation.py`) | a lifted field whose commutant is strictly larger than the algebra of its finest presentation |
+| No distinguished vector or endomorphism: $\Psi^0_h(u)=s(h)u$ | the zero field is lifted by every algebra, so every pair collides on it; plus affine rigidity | an algebraically natural family whose $\Psi^0_h$ has a translation part |
 
 **$N_0$ has now survived the test that killed its predecessors.** It is the newest item, and it is
 the kind of clean combinatorial law that failed three times here: $2^{\text{aromas}}$, then
