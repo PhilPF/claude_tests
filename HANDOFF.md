@@ -132,14 +132,16 @@ The open questions, in order of interest:
    $f$-analytic families? The first implication is the open half; conjectured **false** for smooth
    methods (1-jet loci are nowhere dense, $\dim n^2N<M^2$), blocked on gluing junk up the tower.
 2. Construct the flat, coherent, non-equivariant algebraically natural method, or prove none
-   exists. **Now sharp.** The architecture is: $\Psi_1$ free up to affine rigidity, $\Psi_m$
-   prescribed on $L_m=\bigcup_{(n,A)}\{X^A\}$ and free off it. Consistency of that prescription is
-   settled by the commutant, so the entire question is a **simultaneous retraction** — one smooth
-   local formula restricting correctly on every $\{X^A\}$ at once. §5's retraction does one algebra;
-   the fibrewise-linear route fails because $\dim V_A(u)$ is not locally constant (it drops from 10
-   to 6 on the real locus, measured); and once $\dim A\ge7$ there are moduli of commutative algebras,
-   so $L_m$ is a continuum of loci rather than finitely many. Plausible route: support the junk near
-   a field far from every lifted locus *and* every retraction image, then propagate.
+   exists. **A candidate construction now exists at second order** (§7, `notes/order2-classification.md`,
+   `verify/test_order2.py`), built on a *verified* detector: the **pointwise** commutant reads
+   $\rho_A(A)$ exactly and — unlike $\dim V_A(u)$ — does **not** collapse on the real locus; it is
+   multiplicative, separates the factorizations, and the recover-and-lift prescription needs no
+   per-algebra data on polynomial fields. The proposal sums over divisors $N\mid m$ rather than over
+   algebras, so the dimension-$\ge7$ moduli never enter. **It is a lead, not a result**: three gaps
+   remain — mutually exclusive smooth cutoffs; commutativity/freeness of $\mathcal A_r$ (item 3's
+   residual point, now load-bearing); and that the intrinsic formula is verified for *polynomial*
+   $Y$ while the witness needs a compactly supported *smooth* bump, whose base change expands about
+   the real point the formula claims not to use.
 3. *(Closed modulo one point — §7.)* Cross-dimensional collisions are functorial because the
    commutant is the common refinement. What is left is to prove that $\mathcal A(Z)$ is always
    commutative with $\mathbb R^m$ free over it, so the finest presentation exists; verified in all

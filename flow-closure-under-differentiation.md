@@ -566,6 +566,90 @@ genuine $GL$ to appear in this programme, and it acts in the **algebra** directi
 $\mathbb R^n$ directions — precisely the gap §11 records against "algebraically natural
 $\Rightarrow$ affine equivariant".
 
+### What $\operatorname{Aut}$-equivariance imposes
+
+The condition above reads like equivariance. It is much weaker, and one can say exactly how weak.
+
+> **It is trivial on the base.** Every automorphism is unital, so $\phi_n$ fixes the real locus
+> $1_A\otimes\mathbb R^n$ **pointwise**. Since $\Psi_{n\dim A}$ restricted to that locus is $\Psi_n$,
+> the condition imposes nothing whatever on the base method: its entire content lies in the
+> nilpotent directions.
+
+Infinitesimally the same fact is $d(1)=d(1\cdot1)=2d(1)$, hence $d(1)=0$, together with
+$d(\mathfrak m)\subseteq\mathfrak m$: a derivation has zero $e_0$-row and column. Computed:
+$\operatorname{Der}(J^1_k)=\mathfrak{gl}(k)$ of dimension $k^2$;
+$\operatorname{Der}(\mathbb R[\varepsilon]/(\varepsilon^{r+1}))$ of dimension $r$; and
+$\operatorname{Der}(\mathbb R^k)=0$ — a product algebra has no infinitesimal automorphisms at all,
+only the finite $S_k$.
+
+> **What it generates is $\mathfrak{gl}(m-1)$, not $\mathfrak{gl}(m)$.** Over *all* factorizations
+> $m=n\dim A$ the generated Lie algebra is exactly $\mathfrak{gl}(m-1)$, acting on the nilpotent
+> directions and fixing the unit direction: measured $9,\,25,\,49$ at $m=4,6,8$ against
+> $\mathfrak{gl}(m)=16,\,36,\,64$, and against the stabiliser of $e_0$, larger still at $m^2-m$. It
+> is realised already by $J^1_{m-1}$ alone, so combining factorizations gains nothing.
+
+*This corrects half of a recorded reason.* §11 locates the failure to recover $GL(n)$-equivariance
+in "the group generated is large enough ($\mathfrak{gl}(nN)$) but the lifted locus too thin". For the
+automorphism-generated group that is **false**: the group is not large enough, and thinness is not
+the operative obstruction. It fixes the base pointwise, so no amount of it can produce equivariance
+in the $\mathbb R^n$ directions — the wrong group, not a large group on a small set.
+
+**What it does impose.** For $A=J^1_k$ the lift is the $k$-fold Whitney sum,
+$$X^{J^1_k}(u^0,u^1,\dots,u^k)=\bigl(X(u^0),\ DX(u^0)u^1,\ \dots,\ DX(u^0)u^k\bigr),$$
+and $\operatorname{Aut}(J^1_k)=GL(k)$ mixes the $k$ tangent copies. So the content is exactly:
+**$\Psi$ may not distinguish directions inside the nilpotent part** — no preferred basis of
+$\mathfrak m$ — and nothing else.
+
+### The pointwise detector, and a proposed simultaneous retraction
+
+At second order — write $\Psi^X_{m,h}(u)=u+hX(u)+h^2B_m(X)(u)+O(h^3)$, so naturality is exactly
+$B_{n\dim A}(X^A)=(B_nX)^A$ — the retraction problem changes character, because locality makes the
+relevant object the **pointwise** commutant
+$$\mathcal A_r\bigl(u,j^rZ(u)\bigr)=\bigl\{L:\ L\,D^kZ(u)[v_1,\dots,v_k]=D^kZ(u)[Lv_1,v_2,\dots,v_k],\ 1\le k\le r\bigr\}.$$
+
+> **Verified.** $\dim\mathcal A_3(u,j^3(X^A)(u))=\dim A$, and the commutant *is* $\rho_A(A)$, at a
+> generic point, at the real locus $1_A\otimes\mathbb R^n$, and at the origin — all 17 based
+> algebras, $n=1,2$. So the pointwise commutant does **not** collapse on the real locus, whereas
+> $\dim V_A(u)$ does — and that collapse is what killed the fibrewise-linear route above. It is
+> multiplicative, $\dim\mathcal A(X^A)=\dim A\cdot\dim\mathcal A(X)$, and it *separates* the
+> factorizations: the $\rho_A(A)$ are pairwise distinct (11 factorizations at $m=4$, 8 at $m=6$).
+
+> **Verified.** The prescription needs no per-algebra data. With $\mathfrak a=\mathcal A_r$ and
+> generators $g_j=1_A\otimes e_j$, a **polynomial** field $Y$ on $\mathbb R^n$ satisfies
+> $Y^A(u)=\sum_iY_i(u_1,\dots,u_n)\cdot g_i$, products taken in $\mathfrak a$ — no basis of $A$, no
+> structure constants, no augmentation. Checked against `lift_map` for two different $Y$, over all 17
+> algebras, at all three kinds of point.
+
+Together these suggest summing over the **divisors** $N\mid m$ rather than over algebras,
+$$\Phi_m:=\kappa_m+\sum_{N\mid m,\ N\ge2}\chi_N(J)\,E_{m/N,N}(u,J),$$
+with $E$ the intrinsic recover-and-lift, $\chi_N$ a smooth cutoff keyed to $\dim\mathcal A_r$, and
+$\kappa_m$ free junk supported in $\Omega_m=\{\dim\mathcal A_r=1\}$ — nonempty, disjoint from every
+lifted locus, and containing no affine field, so junk there is affine-rigid for free. If it works,
+both recorded obstacles dissolve, and a witness ($\kappa_1=0$, $\kappa_2$ a bump in $\Omega_2$) would
+refute "algebraically natural $\Rightarrow$ affine equivariant" for smooth families.
+
+**This is a lead, not a result, and three gaps separate it from one.**
+
+1. *The cutoffs.* $\{\dim\mathcal A_r=N\}$ is locally closed, not open, and on a lifted locus has
+   empty interior. Keying $\chi_N$ to a spectral gap is the standard repair, but it must also be made
+   mutually exclusive — first $N$ singular values below $\varepsilon$ **and** the $(N{+}1)$-st above
+   $\delta$ — or a jet with $N$ small values could satisfy a gap condition at some $N'>N$ and pick up
+   a spurious term.
+2. *Commutativity and freeness.* The construction needs $\mathcal A_r(J)$ commutative with
+   $\mathbb R^m$ free over it wherever the prescription is nonzero — precisely the residual point of
+   the commutant theorem above, verified in cases and never proved, and now **load-bearing**.
+3. *Polynomial versus smooth.* The intrinsic formula is verified for **polynomial** $Y$, where
+   substitution needs no expansion point. The witness requires a compactly supported **smooth**
+   $\kappa_2$, whose base change is defined by Taylor expansion about the real point — the datum the
+   formula is advertised as not using. For an algebra with several local factors there is one real
+   point *per factor*, the recorded trap that already invalidated two earlier forms of this
+   prescription. The idempotents of $\mathfrak a$ are intrinsic, so this looks closable; it is not
+   closed, and the verification does not reach it.
+
+Until those close, the headline reading — that the open half of §11's conjecture is false for smooth
+families — is **not** established. What *is* established is the detector: pointwise, non-degenerate,
+multiplicative, separating, and per-algebra-free on polynomial data.
+
 **What the Galois analogy gives, and what it does not.** The shape is right — a correspondence
 between classes of methods and $\otimes$-closed classes of algebras, with the monoid structure in the
 role of the subgroup lattice — and it is what organises the results above. Two things it does not
@@ -819,7 +903,9 @@ the starred items were re-verified here. Items still resting on a single pass ar
   component.
 * **Coherence does not recover $GL(n)$-equivariance.** Both passes say no. They locate it
   differently — one finds the group large enough ($\mathfrak{gl}(nN)$ is generated) but the lifted
-  locus too thin; the other observes that coherence is not a group action at all, being a system of
+  locus too thin — *this half is corrected: the automorphism-generated Lie algebra is exactly
+  $\mathfrak{gl}(m-1)$ and fixes the base pointwise, so it is the wrong group rather than a large
+  group on a small set; see §7*; the other observes that coherence is not a group action at all, being a system of
   restriction conditions on overlapping thin loci. The disagreement traces to the horn dilemma
   above: the "all bases" reading supplies the extra generators but trivialises the question.
 * **A trap worth recording.** Testing on a *quadratic* field makes $\Delta X$ constant and produces
@@ -839,6 +925,8 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_partitioned.py` | PRK satisfies (T) for the $D$-block lift, fails for the real lifts; not affine equivariant |
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/algebra.py` | based algebras (Weil and products), base change over any of them, recognition of lifts |
+| `verify/test_aut.py` | $\operatorname{Der}(A)$ for the based algebras; every derivation kills the unit; the $\operatorname{Aut}$-generated Lie algebra is $\mathfrak{gl}(m-1)$ at $m=4,6$; the $J^1_k$-lift is the $k$-fold Whitney sum |
+| `verify/test_order2.py` | the pointwise commutant reads $\rho_A(A)$ without collapsing on the real locus; multiplicativity; separation of the factorizations; the per-algebra-free lift formula on polynomial data |
 | `verify/test_relations.py` | failure of quotient- and product-closure with explicit witnesses; $\operatorname{Aut}(A)$-equivariance on the lifted locus and the $GL(k)$ it produces |
 | `verify/test_presentation.py` | the commutant recovers the algebra on 17 based algebras and is the common refinement in both coincidence families; zero-field rigidity; degeneration of the jet loci on the real locus |
 | `verify/test_spectrum.py` | the closure spectrum: monoidality under $\otimes$, the corrected survival law on 17 based algebras, the stolon-defect identity, failure of subalgebra-closure, and the incomparable tower spectra |
