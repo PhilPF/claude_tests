@@ -72,6 +72,7 @@ a settled result without new evidence is the waste this file exists to prevent.
 | The commutant recovers the presentation | $\mathcal A(X^A)=\rho_A(A)$ on 17 based algebras, and is the common refinement in both coincidence families (`verify/test_presentation.py`) | a lifted field whose commutant is strictly larger than the algebra of its finest presentation |
 | $\Psi^0_h(u)=s(h)u$ — no distinguished endomorphism | zero-field collision at $n=1$; the no-translation half is just linear rigidity at $M=0$, not new | an algebraically natural family whose $\Psi^0_h$ is not a scalar |
 | Only $\otimes$ transfers between algebras: not sub, quotient or product | three explicit witnesses (`verify/test_relations.py`) | a method natural over $A$ and not over some $A\otimes B$, or a proof that some other relation transfers |
+| $\operatorname{Aut}(A)$-equivariance is trivial on the base; it generates $\mathfrak{gl}(m-1)$, not $\mathfrak{gl}(m)$ | $d(1)=0$ for every derivation; measured $9,25,49$ at $m=4,6,8$ (`verify/test_aut.py`) | an automorphism-induced map moving the real locus, or a generated algebra exceeding $\mathfrak{gl}(m-1)$ |
 
 **$N_0$ has now survived the test that killed its predecessors.** It is the newest item, and it is
 the kind of clean combinatorial law that failed three times here: $2^{\text{aromas}}$, then

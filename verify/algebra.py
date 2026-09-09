@@ -278,7 +278,48 @@ def spectrum_invariants(A, g=None):
     return A.N, c, c == A.one, balanced(A, g)
 
 
+def derivations(A):
+    """Basis of Der(A) = { d : d(ab) = d(a)b + a d(b) }, flattened N x N matrices with
+    d(e_alpha) = sum_gamma d[gamma][alpha] e_gamma.  Der(A) is the Lie algebra of
+    Aut(A); every derivation kills 1, since d(1) = d(1.1) = 2d(1)."""
+    from test_affine import kernel
+    N = A.N; rows = []
+    for a in range(N):
+        for b in range(N):
+            for de in range(N):
+                r = [F(0)] * (N * N)
+                for g in range(N):
+                    if A.c[a][b][g]: r[de * N + g] += A.c[a][b][g]
+                for g in range(N):
+                    if A.c[g][b][de]: r[g * N + a] -= A.c[g][b][de]
+                    if A.c[a][g][de]: r[g * N + b] -= A.c[a][g][de]
+                if any(r): rows.append(r)
+    return kernel(rows, N * N) if rows else []
+
+
 # ---- the based algebras used in the tests -------------------------------------
+
+def Wk(k):
+    """the jet algebra J^1_k = R[x_1..x_k]/m^2, basis (1, x_1, ..., x_k).  Its
+    automorphism group is GL(k) acting on m = span(x_i) -- the largest Aut in its
+    dimension, and the reason the Aut-generated algebra is all of gl(m-1)."""
+    N = k + 1
+    return Alg(f"R[x_1..x_{k}]/m^2", N,
+               {(a, b): [F(0)] * N for a in range(1, N) for b in range(a, N)},
+               [1] + [0] * k)
+
+
+def Jr(r):
+    """R[e]/(e^{r+1}), basis (1, e, ..., e^r)."""
+    N = r + 1
+    tab = {}
+    for a in range(1, N):
+        for b in range(a, N):
+            v = [F(0)] * N
+            if a + b < N: v[a + b] = F(1)
+            tab[(a, b)] = v
+    return Alg(f"R[e]/(e^{N})", N, tab, [1] + [0] * r)
+
 
 R1   = Alg("R", 1, {}, [1])
 D2   = Alg("D = R[e]/(e^2)", 2, {(1, 1): [0, 0]}, [1, 0])

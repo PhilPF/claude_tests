@@ -1,7 +1,7 @@
 """Run every check. Exit status 0 iff all pass."""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import test_basic, test_aromas, test_partitioned, test_weil, test_contractions, test_cotangent, test_exotic, test_vdegree, test_n0, test_round4, test_affine, test_spectrum, test_presentation, test_relations
+import test_basic, test_aromas, test_partitioned, test_weil, test_contractions, test_cotangent, test_exotic, test_vdegree, test_n0, test_round4, test_affine, test_spectrum, test_presentation, test_relations, test_aut
 
 MODULES = [("basic (T) checks", test_basic), ("aroma scaling", test_aromas),
            ("partitioned RK", test_partitioned), ("Weil algebra R[e]/(e^3)", test_weil),
@@ -13,7 +13,8 @@ MODULES = [("basic (T) checks", test_basic), ("aroma scaling", test_aromas),
            ("affine rigidity and the collision trichotomy", test_affine),
            ("the closure spectrum", test_spectrum),
            ("presentations and the gluing problem", test_presentation),
-           ("relations between algebras", test_relations)]
+           ("relations between algebras", test_relations),
+           ("what Aut-equivariance imposes", test_aut)]
 
 def main():
     allok = True

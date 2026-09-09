@@ -81,6 +81,17 @@ Already established (verified, **no equivariance assumed**):
   at $M=0$; an earlier note claimed $u+hX+h^2e_1$ "escapes affine rigidity and dies to the zero-field
   collision", which is misleading — linear rigidity kills it outright. The new content is only
   $S_m=s(h)I_m$, so **no distinguished endomorphism** either.
+* **What $\operatorname{Aut}$-equivariance imposes — much less than it sounds.** Every automorphism
+  is unital, so $\phi_n$ fixes the real locus $1_A\otimes\mathbb R^n$ **pointwise**, and
+  $\Psi_{n\dim A}$ restricted there is $\Psi_n$: the condition says **nothing about the base
+  method**, only about the nilpotent directions. Collected over all factorizations of $m$ the
+  generated Lie algebra is exactly $\mathfrak{gl}(m-1)$ (measured $9,25,49$ at $m=4,6,8$ against
+  $\mathfrak{gl}(m)=16,36,64$), already realised by $J^1_{m-1}$ alone. **Correction:** the recorded
+  claim that "the group generated is large enough ($\mathfrak{gl}(nN)$), the locus too thin" is
+  false for the automorphism group — it is the *wrong group*, since it fixes the base pointwise, so
+  it can never give $GL(n)$ there. Positively, for $A=J^1_k$ the lift is the $k$-fold Whitney sum
+  and $\operatorname{Aut}=GL(k)$ mixes the copies, so the whole imposition is: no preferred basis of
+  $\mathfrak m$. (§7, `verify/test_aut.py`.)
 * **Only $\otimes$ transfers between algebras.** The spectrum is closed under $\otimes$ and under
   **nothing else**: not subalgebras (Laplacian; $\mathbb R[s]/(s^3)\subset D\otimes D$), not
   quotients ($\operatorname{tower}(D\otimes D)$; $D\otimes D\twoheadrightarrow D$), not products
