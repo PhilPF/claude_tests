@@ -13,10 +13,17 @@ is kept *correct* rather than append-only — claims in it have been retracted s
 verification contradicted them.
 
 **Framing discipline.** Closure is a *per-tower* condition and imposes nothing on any individual
-$\Psi_d$. Every characterisation in this area factors as
+$\Psi_d$. Every characterisation **in the literature** factors as
 $[\text{equivariance}]\cap[\text{closure}]$, where equivariance produces the series and closure only
 prunes it. Do not report such a result as though closure alone delivered it — that framing has
 already drifted once.
+
+**But that is a description of the published results, not a research programme**, and reading it as
+one is itself a trap: it forces every round either to prove affine equivariance or to assume it, and
+that road is closed — **leapfrog is closed and not affine equivariant** (`verify/test_jettransport.py`).
+The lens that presupposes no equivariance is the jet-transport interface of §7: *which operations
+does the method use to touch the field, and which **shape** is the property stated relative to?*
+Prefer it when attacking the class directly.
 
 ## Standing practices
 

@@ -650,6 +650,62 @@ Until those close, the headline reading — that the open half of §11's conject
 families — is **not** established. What *is* established is the detector: pointwise, non-degenerate,
 multiplicative, separating, and per-algebra-free on polynomial data.
 
+### Jet transport for a general method, and the shape it is relative to
+
+The condition $\Psi_{n\dim A}(X^A)=T^A(\Psi_n(X))$ carries an asymmetry the equivariance framing
+hides. On the left, $\Psi$ receives $X^A$ as a **bare** field on $\mathbb R^{n\dim A}$: it is not
+told the field is a lift, nor from which $(n,A)$. On the right, $T^A$ is applied to the output using
+the full structure. So the property says: *a method blind to the structure must nonetheless return
+the structured answer.*
+
+For a method that is an **algorithm over the base ring** this is automatic, and is exactly what jet
+transport does in practice — run the same program with $\mathbb R$-arithmetic replaced by
+$A$-arithmetic. The prerequisites are a short list.
+
+| | requirement | why, and who violates it |
+|---|---|---|
+| **J1** | the field is touched only by **evaluation** of $X$ and finitely many derivatives, at computed points | evaluation at an $A$-point *is* $X^A$, by definition of base change — so it costs nothing |
+| **J2** | only $\mathbb R$-algebra operations on values: $+$, $-$, real scalars, products. No norms, no order, no branching on them; **division only by units** | over $A$ a general element is not invertible: $a$ is a unit iff its image in each local factor's residue field is nonzero (verified) |
+| **J3** | implicit definitions are admissible when the defining equation is natural in the base and has a **unique** solution | nilpotence of $\mathfrak m$ supplies this whenever the $\mathbb R$-linearization is invertible: solve over $\mathbb R$, lift by finitely many Newton steps. This is why implicit RK jet-transports |
+| **J4** | any **auxiliary structure** must base-change functorially | a *splitting* does; a *metric* does not — precisely the $c_A$/balancedness/trace trichotomy of §4 |
+
+Every recorded example falls out of the list: the exact flow, RK and Taylor use J1–J3 with no
+auxiliary structure, so they are closed for every $A$, equivariant, B-series; **leapfrog** — and PRK
+generally — uses J1–J3 *plus a splitting*, so it is closed and **not** affine equivariant, a
+splitting being no $GL$-invariant; the **Laplacian method** uses the metric, violating J4, and
+survives over $D$ only by the accident $c_D=1$; **aromatic** methods use the trace, violating J4, and
+die by the factor $\dim_\mathbb R A$; and **adaptive step control** on
+$\lVert\mathrm{err}\rVert<\mathrm{tol}$ violates J2 twice, by a norm and by a branch, so it does not
+jet-transport at all.
+
+**The missing ingredient is the shape.** J4 forces a restatement of the property itself. Leapfrog's
+auxiliary datum is a splitting of the coordinates, and the condition only means anything once one
+says *how the splitting is carried along the lift*. Verified: of the three ways to match a splitting
+of $\mathbb R^2$ against the $D$-lift to $\mathbb R^4$, exactly one — the one base change dictates,
+coordinate $j\mapsto$ the $A$-block $\{jN,\dots,jN+N-1\}$ — makes leapfrog closed; real-versus-fibre
+and crossed both fail. So the honest statement of the property is not "a family indexed by dimension
+commuting with base change" but
+
+> a **shape functor** $\mathcal S$ — dimension, or dimension-with-a-splitting, or whatever structure
+> the method needs — itself carrying a base change $A\mapsto\mathcal S^A$, together with a family
+> $\Psi$ over $\mathcal S$ commuting with it.
+
+Plain dimension is the trivial shape; partitioned dimension is leapfrog's. The recorded caveat that
+"PRK is a (T)-natural family only when indexed by **partitioned** dimensions" is then not a caveat
+but an instance: the shape is part of the data, and had been silently fixed.
+
+**Where the strength is.** J1–J4 are *sufficient*. They are **not** necessary: the extension theorem
+produces closed families by gluing rather than computing, and those are programs in no interface. So
+
+$$\text{programmable}\ \Longrightarrow\ \text{closed},\qquad\text{and the gap is exactly the extension-theorem junk.}$$
+
+This reframes the open problem in a way leapfrog does not refute. Instead of "does closure imply
+affine equivariance" — false, leapfrog — the question becomes: **is every closed method given by an
+algorithm one of J1–J4, relative to some shape?** Leapfrog is then an instance rather than a
+counterexample, and the classification splits into two independent halves: *which shapes
+base-change* (a question about natural structures, where §4's trichotomy answers it for tensors), and
+*which programs over a fixed shape are closed*.
+
 **What the Galois analogy gives, and what it does not.** The shape is right — a correspondence
 between classes of methods and $\otimes$-closed classes of algebras, with the monoid structure in the
 role of the subgroup lattice — and it is what organises the results above. Two things it does not
@@ -925,6 +981,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_partitioned.py` | PRK satisfies (T) for the $D$-block lift, fails for the real lifts; not affine equivariant |
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/algebra.py` | based algebras (Weil and products), base change over any of them, recognition of lifts |
+| `verify/test_jettransport.py` | leapfrog is closed for the lifted splitting and for neither other matching; it is not affine equivariant; invertibility in $A$ is exactly unit-hood |
 | `verify/test_aut.py` | $\operatorname{Der}(A)$ for the based algebras; every derivation kills the unit; the $\operatorname{Aut}$-generated Lie algebra is $\mathfrak{gl}(m-1)$ at $m=4,6$; the $J^1_k$-lift is the $k$-fold Whitney sum |
 | `verify/test_order2.py` | the pointwise commutant reads $\rho_A(A)$ without collapsing on the real locus; multiplicativity; separation of the factorizations; the per-algebra-free lift formula on polynomial data |
 | `verify/test_relations.py` | failure of quotient- and product-closure with explicit witnesses; $\operatorname{Aut}(A)$-equivariance on the lifted locus and the $GL(k)$ it produces |

@@ -126,8 +126,26 @@ Two traps specific to this target:
   generated is large enough ($\mathfrak{gl}(nN)$), but every base-change map **preserves the lifted
   locus**, so naturality never compares a lifted field against a generic one.
 
+**Reframing (new, and it changes the target).** The property has an asymmetry the equivariance
+framing hides: $\Psi$ receives $X^A$ as a *bare* field and is not told it is a lift, yet must return
+$T^A$ of the unlifted answer. For a method that is an **algorithm over the base ring** — which is
+what jet transport runs in practice — this is automatic, and the prerequisites are a short list
+(§7): evaluation-only access to the field; $\mathbb R$-algebra operations only, with **division by
+units alone**; implicit definitions when the equation is natural and uniquely solvable; and any
+auxiliary structure must base-change functorially. A **splitting** does, a **metric** does not.
+Consequently the property is stated relative to a **shape functor**, not to plain dimension —
+leapfrog's shape is dimension-with-a-splitting, and of the three ways to match that splitting against
+the $D$-lift exactly one works (verified). "PRK is natural only for partitioned indexing" is then an
+instance, not a caveat. J1–J4 are sufficient and **not** necessary: programmable $\Rightarrow$
+closed, and the gap is exactly the extension-theorem junk.
+
 The open questions, in order of interest:
 
+0. **Is every closed method that is given by an algorithm one of J1–J4, relative to some shape?**
+   This replaces the old headline: leapfrog refutes "closure $\Rightarrow$ affine equivariance"
+   outright, so that question was mis-posed. The reframed one splits in two — *which shapes
+   base-change* (§4's trichotomy answers it for tensors) and *which programs over a fixed shape are
+   closed* — and leapfrog is an instance of it rather than a counterexample.
 1. Is "algebraically natural $\Rightarrow$ affine equivariant $\Rightarrow$ B-series" true for
    $f$-analytic families? The first implication is the open half; conjectured **false** for smooth
    methods (1-jet loci are nowhere dense, $\dim n^2N<M^2$), blocked on gluing junk up the tower.
