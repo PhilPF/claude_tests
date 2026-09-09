@@ -1,0 +1,138 @@
+"""How the closure spectrum behaves under the relations between algebras.
+
+The Weil algebras form a category, and one would like to check naturality on a
+generating family and deduce the rest.  That fails, and the failures are sharp.
+
+D1.  NOT CLOSED UNDER QUOTIENTS.  tower(D (x) D) is T^{D(x)D}-natural but not
+     T^D-natural, and D is a quotient of D (x) D (send x, y -> eps).  Since EVERY
+     Weil algebra is a quotient of a jet algebra R[x_1..x_k]/m^{r+1}, this kills
+     the obvious reduction: one cannot verify naturality on the jet algebras and
+     deduce it for the rest.
+
+D2.  NOT CLOSED UNDER PRODUCTS.  tower(D) is T^D-natural but not T^{DxD}-natural.
+
+     With the earlier failure under subalgebras, the spectrum is closed under (x)
+     and under nothing else.  The reason is structural: (x) is the only relation
+     among Weil algebras that is a relation between the FUNCTORS, T^{A(x)B} =
+     T^A o T^B, so one condition can be applied twice.  Sub, quotient and product
+     give natural transformations BETWEEN functors, and naturality is a condition
+     on each functor separately -- Psi_m and Psi_{m'} in different dimensions are
+     a priori unrelated, so nothing transfers.
+
+D3.  WHAT THE MORPHISMS DO GIVE.  For phi: A -> B the map phi_n = phi (x) id is
+     real-linear, intertwines X^A with X^B, and satisfies T^B F . phi_n = phi_n .
+     T^A F.  So an algebraically natural Psi obeys
+
+         phi_n . Psi^{X^A} = Psi^{X^B} . phi_n     on lifted fields,
+
+     which for A = B is Aut(A)-equivariance of Psi_m on the A-lifted locus.  This
+     is not vacuous: Aut(R[x_1..x_k]/m^2) = GL(k), so T^{J^1_k}-naturality forces
+     honest GL(k)-equivariance -- the first genuine GL in this programme.  It acts
+     in the ALGEBRA directions, not the R^n directions, which is exactly the gap
+     section 11 records against "algebraically natural => affine equivariant".
+"""
+from fractions import Fraction as F
+from poly import P
+import algebra as al
+from test_affine import gen_map, _u, euler
+from test_spectrum import tower, power, natural
+
+
+def is_hom(pi, A, B):
+    """pi: a list of B-coordinate vectors, one per basis element of A."""
+    def bmul(x, y):
+        o = [F(0)] * B.N
+        for a in range(B.N):
+            for b in range(B.N):
+                if x[a] and y[b]:
+                    for g in range(B.N): o[g] += x[a] * y[b] * B.c[a][b][g]
+        return o
+    if [sum(A.one[a] * pi[a][g] for a in range(A.N)) for g in range(B.N)] != B.one:
+        return False
+    for a in range(A.N):
+        for b in range(A.N):
+            lhs = [sum(A.c[a][b][c] * pi[c][g] for c in range(A.N)) for g in range(B.N)]
+            if lhs != bmul(pi[a], pi[b]): return False
+    return True
+
+
+def rank(rows, w):
+    R = [r[:] for r in rows]; r = 0
+    for c in range(w):
+        p = next((i for i in range(r, len(R)) if R[i][c]), None)
+        if p is None: continue
+        R[r], R[p] = R[p], R[r]; pv = R[r][c]
+        for i in range(len(R)):
+            if i != r and R[i][c]:
+                f = R[i][c] / pv; R[i] = [R[i][j] - f * R[r][j] for j in range(w)]
+        r += 1
+    return r
+
+
+def closure_ops():
+    ok = True
+    DD = al.tensor(al.D2, al.D2)
+    pi = [[F(1), F(0)], [F(0), F(1)], [F(0), F(1)], [F(0), F(0)]]   # x, y -> eps
+    h, sur = is_hom(pi, DD, al.D2), rank(pi, 2) == 2
+    ok &= h and sur
+    print("  D1  quotients.  pi: D(x)D -> D sending x, y -> eps is a surjective")
+    print(f"      algebra homomorphism: hom {h}, surjective {sur}")
+    a, b = natural(DD, tower(DD), 3), natural(al.D2, tower(DD), 3)
+    ok &= (a and not b)
+    print(f"      tower(D(x)D) is T^(D(x)D)-natural {a}, T^D-natural {b}")
+    print("      -> the spectrum contains the parent and not the quotient.  Since every")
+    print("         Weil algebra is a quotient of a jet algebra, naturality cannot be")
+    print("         reduced to the jet algebras.")
+    c, d = natural(al.D2, tower(al.D2), 3), natural(al.DxD, tower(al.D2), 3)
+    ok &= (c and not d)
+    print(f"\n  D2  products.  tower(D) is T^D-natural {c}, T^(DxD)-natural {d}")
+    print("      -> with the earlier failure under subalgebras: the spectrum is closed")
+    print("         under (x) and under nothing else.  (x) is the only relation that is")
+    print("         one between the functors, T^{A(x)B} = T^A o T^B.")
+    return ok
+
+
+def aut_equivariance():
+    ok = True
+    W2, n, Ms = al.W2, 2, 3
+    m = n * W2.N
+    Lm = lambda g: [[F(1), F(0), F(0)], [F(0), g[0][0], g[0][1]], [F(0), g[1][0], g[1][1]]]
+
+    def post(vecs, g, M):                       # apply phi_n to values: v -> L v
+        L = Lm(g); out = []
+        for j in range(n):
+            blk = vecs[j * 3:(j + 1) * 3]
+            out += [sum((blk[b] * L[a][b] for b in range(3)), P(M)) for a in range(3)]
+        return out
+
+    def pre(polys, g, M):                       # precompose with phi_n
+        L = Lm(g)
+        im = [sum((P.var(M, j * 3 + b) * L[a][b] for b in range(3)), P(M))
+              for j in range(n) for a in range(3)]
+        if M > m: im.append(P.var(M, m))
+        return [al.subs(p, im, M) for p in polys]
+
+    def marked_block(Z, mm, MM):                # singles out the x-block coordinate
+        hh = P.var(MM, mm); u = _u(mm, MM); s = Z[1] * Z[1]
+        return [u[i] + hh * Z[i] + hh * hh * s * Z[i] for i in range(mm)]
+
+    g = [[F(2), F(-1)], [F(3), F(1, 2)]]
+    XA = al.lift_map(W2, n, gen_map(n, Ms, 3), Ms, hs=n)
+    print("\n  D3  Aut(A)-equivariance on the lifted locus, for A = R[x,y]/m^2 (Aut = GL(2))")
+    for label, obj, exp in [("the lifted field X^A", XA, True),
+                            ("Euler on the locus", euler(XA, m, m + 1), True),
+                            ("a method singling out the x-block", marked_block(XA, m, m + 1), False)]:
+        got = (post(obj, g, m + 1) == pre(obj, g, m + 1))
+        ok &= (got == exp)
+        print(f"      commutes with phi_n:  {label:34s} {got}"
+              + ("" if got == exp else "   <-- UNEXPECTED"))
+    print("      -> T^{J^1_k}-naturality forces honest GL(k)-equivariance of Psi on the")
+    print("         lifted locus, in the ALGEBRA directions, not the R^n directions.")
+    return ok
+
+
+def main():
+    return closure_ops() & aut_equivariance()
+
+
+if __name__ == "__main__": raise SystemExit(0 if main() else 1)

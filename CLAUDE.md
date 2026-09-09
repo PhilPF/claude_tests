@@ -28,6 +28,11 @@ arithmetic. `python3 verify/run_all.py` runs all of it (no dependencies; `sympy`
 unavailable and pip has no index). Lines printed `FAIL` are *expected* failures — methods that
 must **not** satisfy closure; the suite passes iff every outcome matches its prediction.
 
+**"Max degree $\le1$" is not "linear".** Testing linear rigidity by `max u-degree == 1` admits a
+constant term — exactly what a distinguished vector contributes — and it passed a marked-vector
+method that linear rigidity in fact kills, producing a wrong novelty claim. Require every monomial
+to have $u$-degree exactly one.
+
 **Use cubic or higher test fields.** With a quadratic field $\Delta X$ is constant and low-order
 differentials degenerate. This produced spurious results twice.
 
@@ -65,7 +70,8 @@ a settled result without new evidence is the waste this file exists to prevent.
 | Loops *and stolons* survive only for $A=\mathbb R$; lianas iff $c_A=1$ | 17 based algebras $\times$ 6 methods, plus the exact defect identity $h^2(r\cdot1_A-q)X^A$ (`verify/test_spectrum.py`) | a based algebra of dimension $>1$ over which a loop- or stolon-carrying differential is $T^A$-natural |
 | The closure spectrum is a $\otimes$-monoid, not subalgebra-closed | one-line proof plus multiplicativity of $\dim$, $c_A$, balancedness; Laplacian over $D\otimes D$ vs its $S_2$-invariant | a method natural over $A$ and over $B$ but not over $A\otimes B$ |
 | The commutant recovers the presentation | $\mathcal A(X^A)=\rho_A(A)$ on 17 based algebras, and is the common refinement in both coincidence families (`verify/test_presentation.py`) | a lifted field whose commutant is strictly larger than the algebra of its finest presentation |
-| No distinguished vector or endomorphism: $\Psi^0_h(u)=s(h)u$ | the zero field is lifted by every algebra, so every pair collides on it; plus affine rigidity | an algebraically natural family whose $\Psi^0_h$ has a translation part |
+| $\Psi^0_h(u)=s(h)u$ — no distinguished endomorphism | zero-field collision at $n=1$; the no-translation half is just linear rigidity at $M=0$, not new | an algebraically natural family whose $\Psi^0_h$ is not a scalar |
+| Only $\otimes$ transfers between algebras: not sub, quotient or product | three explicit witnesses (`verify/test_relations.py`) | a method natural over $A$ and not over some $A\otimes B$, or a proof that some other relation transfers |
 
 **$N_0$ has now survived the test that killed its predecessors.** It is the newest item, and it is
 the kind of clean combinatorial law that failed three times here: $2^{\text{aromas}}$, then

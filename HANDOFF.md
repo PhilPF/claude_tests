@@ -75,11 +75,26 @@ Already established (verified, **no equivariance assumed**):
   contains both coarser actions. So two presentations always refine to the commutant one, and the
   prescription on the union of lifted loci is **consistent** by induction on dimension. (§7,
   `verify/test_presentation.py`.)
-* **Zero-field rigidity.** $0^A=0$ for every $A$, so every pair of algebras of one dimension collides
-  on the zero field; with affine rigidity this gives $\Psi^0_h(u)=s(h)u$, and $s\equiv1$ under
-  consistency. Hence **no distinguished vector and no distinguished endomorphism**. Note
-  $u+hX+h^2e_1$ is affine on affine fields — affine rigidity misses it, the zero-field collision
-  kills it.
+* **Zero-field rigidity** *(corrected)*. $0^A=0$ for every $A$, so every pair of algebras of one
+  dimension collides on the zero field, giving $\Psi^0_h(u)=s(h)u$ with $s\equiv1$ under
+  consistency. But the zero field is **linear**, so the no-translation half is just linear rigidity
+  at $M=0$; an earlier note claimed $u+hX+h^2e_1$ "escapes affine rigidity and dies to the zero-field
+  collision", which is misleading — linear rigidity kills it outright. The new content is only
+  $S_m=s(h)I_m$, so **no distinguished endomorphism** either.
+* **Only $\otimes$ transfers between algebras.** The spectrum is closed under $\otimes$ and under
+  **nothing else**: not subalgebras (Laplacian; $\mathbb R[s]/(s^3)\subset D\otimes D$), not
+  quotients ($\operatorname{tower}(D\otimes D)$; $D\otimes D\twoheadrightarrow D$), not products
+  ($\operatorname{tower}(D)$; $D\times D$). $\otimes$ is the only relation that is one between the
+  *functors*, so only it lets a condition be applied twice. Consequence: **there is no generating
+  family of test algebras** — in particular one cannot verify naturality on the jet algebras
+  $\mathbb R[x]/\mathfrak m^{r+1}$ and deduce it for their quotients, though every Weil algebra is
+  one. This is a concrete reason (i)$\Rightarrow$(ii) resists.
+* **Aut$(A)$-equivariance, and the first genuine $GL$.** For $\phi:A\to B$, $\phi_n$ intertwines the
+  lifts, so $\phi_n\Psi^{X^A}=\Psi^{X^B}\phi_n$ on lifted fields; for $A=B$ this is
+  $\operatorname{Aut}(A)$-equivariance of $\Psi_m$ on the $A$-lifted locus. Not vacuous:
+  $\operatorname{Aut}(\mathbb R[x_1..x_k]/\mathfrak m^2)=GL(k)$, so that one algebra forces honest
+  $GL(k)$-equivariance — in the **algebra** directions, not the $\mathbb R^n$ ones, which is exactly
+  the recorded gap.
 * **Correction — the non-equivariant witness.** $u+hX+h^2(X^1)^2X$ with the scalar left
   *real*-valued is **not** (T)-natural (defect $2X^1(DX^1v)X$, measured); earlier notes labelled it
   so. §5's own prescription — make the scalar *ring*-valued — gives the genuine witness: for

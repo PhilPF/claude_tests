@@ -74,12 +74,12 @@ def power(A, k):
 
 def tower(base):
     """The same method with the scalar taken RING-valued: on R^m = A^q with
-    m = 2^k q, q odd, and A = base^(x)k, the square and the product happen in A.
-    Every dimension is hit exactly once, so this is a family indexed by plain
-    dimension, and it is (T)-natural for base = D."""
+    m = N0^k q with N0 = dim base not dividing q, and A = base^(x)k, the square and
+    the product happen in A.  Every dimension is hit exactly once, so this is a
+    family indexed by plain dimension, and it is T^{base}-natural."""
     def meth(X, m, Ms):
-        k, q = 0, m
-        while q % 2 == 0: q //= 2; k += 1
+        k, q, N0 = 0, m, base.N
+        while q % N0 == 0: q //= N0; k += 1
         A = power(base, k); N = A.N
         h = P.var(Ms, m); u = _u(m, Ms)
         sig = al.amul(A, X[:N], X[:N], Ms)

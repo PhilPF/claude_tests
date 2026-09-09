@@ -493,18 +493,22 @@ That is the input the gluing needed, and it closes open item 3 up to one point: 
 is always commutative with $\mathbb R^m$ free over it, so that the finest presentation exists.
 Verified in all 19 cases here; not proved.
 
-**Zero-field rigidity.** The zero field is lifted by *every* algebra, $0^A=0$, so every pair of based
-algebras of one dimension collides there. Affine rigidity makes $\Psi^0_h$ affine, $u\mapsto Su+w$,
-and base change of an affine map gives $S_{nN}=I_N\otimes S_n$ and $w_{nN}=1_A\otimes w_n$. Reading
-the second for $A=D$ against $\mathbb R^2$ in its standard basis ($1_D=(1,0)$ but
-$1_{\mathbb R^2}=(1,1)$) forces $w=0$; the first at $n=1$ gives $S_m=S_1I_m$.
+**Zero-field rigidity — with a correction.** The zero field is lifted by *every* algebra, $0^A=0$,
+so every pair of based algebras of one dimension collides there. Base change of an affine map gives
+$S_{nN}=I_N\otimes S_n$ and $w_{nN}=1_A\otimes w_n$; reading the second for $A=D$ against
+$\mathbb R^2$ in its standard basis ($1_D=(1,0)$ but $1_{\mathbb R^2}=(1,1)$) forces $w=0$, and the
+first at $n=1$ gives $S_m=S_1I_m$.
 
-> **Corollary.** $\Psi^0_h(u)=s(h)\,u$, with $s\equiv1$ once consistency is imposed. An
-> algebraically natural family carries **no distinguished vector and no distinguished
-> endomorphism**.
+> **Corollary.** $\Psi^0_h(u)=s(h)\,u$, with $s\equiv1$ once consistency is imposed.
 
-Note how this escapes the earlier net: $u+hX+h^2e_1$ *is* affine on affine fields, so affine rigidity
-misses it — the zero-field collision is what kills it.
+*What is new here, and what is not.* The zero field is **linear**, so $w=0$ is nothing but linear
+rigidity at $M=0$. An earlier draft claimed that $u+hX+h^2e_1$ "escapes affine rigidity and is killed
+by the zero-field collision"; that is misleading — linear rigidity kills it directly, since
+$\Psi^0_h(u)=u+h^2e_1$ is not a linear map. The claim survived a first pass only because the check
+tested $\max_u\deg=1$, which admits a constant term; it now requires every monomial to have
+$u$-degree exactly one. The genuinely new content is $S_m=s(h)I_m$ — the linear part on the zero
+field is a **scalar**, forced by the $n=1$ instance of the tensor compatibility — so the family
+carries no distinguished endomorphism either.
 
 **Where the gluing stands.** Building a non-equivariant algebraically natural family (open item 2)
 has the shape: $\Psi_1$ is free up to affine rigidity, and for $m>1$, $\Psi_m$ is prescribed on
@@ -528,6 +532,39 @@ retraction** — one smooth local formula restricting correctly on every $\{X^A\
 plausible route is to support the junk near a field far from every lifted locus *and* from every
 retraction image, then propagate; that is an inductive genericity argument, and the moduli in high
 dimension are what make it delicate.
+
+**Only the tensor relation transfers.** The Weil algebras form a category, and one would like to
+test naturality on a generating family: every Weil algebra is a quotient of a jet algebra
+$\mathbb R[x_1,\dots,x_k]/\mathfrak m^{r+1}$, so quotient-closure would reduce everything to the jet
+algebras together with finite products. It fails — and so does every relation except $\otimes$.
+
+| relation | transfers? | witness |
+|---|---|---|
+| $A,B\in\mathcal W\Rightarrow A\otimes B\in\mathcal W$ | **yes** | one line, from $T^{A\otimes B}=T^AT^B$ |
+| $A\in\mathcal W$ and $B\subseteq A$ | no | Laplacian; $\mathbb R[s]/(s^3)\subset D\otimes D$ |
+| $A\in\mathcal W$ and $A\twoheadrightarrow B$ | no | $\operatorname{tower}(D\otimes D)$; $D\otimes D\twoheadrightarrow D$ by $x,y\mapsto\varepsilon$ |
+| $A,B\in\mathcal W\Rightarrow A\times B\in\mathcal W$ | no | $\operatorname{tower}(D)$; $D\times D$ |
+
+The reason is uniform. $\otimes$ is the only one of these that is a relation between the *functors*,
+$T^{A\otimes B}=T^A\circ T^B$, so one condition can be applied twice. Subalgebra, quotient and
+product give natural transformations *between* functors, and naturality is a condition on each
+functor separately — $\Psi_m$ and $\Psi_{m'}$ in different dimensions are a priori unrelated, so
+nothing passes along a transformation. **Algebraic naturality therefore has no generating family of
+test algebras**, which is one concrete reason the implication (i)$\Rightarrow$(ii) of §11 resists:
+there is no finite set of algebras on which to run an argument.
+
+**What the morphisms do give: a genuine $GL$.** For $\phi:A\to B$ the map $\phi_n=\phi\otimes\operatorname{id}$
+is real-linear, intertwines $X^A$ with $X^B$, and satisfies $T^BF\circ\phi_n=\phi_n\circ T^AF$. So an
+algebraically natural $\Psi$ obeys
+$$\phi_n\circ\Psi^{X^A}_{n\dim A}=\Psi^{X^B}_{n\dim B}\circ\phi_n\qquad\text{on lifted fields,}$$
+a consequence of naturality rather than an extra condition. For $A=B$ it reads: $\Psi_m$ is
+**$\operatorname{Aut}(A)$-equivariant on the $A$-lifted locus** — and that is not vacuous. Since
+$\operatorname{Aut}(\mathbb R[x_1,\dots,x_k]/\mathfrak m^2)=GL(k)$, naturality under that one algebra
+forces honest $GL(k)$-equivariance there (verified: the lifted field is $GL(2)$-invariant, Euler
+commutes with the action, a method singling out one algebra block does not). This is the first
+genuine $GL$ to appear in this programme, and it acts in the **algebra** directions rather than the
+$\mathbb R^n$ directions — precisely the gap §11 records against "algebraically natural
+$\Rightarrow$ affine equivariant".
 
 **What the Galois analogy gives, and what it does not.** The shape is right — a correspondence
 between classes of methods and $\otimes$-closed classes of algebras, with the monoid structure in the
@@ -802,6 +839,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_partitioned.py` | PRK satisfies (T) for the $D$-block lift, fails for the real lifts; not affine equivariant |
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/algebra.py` | based algebras (Weil and products), base change over any of them, recognition of lifts |
+| `verify/test_relations.py` | failure of quotient- and product-closure with explicit witnesses; $\operatorname{Aut}(A)$-equivariance on the lifted locus and the $GL(k)$ it produces |
 | `verify/test_presentation.py` | the commutant recovers the algebra on 17 based algebras and is the common refinement in both coincidence families; zero-field rigidity; degeneration of the jet loci on the real locus |
 | `verify/test_spectrum.py` | the closure spectrum: monoidality under $\otimes$, the corrected survival law on 17 based algebras, the stolon-defect identity, failure of subalgebra-closure, and the incomparable tower spectra |
 | `verify/test_affine.py` | the collision trichotomy on all 41 pairs from 16 based algebras; affine rigidity and its two witness pairs; its separation from linear rigidity; functoriality of the cross-dimensional collisions |

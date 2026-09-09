@@ -55,6 +55,8 @@ def gen_map(n, Ms, deg, const=True):
 
 
 def deg_u(p, n):
+    """max u-degree.  NB: 'affine' is max <= 1, but 'linear' is NOT max == 1 --
+    that admits a constant term.  Linearity is every monomial of u-degree 1."""
     return max((sum(k[:n]) for k in p.d), default=-1)
 
 
@@ -174,7 +176,7 @@ def rigidity():
     print("\n  A2  linear rigidity (Psi^M linear) vs affine rigidity (Psi^X affine)")
     print("      method                          lin-rigid  aff-rigid  transl-eqv  predicted")
     for name, meth, plin, paff in METHODS:
-        rl = all(deg_u(p, n) == 1 for p in meth(lin, n, Ms))
+        rl = all(all(sum(k[:n]) == 1 for k in p.d) for p in meth(lin, n, Ms))
         ra = all(deg_u(p, n) <= 1 for p in meth(aff, n, Ms))
         # translation equivariance: Psi^{X(.+a)}(u) = Psi^X(u+a) - a.  Checked on the
         # single-evaluation methods, which is where the claim carries information; for
