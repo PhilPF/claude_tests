@@ -126,6 +126,17 @@ Two traps specific to this target:
   generated is large enough ($\mathfrak{gl}(nN)$), but every base-change map **preserves the lifted
   locus**, so naturality never compares a lifted field against a generic one.
 
+**AD dictionary, and the shape under $T^*$** (§9). (T) is forward mode, (T*) is reverse mode — the
+$\lambda$-part the method returns on the cotangent-lifted field is the discrete adjoint of its own
+step. For RK, (T*) $\iff$ symplecticity (already recorded). **New and verified:** the shape
+transports *differently* under the two lifts. Leapfrog is (T*)-closed on a nonlinear separable field,
+but only with the **crossed** splitting $\{q,\lambda_p\}\mid\{p,\lambda_q\}$ — the obvious
+cotangent-lifted one fails — because $\langle\lambda,X\rangle=\lambda_qf(p)+\lambda_pg(q)$ is
+separable exactly there. $T$ carries a splitting blockwise; $T^*$ crosses it. So **leapfrog is
+(T)-closed, (T*)-closed and not affine equivariant.** (T*) also carries a prerequisite (T) lacks —
+$T^*$ is functorial only on diffeomorphisms, so $\Psi^X_h$ must be invertible; over $A$ that is free,
+since a matrix over $A$ is invertible iff its real part is.
+
 **Reframing (new, and it changes the target).** The property has an asymmetry the equivariance
 framing hides: $\Psi$ receives $X^A$ as a *bare* field and is not told it is a lift, yet must return
 $T^A$ of the unlifted answer. For a method that is an **algorithm over the base ring** — which is

@@ -81,6 +81,7 @@ a settled result without new evidence is the waste this file exists to prevent.
 | Only $\otimes$ transfers between algebras: not sub, quotient or product | three explicit witnesses (`verify/test_relations.py`) | a method natural over $A$ and not over some $A\otimes B$, or a proof that some other relation transfers |
 | $\operatorname{Aut}(A)$-equivariance is trivial on the base; it generates $\mathfrak{gl}(m-1)$, not $\mathfrak{gl}(m)$ | $d(1)=0$ for every derivation; measured $9,25,49$ at $m=4,6,8$ (`verify/test_aut.py`) | an automorphism-induced map moving the real locus, or a generated algebra exceeding $\mathfrak{gl}(m-1)$ |
 | The *pointwise* commutant reads $\rho_A(A)$ and does not collapse on the real locus | 17 based algebras $\times$ $n=1,2$ at generic/real-locus/origin points; multiplicative; separating (`verify/test_order2.py`) | a lifted jet whose pointwise commutant differs from $\rho_A(A)$, at any point |
+| The shape transports blockwise under $T$ and *crossed* under $T^*$ | leapfrog is (T*)-closed on a nonlinear separable field only for $\{q,\lambda_p\}\mid\{p,\lambda_q\}$; the lifted Hamiltonian is separable exactly there (`verify/test_cotangent.py`) | a method (T*)-closed under the blockwise transport, or leapfrog failing under the crossed one |
 
 **$N_0$ has now survived the test that killed its predecessors.** It is the newest item, and it is
 the kind of clean combinatorial law that failed three times here: $2^{\text{aromas}}$, then

@@ -767,6 +767,36 @@ $$b_ia_{ij}+b_ja_{ji}=b_ib_j,$$
 i.e. **symplecticity**. (The linear test is strictly weaker: the trapezoidal rule passes
 $R(z)R(-z)=1$ but is not symplectic and fails (T*) on nonlinear fields.)
 
+**In AD terms.** (T) is **forward mode** — evaluation over $D$, which is what §2 says — and (T*) is
+**reverse mode**: the $\lambda$-component the method returns on the cotangent-lifted field *is* the
+discrete adjoint of its own step, so (T*) is the statement that differentiate-then-discretise and
+discretise-then-differentiate agree on the reverse sweep. Read that way the recorded result is the
+familiar one: the adjoint of an RK method is again RK (Hager; Sanz-Serna), and it is the *same*
+method exactly when the method is symplectic.
+
+**The shape transports differently for $T$ and for $T^*$** *(verified)*. §7 records that the property
+is stated relative to a shape which itself carries a base change; leapfrog's shape is a splitting of
+the coordinates. Under $T$ the splitting travels blockwise — coordinate $j$ becomes the $A$-block
+$\{jN,\dots\}$, and that matching alone makes leapfrog closed. Under $T^*$ it does **not**. On a
+nonlinear separable field $X(q,p)=(f(p),g(q))$, leapfrog satisfies (T*) with the **crossed** matching
+$\{q,\lambda_p\}\mid\{p,\lambda_q\}$, and fails with the obvious cotangent-lifted one
+$\{q,\lambda_q\}\mid\{p,\lambda_p\}$ and with base-versus-fibre. The reason is visible in the lifted
+Hamiltonian:
+$$\langle\lambda,X(x)\rangle=\lambda_q f(p)+\lambda_p g(q),$$
+whose two terms involve $(p,\lambda_q)$ and $(q,\lambda_p)$ — so it is separable exactly for the
+crossed grouping, which is also the grouping that keeps the method explicit. Leapfrog splits a
+Hamiltonian into Lagrangian halves, and the adjoint of a position behaves like a momentum. So the
+shape is genuinely part of the data and its transport is *dictated by the lift*, not chosen: $T$
+carries a splitting blockwise, $T^*$ crosses it.
+
+Two consequences worth recording. **Leapfrog is (T)-closed, (T*)-closed and not affine equivariant** —
+both AD modes coexist with non-equivariance, which is the sharpest form of the point that the
+equivariance framing is not the only lens. And (T*) has a **prerequisite (T) does not**: since $T^*$
+is functorial only on the groupoid of diffeomorphisms, (T*) is statable only where $\Psi^X_h$ is
+invertible. Over $A$ that costs nothing extra — by the unit criterion of §7 a matrix over $A$ is
+invertible iff its real part is (verified) — so once (T*) is statable over $\mathbb R$ it is statable
+over every $A$.
+
 **The reason** is *not* "$T^*$ is not a functor" — $T^*$ is a functor on the groupoid of
 diffeomorphisms, and the cotangent lift of a vector field is perfectly natural. The operative
 point is that $T=-\otimes_\mathbb R D$ is a **covariant base change**, so the Picard and stage
