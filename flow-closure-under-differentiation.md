@@ -706,6 +706,46 @@ counterexample, and the classification splits into two independent halves: *whic
 base-change* (a question about natural structures, where §4's trichotomy answers it for tensors), and
 *which programs over a fixed shape are closed*.
 
+### The other Weil algebra, and why it is not a stronger test
+
+Two different objects carry the name. Ours is **Weil's algebra of infinitely near points** — a
+finite-dimensional commutative $\mathbb R$-algebra $\mathbb R\oplus\mathfrak m$ with $\mathfrak m$
+nilpotent — and by Kolář–Michor–Slovák these classify the product-preserving endofunctors of
+$\mathbf{Mf}$. The other is **Cartan's Weil algebra of a Lie algebra**,
+$W(\mathfrak g)=\Lambda\mathfrak g^*\otimes S\mathfrak g^*$: an acyclic differential graded algebra
+modelling $EG$, the object behind Chern–Weil theory and the Cartan model of equivariant cohomology.
+They share a name and a namesake; I know of no theorem identifying them.
+
+There *is* a genuine common home, and it is the graded one. Taking the generator of
+$D=\mathbb R[\varepsilon]/(\varepsilon^2)$ to be **odd** rather than even replaces $TM$ by
+$\Pi TM=T[1]M=\operatorname{Map}(\mathbb R^{0|1},M)$, whose function algebra is
+$C^\infty(T[1]M)=\Omega^\bullet(M)$ with the de Rham differential as a homological vector field; and
+$W(\mathfrak g)$ is the function algebra of $\mathfrak g[1]\oplus\mathfrak g[2]$. So both notions sit
+inside "algebras of functions on graded or infinitesimally thickened points", which is presumably the
+kinship being felt.
+
+**It is nevertheless not a stronger condition here, and the reason is one line.** An ordinary
+manifold's $A$-points are $(A_{\text{even}})^n$ — there are no odd parameters to pair with odd basis
+vectors — so a super Weil algebra acts through its **even part**, which is an ordinary Weil algebra.
+Verified: $\mathrm{even}(\Lambda\mathbb R^2)=D$, and $\mathrm{even}(\Lambda\mathbb R^3)$ has *exactly*
+the structure constants of $J^1_3=\mathbb R[x,y,z]/\mathfrak m^2$ — an algebra already in the family,
+indeed the one whose $\operatorname{Aut}=GL(3)$ generated the $\mathfrak{gl}(m-1)$ of the previous
+subsection. $\mathrm{even}(\Lambda\mathbb R^4)$ and $\mathrm{even}(\Lambda\mathbb R^5)$ are ordinary
+Weil algebras of dimensions 8 and 16. So the graded notion contributes no new test algebra.
+
+Where it *would* add strength is not by supplying an algebra but by enlarging the category the
+**method** acts on: methods defined on supermanifolds or graded bundles, whose input field itself has
+odd components. That is a different — and larger — undertaking than adding a test object, and the
+J-list of the previous subsection is what it would have to be re-run against, since a program in
+$+,\times$ and evaluations extends to a supercommutative ring only once its signs are fixed.
+
+And the topological notion does touch this project, but in **§8**, not here. §8 records that
+$\tfrac12X'X$ is not a natural vector field — it needs a connection — and that by
+Kolář–Michor–Slovák the natural operators $\mathfrak X\rightsquigarrow\mathfrak X$ are only
+$X\mapsto cX$, so that the affine category is exactly what makes non-exact one-step methods possible
+at all. Chern–Weil theory is the theory of what a connection buys; that is the honest point of
+contact, and it is about §8's connection-dependence rather than about a stronger closure axiom.
+
 **What the Galois analogy gives, and what it does not.** The shape is right — a correspondence
 between classes of methods and $\otimes$-closed classes of algebras, with the monoid structure in the
 role of the subgroup lattice — and it is what organises the results above. Two things it does not
@@ -1014,7 +1054,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_jettransport.py` | leapfrog is closed for the lifted splitting and for neither other matching; it is not affine equivariant; invertibility in $A$ is exactly unit-hood |
 | `verify/test_aut.py` | $\operatorname{Der}(A)$ for the based algebras; every derivation kills the unit; the $\operatorname{Aut}$-generated Lie algebra is $\mathfrak{gl}(m-1)$ at $m=4,6$; the $J^1_k$-lift is the $k$-fold Whitney sum |
 | `verify/test_order2.py` | the pointwise commutant reads $\rho_A(A)$ without collapsing on the real locus; multiplicativity; separation of the factorizations; the per-algebra-free lift formula on polynomial data |
-| `verify/test_relations.py` | failure of quotient- and product-closure with explicit witnesses; $\operatorname{Aut}(A)$-equivariance on the lifted locus and the $GL(k)$ it produces |
+| `verify/test_relations.py` | graded Weil algebras act through their even parts, which are ordinary ones; failure of quotient- and product-closure with explicit witnesses; $\operatorname{Aut}(A)$-equivariance on the lifted locus and the $GL(k)$ it produces |
 | `verify/test_presentation.py` | the commutant recovers the algebra on 17 based algebras and is the common refinement in both coincidence families; zero-field rigidity; degeneration of the jet loci on the real locus |
 | `verify/test_spectrum.py` | the closure spectrum: monoidality under $\otimes$, the corrected survival law on 17 based algebras, the stolon-defect identity, failure of subalgebra-closure, and the incomparable tower spectra |
 | `verify/test_affine.py` | the collision trichotomy on all 41 pairs from 16 based algebras; affine rigidity and its two witness pairs; its separation from linear rigidity; functoriality of the cross-dimensional collisions |

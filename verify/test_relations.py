@@ -32,6 +32,7 @@ D3.  WHAT THE MORPHISMS DO GIVE.  For phi: A -> B the map phi_n = phi (x) id is
      section 11 records against "algebraically natural => affine equivariant".
 """
 from fractions import Fraction as F
+from itertools import combinations
 from poly import P
 import algebra as al
 from test_affine import gen_map, _u, euler
@@ -131,8 +132,70 @@ def aut_equivariance():
     return ok
 
 
+def wedge_even(k):
+    """The even part of Lambda R^k as an ordinary based algebra: basis the even wedge
+    monomials, which commute because even elements are central in a supercommutative
+    algebra.  An ordinary manifold sees only this part -- the A-points of R^n are
+    (A_even)^n, there being no odd parameters to pair with odd basis vectors."""
+    basis = []
+    for d in range(0, k + 1, 2):
+        basis += [frozenset(c) for c in combinations(range(k), d)]
+    basis.sort(key=lambda t: (len(t), sorted(t)))
+    idx = {b: i for i, b in enumerate(basis)}
+    N = len(basis)
+
+    def sign(I, J):
+        arr, s = sorted(I) + sorted(J), 1
+        for _ in range(len(arr)):
+            for b in range(len(arr) - 1):
+                if arr[b] > arr[b + 1]:
+                    arr[b], arr[b + 1] = arr[b + 1], arr[b]; s = -s
+        return s
+
+    table = {}
+    for i, I in enumerate(basis):
+        for j, J in enumerate(basis):
+            if i > j: continue
+            v = [F(0)] * N
+            if not (I & J): v[idx[I | J]] = F(sign(I, J))
+            table[(i, j)] = v
+    return al.Alg(f"even part of Lambda R^{k}", N, table, [F(1)] + [F(0)] * (N - 1))
+
+
+def graded():
+    """D4.  The OTHER notion named after Weil -- Cartan's W(g) = Lambda g^* (x) S g^*,
+    the model of EG behind Chern-Weil theory -- lives in the graded world, where
+    R[theta] with theta ODD gives Pi T = T[1] and C^oo(T[1]M) = Omega(M).  It is not a
+    stronger test for us: on an ordinary manifold a super Weil algebra acts through its
+    EVEN part, and that is an ordinary Weil algebra already of the kind in our family."""
+    ok = True
+    print("\n  D4  graded Weil algebras act through their even parts")
+    print("      k   dim   unital/assoc/comm   m^2 = 0   identification")
+    ids = {2: ("D = R[e]/(e^2)", al.D2), 3: ("J^1_3 = R[x,y,z]/m^2", al.W3)}
+    for k in (2, 3, 4, 5):
+        A = wedge_even(k)
+        m2 = all(all(A.c[a][b][g] == 0 for g in range(A.N))
+                 for a in range(1, A.N) for b in range(1, A.N))
+        note = ""
+        if k in ids:
+            name, ref = ids[k]
+            same = (A.c == ref.c and A.one == ref.one)
+            ok &= same
+            note = f"IS {name}: {same}"
+        else:
+            note = "an ordinary Weil algebra of dim " + str(A.N)
+        ok &= A.check()
+        print(f"      {k}   {A.N:3d}   {str(A.check()):17s}   {str(m2):7s}   {note}")
+    print("      -> even(Lambda R^3) has exactly the structure constants of W_3, which is")
+    print("         already in the family (it is the algebra whose Aut = GL(3) generated")
+    print("         gl(m-1) in test_aut).  So the graded notion adds no test algebra.")
+    print("      -> it would add strength only by enlarging the category the METHOD acts")
+    print("         on -- methods on supermanifolds, whose input field has odd components.")
+    return ok
+
+
 def main():
-    return closure_ops() & aut_equivariance()
+    return closure_ops() & aut_equivariance() & graded()
 
 
 if __name__ == "__main__": raise SystemExit(0 if main() else 1)

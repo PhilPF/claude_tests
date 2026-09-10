@@ -126,6 +126,16 @@ Two traps specific to this target:
   generated is large enough ($\mathfrak{gl}(nN)$), but every base-change map **preserves the lifted
   locus**, so naturality never compares a lifted field against a generic one.
 
+**The other Weil algebra — checked, and it is not stronger** (§7). Cartan's
+$W(\mathfrak g)=\Lambda\mathfrak g^*\otimes S\mathfrak g^*$, the $EG$-model behind Chern–Weil and
+equivariant cohomology, is a different object from Weil's algebras of infinitely near points; no
+theorem identifies them. The common home is the graded world ($\mathbb R[\theta]$ odd gives
+$\Pi T=T[1]$, $C^\infty(T[1]M)=\Omega(M)$). But it supplies **no new test algebra**: an ordinary
+manifold's $A$-points are $(A_{\text{even}})^n$, so a super Weil algebra acts through its even part,
+and $\mathrm{even}(\Lambda\mathbb R^3)$ is *exactly* $J^1_3$, already in the family. It would add
+strength only by enlarging the category the **method** acts on (supermanifolds/graded bundles). The
+topological notion's real point of contact is §8's connection-dependence, not a closure axiom.
+
 **AD dictionary, and the shape under $T^*$** (§9). (T) is forward mode, (T*) is reverse mode — the
 $\lambda$-part the method returns on the cotangent-lifted field is the discrete adjoint of its own
 step. For RK, (T*) $\iff$ symplecticity (already recorded). **New and verified:** the shape
