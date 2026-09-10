@@ -359,3 +359,54 @@ R4u  = Alg("R^4 (unit-first)", 4,
 
 ALGEBRAS = {1: [R1], 2: [D2, R2s, R2u], 3: [J3, W2, DxR, R3u, R3s],
             4: [J4, DD, W3, Axy, DxD, J3xR, W2xR, R4u]}
+
+
+# ---- the semisimple quotient: how many real points A has ---------------------
+# For a SMOOTH (non-polynomial) f, base change f^A(u) = sum_a d^a f(pi u) (u-pi u)^a/a!
+# terminates only because u - pi(u) is nilpotent.  So the expansion point is not a
+# convention: it is forced to be the real part, and there is one real part PER LOCAL
+# FACTOR.  Nil(A) is the radical of the trace form (char 0, commutative), and
+# dim_R A/Nil(A) counts those points.
+
+def _trace_form(A):
+    """B(x,y) = tr(L_{xy}) in the chosen basis."""
+    t = [sum(A.c[a][b][b] for b in range(A.N)) for a in range(A.N)]      # tr(L_{e_a})
+    return [[sum(A.c[a][b][g] * t[g] for g in range(A.N)) for b in range(A.N)]
+            for a in range(A.N)]
+
+
+def nilradical(A):
+    """basis of Nil(A) = rad(trace form).  Each returned vector is checked nilpotent."""
+    M = [row[:] for row in _trace_form(A)]
+    N, piv, r = A.N, [], 0
+    for c in range(N):
+        p = next((i for i in range(r, N) if M[i][c]), None)
+        if p is None: continue
+        M[r], M[p] = M[p], M[r]
+        M[r] = [x / M[r][c] for x in M[r]]
+        for i in range(N):
+            if i != r and M[i][c]:
+                f = M[i][c]; M[i] = [M[i][j] - f * M[r][j] for j in range(N)]
+        piv.append(c); r += 1
+    free = [c for c in range(N) if c not in piv]
+    out = []
+    for c in free:
+        v = [F(0)] * N; v[c] = F(1)
+        for i, p in enumerate(piv): v[p] = -M[i][c]
+        out.append(v)
+    return out
+
+
+def is_nilpotent(A, x):
+    y = list(x)
+    for _ in range(A.N):
+        if all(v == 0 for v in y): return True
+        y = [sum(y[a] * x[b] * A.c[a][b][g] for a in range(A.N) for b in range(A.N))
+             for g in range(A.N)]
+    return all(v == 0 for v in y)
+
+
+def num_real_points(A):
+    """dim_R A/Nil(A).  For a product of Weil algebras this is the number of local
+    factors, i.e. the number of expansion points a smooth base change needs."""
+    return A.N - len(nilradical(A))

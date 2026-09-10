@@ -7,6 +7,8 @@ a *disputed* citation or to look up something genuinely not recorded here.
 
 Provenance is marked. **[V]** = verified verbatim against the source in this project.
 **[R]** = reported by an agent, not independently confirmed — treat as a lead, not a citation.
+**[B]** = standard background, stated from knowledge and **not** read from a source in this project;
+the mathematical content is checked here computationally, the attribution is not.
 
 ---
 
@@ -94,3 +96,12 @@ equivariant in fixed dimension $\Rightarrow$ aromatic B-series.
 **[R]** Kolář–Michor–Slovák, *Natural Operations in Differential Geometry*, 1993 — Weil functors
 are exactly the product-preserving bundle functors; natural operators $\mathfrak X\to\mathfrak X$
 are only $X\mapsto cX$.
+
+**[B]** Dubuc, *$C^\infty$-schemes*, Amer. J. Math. **103** (1981) 683–690; Moerdijk & Reyes,
+*Models for Smooth Infinitesimal Analysis*, Springer 1991; Joyce, *Algebraic Geometry over
+$C^\infty$-rings*, Mem. AMS 2019 — a $C^\infty$-ring is a product-preserving functor
+$\mathbf{CartSp}\to\mathbf{Set}$, i.e. a set with an operation for every smooth map; Weil algebras
+are exactly the **local** finite-dimensional ones (a non-local one is a finite product of them),
+and their $C^\infty$-structure is base change. Used in §7
+("the definition"). The identification $f^A=T^Af$ is verified here in
+`verify/test_transport.py`; the citations are from background, not fetched.
