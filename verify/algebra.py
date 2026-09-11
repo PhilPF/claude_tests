@@ -410,3 +410,94 @@ def num_real_points(A):
     """dim_R A/Nil(A).  For a product of Weil algebras this is the number of local
     factors, i.e. the number of expansion points a smooth base change needs."""
     return A.N - len(nilradical(A))
+
+
+# ---- the boundary of the Weil world -----------------------------------------
+# A finite-dimensional commutative R-algebra is a product of local ones, and the
+# only finite field extensions of R are R and C, so each residue field is R or C.
+# A is a product of WEIL algebras iff every residue field is R -- equivalently iff
+# the trace form induced on A/Nil(A) is POSITIVE DEFINITE (a real factor contributes
+# a +, a complex factor the hyperbolic pair diag(+,-)).  That is the exact boundary
+# at which SMOOTH base change stops being defined: (*) terminates only on nilpotents.
+
+def trace_signature(A):
+    """(p, n, z) for the trace form B(x,y) = tr(L_{xy}): positive, negative and
+    radical dimensions.  z = dim Nil(A)."""
+    M = [row[:] for row in _trace_form(A)]
+    N = A.N
+    p = q = 0
+    idx = list(range(N))
+    for c in range(N):
+        if not M[c][c]:
+            k = next((i for i in range(c + 1, N) if M[i][c]), None)
+            if k is None:
+                j = next((i for i in range(c + 1, N) if M[c][i]), None)
+                if j is None: continue
+                k = j
+            for r in range(N): M[r][c] += M[r][k]          # x -> x + y
+            for r in range(N): M[c][r] += M[k][r]
+            if not M[c][c]: continue
+        d = M[c][c]
+        p += (d > 0); q += (d < 0)
+        for i in range(c + 1, N):
+            if M[i][c]:
+                f = M[i][c] / d
+                for j in range(N): M[i][j] -= f * M[c][j]
+                for j in range(N): M[j][i] -= f * M[j][c]
+    return p, q, N - p - q
+
+
+def is_split(A):
+    """True iff A is a product of Weil algebras, i.e. every residue field is R.
+    These are exactly the algebras over which base change of SMOOTH data is defined."""
+    return trace_signature(A)[1] == 0
+
+
+def is_unit(A, x):
+    """x invertible in A: the multiplication matrix L_x has full rank."""
+    M = [[sum(x[a] * A.c[a][b][g] for a in range(A.N)) for b in range(A.N)]
+         for g in range(A.N)]
+    R, r = [row[:] for row in M], 0
+    for c in range(A.N):
+        i = next((i for i in range(r, A.N) if R[i][c]), None)
+        if i is None: continue
+        R[r], R[i] = R[i], R[r]
+        for k in range(A.N):
+            if k != r and R[k][c]:
+                f = R[k][c] / R[r][c]
+                R[k] = [R[k][j] - f * R[r][j] for j in range(A.N)]
+        r += 1
+    return r == A.N
+
+
+# ---- algebras outside the Weil world ----------------------------------------
+# Finite-dimensional, commutative, and NOT products of Weil algebras: C appears as
+# a residue field.  Base change of POLYNOMIAL data works verbatim (substitution);
+# base change of SMOOTH data does not exist.
+
+CC   = Alg("C = R[i]", 2, {(1, 1): [-1, 0]}, [1, 0])
+CxR  = Alg("C x R", 3, {(0, 0): [1, 0, 0], (0, 1): [0, 1, 0], (0, 2): [0, 0, 0],
+                        (1, 1): [-1, 0, 0], (1, 2): [0, 0, 0], (2, 2): [0, 0, 1]},
+           [1, 0, 1])
+Rx2  = Alg("R[x]/(x^2-1) = R^2", 2, {(1, 1): [1, 0]}, [1, 0])   # split: a control
+NONWEIL = [CC, CxR]
+
+
+def rebase(A, S, name=None):
+    """A in the new basis f_b = sum_a S[a][b] e_a (S invertible over Q).  The based
+    algebra changes, and so do the invariants c_A and balancedness -- that is the
+    point of `based`."""
+    N, Si = A.N, _inverse(S)
+    tab = {}
+    for b in range(N):
+        for g in range(b, N):
+            old = [sum(S[a][b] * S[a2][g] * A.c[a][a2][de]
+                       for a in range(N) for a2 in range(N)) for de in range(N)]
+            tab[(b, g)] = [sum(Si[e][de] * old[de] for de in range(N)) for e in range(N)]
+    one = [sum(Si[e][de] * A.one[de] for de in range(N)) for e in range(N)]
+    out = Alg(name or f"{A.name} [rebased]", N, {}, one)
+    for b in range(N):
+        for g in range(N):
+            v = tab[(b, g)] if b <= g else tab[(g, b)]
+            for e in range(N): out.c[b][g][e] = v[e]
+    return out

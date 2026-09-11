@@ -35,9 +35,23 @@ closed class has the cardinality of the continuum. Consequently:
 
 Strengthen from one algebra to all of them, **coherently across factorizations** $m=n\dim A$. Call it
 **algebraic naturality**: for each such $A$, $\Psi_{n\dim A}$ restricted to $A$-lifted fields is the
-$\mathbb R$-realization of the $A$-base change of $\Psi_n$. By Kolář–Michor–Slovák the legitimate class
-is **Weil algebras and their finite products** — these are exactly the product-preserving functors on
-manifolds; $\mathbb C$ is not one of them.
+$\mathbb R$-realization of the $A$-base change of $\Psi_n$.
+
+**Corrected: the class is finite-dimensional commutative $\mathbb R$-algebras, not Weil algebras.**
+Kolář–Michor–Slovák's Weil algebras are exactly the product-preserving functors on $\mathbf{Mf}$, and
+this file used to conclude "$\mathbb C$ is not one of them" — true, and the wrong conclusion.
+Every residue field of a finite-dimensional commutative $\mathbb R$-algebra is $\mathbb R$ or
+$\mathbb C$; the Weil products are exactly those with all residue fields $\mathbb R$ (equivalently
+the trace form on $A/\mathrm{Nil}$ has no negative square — computable, `al.is_split`), and that is
+exactly the condition for base change of **smooth** data, since $(*)$ terminates only on nilpotents.
+For polynomial or (locally) analytic data any finite-dimensional commutative algebra works, and the
+closure property is well posed there: **Euler, Heun, midpoint and RK4 are $T^{\mathbb C}$-natural**,
+and §4's trichotomy predicts every non-Weil row (`verify/test_nonweil.py`). $\mathbb C$ is strictly
+stronger, not a formality: $c_A$ is a **unit in every basis** over a split algebra, while
+$c_{\mathbb C}=1+i^2=0$, so the **Laplacian method dies over $\mathbb C$ and survives over $D$** — a
+separation no Weil algebra can produce. Complexification is a functor on real-analytic manifolds and
+not on smooth ones; that, and only that, is what the KMS restriction records. Since jet transport is
+run on Taylor methods with analytic fields, the larger class is the one the application lives in.
 
 Already established (verified, **no equivariance assumed**):
 
@@ -191,6 +205,20 @@ under lift) is the bookkeeping of that uniformity, hence belongs to closure. Its
 $\otimes$-monoid **is** the cocycle (verified over $D\otimes D$), $\iota$ is the standing
 identification trap made a datum, and §9's crossed $T^*$ transport **is** stability of the admissible
 class.
+
+**Beyond the lifts: the $\operatorname{Der}(A)$ twists** (§7, `verify/test_nonweil.py`). The fields
+$\pi_A$-related to $X$ are far more than the lifts: every $\delta\in\operatorname{Der}(A)$ gives a
+vertical linear $\delta_A$ on $A^n$ with $X^A+\delta_A$ still $\pi_A$-related to $X$. Verified:
+$[\delta_A,X^A]=0$ always (X^A is $\operatorname{Aut}(A)$-invariant), so the exact flows split as
+$\varphi^{X^A}_t\circ T^{\exp(t\delta)}$; a method keeps the **base** half of that and does **not**
+split the commuting pair. That is the right division of labour rather than a defect —
+$\exp(t\delta)$ is transcendental ($e^{ct}$ on $D$'s fibre), so the algebra part must be taken
+exactly, which is what $\operatorname{Aut}(A)$-equivariance supplies. So the invariant-manifold use of
+jet transport (the twist is the internal dynamics; the invariance equation seeks a zero of
+$X^A-\delta_A$) needs no new axiom. $\operatorname{Der}(\mathbb C)=0$: the twists are a nilpotent
+phenomenon. More generally every property here is naturality on a **subcategory** of
+$\mathbf{Vect}$ (objects $(M,X)$, morphisms $p$ with $Tp\circ Y=X\circ p$): all of it gives the flow
+(§8), the affine morphisms give B-series, base change gives closure. Which subcategory is the dial.
 
 The open questions, in order of interest:
 

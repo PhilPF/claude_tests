@@ -95,7 +95,11 @@ equivariant in fixed dimension $\Rightarrow$ aromatic B-series.
 **[R]** Sanz-Serna, *SIAM Rev.* **58** (2016) 3–33 — symplectic RK for adjoint equations.
 **[R]** Kolář–Michor–Slovák, *Natural Operations in Differential Geometry*, 1993 — Weil functors
 are exactly the product-preserving bundle functors; natural operators $\mathfrak X\to\mathfrak X$
-are only $X\mapsto cX$.
+are only $X\mapsto cX$. **Note the category**: the classification is over $\mathbf{Mf}$, i.e. over
+*smooth* manifolds, and that is the sole source of the Weil restriction — see §7 ("beyond Weil").
+For polynomial or analytic data the corresponding class is all finite-dimensional commutative
+$\mathbb R$-algebras; complexification is a functor on real-analytic manifolds and not on smooth
+ones. Do not quote this entry as saying $\mathbb C$ is an illegitimate test algebra for closure.
 
 **[B]** Dubuc, *$C^\infty$-schemes*, Amer. J. Math. **103** (1981) 683–690; Moerdijk & Reyes,
 *Models for Smooth Infinitesimal Analysis*, Springer 1991; Joyce, *Algebraic Geometry over

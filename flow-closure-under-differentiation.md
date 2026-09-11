@@ -818,6 +818,95 @@ carries structure — a splitting, uniform for every $A$; a metric, uniform only
 Finally, this places Gimeno et al. correctly: their jet transport is object 3 above with $A=J^r_k$ —
 an operation for computing jets of the numerical flow, not a property distinguishing integrators.
 
+### Beyond Weil: the algebra class is set by the regularity of the data
+
+**Correction.** This project recorded, from Kolář–Michor–Slovák, that "the legitimate class is Weil
+algebras and their finite products — these are exactly the product-preserving functors on manifolds;
+$\mathbb C$ is not one of them". The first clause is right and the conclusion drawn from it was not.
+$\mathbb C$ is not a product-preserving functor on $\mathbf{Mf}$, but it **is** a legitimate — and
+strictly stronger — test algebra for the closure property, and the property is not about Weil
+algebras at all.
+
+**The structure of the boundary.** A finite-dimensional commutative $\mathbb R$-algebra is a finite
+product of local ones, and the only finite field extensions of $\mathbb R$ are $\mathbb R$ and
+$\mathbb C$, so every residue field is one of those two. Hence
+
+$$A\ \text{is a product of Weil algebras}\iff\text{every residue field is }\mathbb R
+\iff\text{the trace form }B(x,y)=\operatorname{tr}(L_{xy})\text{ has no negative square,}$$
+
+a real factor contributing $+$ and a complex one the hyperbolic pair $\operatorname{diag}(+,-)$; the
+radical of $B$ is $\operatorname{Nil}(A)$. *Verified* (`verify/test_nonweil.py`, W1): signature
+$(+p,-0,0^z)$ on all seventeen based algebras, $(+1,-1)$ for $\mathbb C$, $(+2,-1)$ for
+$\mathbb C\times\mathbb R$, $(+2,-2)$ for $\mathbb C\otimes\mathbb C$ — with $\mathbb R[x]/(x^2-1)$ as
+the control, which looks exotic, is $\mathbb R^2$, and is correctly classified as split.
+
+**Closure holds over non-Weil algebras.** *Verified* (W2): Euler, Heun, the midpoint rule and RK4 are
+$T^{\mathbb C}$-natural, and over $\mathbb C$, $\mathbb C\times\mathbb R$ and $\mathbb C\otimes D$
+every row of the method table matches §4's prediction — a loop or a stolon needs $\dim A=1$, a liana
+needs $c_A=1_A$. Nothing in the trichotomy and nothing in the machinery ever used nilpotency: base
+change of a polynomial is substitution, which needs only a commutative ring.
+
+**And $\mathbb C$ is a strictly new test, not a formality.** Over a product of Weil algebras
+$c_A=\sum_\alpha e_\alpha^2$ is a **unit in every basis**: its image in $A/\operatorname{Nil}A\cong
+\mathbb R^k$ has $j$-th component $\sum_\alpha(\bar e_\alpha)_j^2>0$, the $\bar e_\alpha$ spanning.
+So the liana factor can never vanish inside the Weil world. Over $\mathbb C$ in the basis $(1,i)$ it
+is $1+i^2=0$. Consequently **the Laplacian method dies over $\mathbb C$ and survives over $D$** — a
+separation no Weil algebra can produce. *Verified* (W3), including the converse caveat: rebasing
+$\mathbb C$ to $(1,2i)$ gives $c_A=-3$, a unit, so the implication runs one way only.
+The collision trichotomy is equally indifferent: $\mathcal C(\mathbb C,D)$ is the affine maps and
+$\mathcal C(\mathbb C,\mathbb R^2_{\text{std}})$ the linear ones, by the same unit-agreement rule
+(W5) — so affine rigidity now has a witness pair inside dimension $2$ that is not two Weil algebras.
+
+**Where the Weil condition is genuinely needed: smooth data, and nothing else.** The Taylor sum
+$(*)$ terminates only because $u-\pi u$ is nilpotent. A complex residue field leaves a direction in
+which no real expansion point will do — in $\mathbb C$, $(i-c)^2=-1-c^2-2ci=0$ needs $c^2=-1$ — so
+$f^{\mathbb C}$ is undefined for a general smooth $f$, while polynomial base change is defined and
+functorial over every one of these algebras (*verified*, W4). That is the whole content of the Weil
+restriction: **complexification is a functor on real-analytic manifolds and not on smooth ones**, and
+Kolář–Michor–Slovák's classification is recording the smoothness of $\mathbf{Mf}$, not a constraint
+of the closure property. So the correct statement of the class is
+
+| data | legitimate algebras |
+|---|---|
+| polynomial | any commutative $\mathbb R$-algebra |
+| analytic (locally) | any finite-dimensional commutative $\mathbb R$-algebra |
+| smooth | the split ones: Weil algebras and their finite products |
+
+and the closure spectrum $\mathcal W(\Psi)$ should be indexed by the second row, not the third. This
+matters for the intended application rather than only in principle: jet transport is run on Taylor
+methods with analytic fields, exactly where the larger class is available.
+
+### Relating the lift to other fields: the $\operatorname{Der}(A)$ twists
+
+The second thing the base-change framing hides is that **the lifts are a thin slice of the fields
+$\pi_A$-related to $X$**. The natural home is the category $\mathbf{Vect}$ whose objects are pairs
+$(M,X)$ and whose morphisms are smooth $p$ with $Tp\circ Y=X\circ p$; the flow is natural on all of
+it, and any method natural on all of it is the flow (§8). Every property in this subject is
+naturality on a *subcategory*: affine morphisms give B-series (MMMV), the base-change morphisms give
+closure. Which subcategory is the dial.
+
+Inside the base-change fibre there is already more than the lift. Each $\delta\in\operatorname{Der}(A)$
+induces a **vertical linear field** $\delta_A$ on $A^n$, acting slotwise, and $X^A+\delta_A$ is
+$\pi_A$-related to $X$ without being a lift. Two facts, both *verified* (W6):
+
+* $[\delta_A,X^A]=0$, for every derivation of every algebra in the family — because $X^A$ is
+  $\operatorname{Aut}(A)$-invariant, being natural in $A$, so the flow of $\delta_A$ preserves it.
+  Hence the exact flows split, $\varphi^{X^A+\delta}_t=\varphi^{X^A}_t\circ T^{\exp(t\delta)}$ with
+  $\exp(t\delta)\in\operatorname{Aut}(A)$.
+* A method keeps the **base** half — $\pi_A\circ\Psi^{X^A+\delta}_h=\Psi^X_h\circ\pi_A$, since the
+  twist is vertical — and does **not** split the commuting pair:
+  $\Psi^{X^A+\delta}_h\neq\Psi^{X^A}_h\circ\Psi^{\delta_A}_h$ for Heun, on every algebra with a
+  nonzero derivation.
+
+The second is not a defect but the correct division of labour, and it is exactly what the
+parameterization method does in practice: $\exp(t\delta)$ is transcendental — on $D$ it is $e^{ct}$
+on the fibre — so no polynomial method can produce it, and the algebra part must be taken
+**exactly** while the method handles only $X^A$. What supplies it is $\operatorname{Aut}(A)$-equivariance,
+already recorded, so this use of jet transport — invariant manifolds, where the twist is the internal
+dynamics and the invariance equation asks for a zero of $X^A-\delta_A$ — needs no new axiom. Finally
+$\operatorname{Der}(\mathbb C)=0$: the twists are a **nilpotent** phenomenon, living exactly where
+jets do and vanishing on the part of the enlarged class that jets do not reach.
+
 ### The other Weil algebra, and why it is not a stronger test
 
 Two different objects carry the name. Ours is **Weil's algebra of infinitely near points** — a
@@ -975,8 +1064,9 @@ the discrete transpose of an RK method is a *different* method. In one line:
 * **Definability is impossible — settled negatively.** One might hope to characterise (T)-natural methods intrinsically, presupposing neither an equivariance class nor a series. The extension theorem of §5 rules this out in **every** category — smooth, analytic *or* algebraic — since the counterexamples are already polynomial. What is missing is not regularity but a **dimension-uniformity axiom**; the equivariance hypothesis is not a removable technical convenience, it is exactly the missing content.   The constructive replacement is to stop privileging $D$. Call $\Psi$ **algebraically natural**
   if for *every* finite-dimensional commutative $\mathbb R$-algebra $A$, $\Psi_{n\dim A}$ restricted to
   $A$-lifted fields is the $\mathbb R$-realization of the $A$-base change of $\Psi_n$. By
-  Kolář–Michor–Slovák this is exactly naturality with respect to **all product-preserving
-  endofunctors of $\mathbf{Mf}$** — intrinsic, series-free and equivariance-free — and the three
+  Kolář–Michor–Slovák this contains naturality with respect to **all product-preserving
+  endofunctors of $\mathbf{Mf}$** — intrinsic, series-free and equivariance-free — and is strictly
+  larger than it, the Weil products being exactly the split algebras (§7, "beyond Weil"); the three
   algebra types kill the three obstructions separately:
 
   | algebra | condition it imposes | what it kills |
@@ -1134,11 +1224,16 @@ the starred items were re-verified here. Items still resting on a single pass ar
   definition; the resulting basis-relativity is then $GL$-conjugation, hence invisible for
   equivariant $\Psi$ and visible only where the conjecture lives. *(This corrects the instruction I
   gave — "quantify over all bases" — which would have been vacuous.)*
-* **Two scope corrections.** The legitimate class is Weil algebras **and their finite products**,
-  not all finite-dimensional commutative $\mathbb R$-algebras ($\mathbb C$ gives no product-preserving
-  functor on real manifolds). And $A=\mathbb R^k$ yields only *diagonal* decoupling, not
-  $\Psi^{X\oplus Y}=\Psi^X\oplus\Psi^Y$ — though that still kills every forest with a non-root
-  component.
+* **Two scope corrections — and the first of them was itself wrong.** It read: "the legitimate class
+  is Weil algebras **and their finite products**, not all finite-dimensional commutative
+  $\mathbb R$-algebras ($\mathbb C$ gives no product-preserving functor on real manifolds)".
+  **Retracted** (§7, "beyond Weil"): the parenthesis is true and does not narrow the class. Weil-ness
+  is exactly what base change of *smooth* data requires, not what the property requires; the
+  formulation it "corrected" — *every* finite-dimensional commutative $\mathbb R$-algebra — was
+  right, and $\mathbb C$ is a strictly stronger test than any Weil algebra (it kills the Laplacian
+  method, which $D$ does not). The second correction stands: $A=\mathbb R^k$ yields only *diagonal*
+  decoupling, not $\Psi^{X\oplus Y}=\Psi^X\oplus\Psi^Y$ — though that still kills every forest with
+  a non-root component.
 * **Coherence does not recover $GL(n)$-equivariance.** Both passes say no. They locate it
   differently — one finds the group large enough ($\mathfrak{gl}(nN)$ is generated) but the lifted
   locus too thin — *this half is corrected: the automorphism-generated Lie algebra is exactly
@@ -1163,6 +1258,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_partitioned.py` | PRK satisfies (T) for the $D$-block lift, fails for the real lifts; not affine equivariant |
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/algebra.py` | based algebras (Weil and products), base change over any of them, recognition of lifts |
+| `verify/test_nonweil.py` | the class is finite-dimensional commutative algebras, not Weil ones: the trace-form signature separates split from non-split on 22 algebras; Euler/Heun/midpoint/RK4 are $T^{\mathbb C}$-natural and §4's trichotomy predicts every non-Weil row; $c_A$ is a unit over every split algebra and $0$ over $\mathbb C$, so the Laplacian dies there and survives over $D$; the collision trichotomy extends; $[\delta_A,X^A]=0$ for every derivation |
 | `verify/test_transport.py` | base change is the $C^\infty$-ring structure: the Taylor formula $(*)$ on the 8 local algebras and functoriality on all 17; the expansion point counted by $\dim A/\mathrm{Nil}(A)$; the lift of $1/x$ equals the algebraic inverse; the implicit-midpoint stage equation transports; $T^{A\otimes B}=T^AT^B$ on the nose and leapfrog's splitting lifted twice by $D$ closed over $D\otimes D$; and the separation of transport from closure — the Laplacian and aromatic methods transport over all 17 algebras yet close only where $c_A=1_A$ / $\dim_{\mathbb R}A=1$ |
 | `verify/test_jettransport.py` | leapfrog is closed for the lifted splitting and for neither other matching; it is not affine equivariant; invertibility in $A$ is exactly unit-hood |
 | `verify/test_aut.py` | $\operatorname{Der}(A)$ for the based algebras; every derivation kills the unit; the $\operatorname{Aut}$-generated Lie algebra is $\mathfrak{gl}(m-1)$ at $m=4,6$; the $J^1_k$-lift is the $k$-fold Whitney sum |
