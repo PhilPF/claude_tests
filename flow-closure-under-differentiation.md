@@ -969,6 +969,69 @@ So the honest status of P1–P5 is that they characterise *what structure a meth
 tensors, which projections, which contractions — and not which method it is. The residue is still the
 extension-theorem junk, and the missing axiom still has the shape of P1 extended off the lifted locus.
 
+### Decoupling: the axiom that connects dimensions additively
+
+P6 left the residue where it has always been — the extension theorem — and the reason is visible in
+the definition. **Closure connects dimensions multiplicatively.** (AN) relates $\Psi_n$ to
+$\Psi_{n\dim A}$ and to nothing else, which is exactly the freedom §5 exploits: choose $\Psi_q$ as you
+like for every odd $q$, and let base change fill in the rest of the tower. Any axiom that closes that
+gap has to connect $n$ and $m$ to $n+m$. The candidate is
+
+$$\textbf{(D)}\qquad \Psi^{X\oplus Y}_{n+m,\,h}\;=\;\Psi^{X}_{n,h}\oplus\Psi^{Y}_{m,h}
+\qquad\text{for \emph{independent} }X,Y.$$
+
+**What (D) is, in this project's own terms.** Base change along $\mathbb R^k$ sends *one* field to the
+**diagonal** $X\oplus\cdots\oplus X$ — *verified*: $X^{\mathbb R^k}$ in the shuffled realization is
+literally the $k$-fold diagonal product, for $k=2,3$ (`verify/test_decoupling.py`, E1). So closure
+over $\mathbb R^k$ is precisely **(D) with the same field in every factor**, and (D) is its multi-field
+completion. That completion is something the base-change formalism structurally cannot express: a base
+change acts on one field at a time. This is the sharp form of "relating the extension to different
+vector fields" — not the $\operatorname{Der}(A)$ twists of the next subsection, which stay inside one
+fibre, but **products of distinct fields**.
+
+**(D) and closure are independent** *(verified, E2)*. In one direction the coordinate-wise method
+$u+hX+h^2(\partial_iX^i)X^i$ (no sum) decouples and is not closed. In the other — and this is the
+substantial half — take **leapfrog with the plain shape "first half $\mid$ second half"**. The block
+realization carries the first half of $\{1,\dots,n\}$ to the first half of $\{1,\dots,n\dim A\}$, so
+this is a genuine *plain-dimension-indexed* family, and it is closed over the **whole class**:
+verified over $D$, $\mathbb R^2$ in two bases, $\mathbb C$, two more members of $A_\lambda$,
+$\mathbb R[\varepsilon]/\varepsilon^3$, $\mathbb R[x,y]/\mathfrak m^2$ and $D\otimes D$ (E3). It fails (D): at
+dimensions $2+2$ the shape of $\mathbb R^4$ is $\{0,1\}\mid\{2,3\}$ while the two factors contribute
+$\{0\}\mid\{1\}$ and $\{2\}\mid\{3\}$, i.e. $\{0,2\}\mid\{1,3\}$. So
+
+> **closure over all of $\mathbf{FCA}$ does not imply (D)**, and Störmer–Verlet is the witness: it is
+> closed for each single field and not for independent fields in two blocks.
+
+That also localises how leapfrog escapes the published characterisations. It is not that closure is
+too weak to see it; leapfrog genuinely fails an axiom that affine equivariance contains — the product
+one — while satisfying the closure half in full.
+
+**What (D) costs the extension theorem.** Under closure alone $\Psi_q$ is free for every odd $q$.
+Under (D) it is determined on every product locus by strictly lower dimensions, and the construction
+of §5 loses its independence across the tower: *verified*, the §5 witness $\operatorname{tower}(D)$ is
+$T^D$-natural and fails (D) at dimensions $1{+}1$, $2{+}2$ and $1{+}2$ (E4). The free data shrinks
+from "all of $\Psi_q$" to "$\Psi_d$ on **irreducible** fields" — those that are neither a product nor a
+lift. A generic field is still irreducible, so this is a smaller residue, **not an empty one**, and
+the extension theorem is wounded rather than refuted.
+
+**An honest negative, recorded so it is not re-walked.** One might hope (D) constrains a *single*
+$\Psi_d$, which closure provably never does. At $n=1$ the two prescriptions do overlap: *verified*,
+$X^D$ is a product field exactly for **affine** $X$ (E5). There closure gives $\Psi_2^{X^D}=T\Psi_1^X$
+and (D) gives $\Psi_1^{ax+b}\oplus\Psi_1^{ax}$, and equating the fibre components forces
+$\Psi_1^{ax}(v)$ to be linear with no constant term. That is **linear rigidity**, which closure
+already delivers on its own. So (D) buys nothing at $n=1$; its content is entirely in the propagation
+across dimensions above.
+
+**Conjecture (open).** *Algebraically natural over $\mathbf{FCA}$ and decoupling $\Rightarrow$ affine
+equivariant, hence a B-series.* It survives every witness recorded here — leapfrog fails (D), the
+coordinate-wise method fails closure, $\operatorname{tower}(D)$ fails both — and it holds outright for
+contraction-type methods, since full closure forces $N_0=1$ by §4, i.e. trees, and trees are
+$GL$-equivariant. It is not proved. The natural attack is the one the extension theorem suggests:
+can §5's construction be redone respecting (D) on the irreducible locus? If yes the conjecture is
+false and the residue is permanent; if no, this is the factorisation
+$[\text{equivariance}]\cap[\text{closure}]$ finally derived rather than assumed, with **(D) in place of
+equivariance** — a strictly weaker and far more natural hypothesis.
+
 ### Relating the lift to other fields: the $\operatorname{Der}(A)$ twists
 
 The second thing the base-change framing hides is that **the lifts are a thin slice of the fields
@@ -1351,6 +1414,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_partitioned.py` | PRK satisfies (T) for the $D$-block lift, fails for the real lifts; not affine equivariant |
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/algebra.py` | based algebras (Weil and products), base change over any of them, recognition of lifts |
+| `verify/test_decoupling.py` | decoupling (D) as the additive dimension axiom: $X^{\mathbb R^k}$ is the $k$-fold diagonal, so $\mathbb R^k$-closure is (D) for equal fields; (D) and closure independent, with leapfrog (plain halves shape, closed over nine algebras including $\mathbb C$) failing (D) and the coordinate-wise method failing closure; $\operatorname{tower}(D)$ fails (D) at three dimension pairs; and the $n=1$ overlap is the affine locus, yielding only linear rigidity |
 | `verify/test_necessary.py` | the property on $\mathbf{FCA}$ and six necessary conditions: module rigidity ($A$-differentiability of the output, Cauchy–Riemann over $\mathbb C$) and its strictness; $\#\operatorname{Hom}(A,\mathbb R)=p-q$, so $\mathbb C$ has no augmentation; the exact identity $\Delta_{\mathbb R^{nN}}(X^A)=\rho_A(c_A)(\Delta_AX)^A$; the family $A_\lambda$ with $c_A=1+\lambda$ and the Laplacian defect of $\lambda$-degree 1; the spectrum analytically closed, hence never the split algebras; collisions across the family still affine |
 | `verify/test_nonweil.py` | the class is finite-dimensional commutative algebras, not Weil ones: the trace-form signature separates split from non-split on 22 algebras; Euler/Heun/midpoint/RK4 are $T^{\mathbb C}$-natural and §4's trichotomy predicts every non-Weil row; $c_A$ is a unit over every split algebra and $0$ over $\mathbb C$, so the Laplacian dies there and survives over $D$; the collision trichotomy extends; $[\delta_A,X^A]=0$ for every derivation |
 | `verify/test_transport.py` | base change is the $C^\infty$-ring structure: the Taylor formula $(*)$ on the 8 local algebras and functoriality on all 17; the expansion point counted by $\dim A/\mathrm{Nil}(A)$; the lift of $1/x$ equals the algebraic inverse; the implicit-midpoint stage equation transports; $T^{A\otimes B}=T^AT^B$ on the nose and leapfrog's splitting lifted twice by $D$ closed over $D\otimes D$; and the separation of transport from closure — the Laplacian and aromatic methods transport over all 17 algebras yet close only where $c_A=1_A$ / $\dim_{\mathbb R}A=1$ |

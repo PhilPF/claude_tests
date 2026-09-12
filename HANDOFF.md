@@ -244,6 +244,40 @@ so here are six things a method cannot avoid:
   fattening the locus**. The gluing of §5 survives, affine rigidity is still the ceiling, and the
   missing axiom still has the shape of P1 extended off the lifted locus.
 
+**Decoupling (D): the additive dimension axiom** (§7, `verify/test_decoupling.py`). Closure connects
+dimensions **multiplicatively** — (AN) relates $\Psi_n$ to $\Psi_{n\dim A}$ and nothing else, which is
+exactly the freedom §5's extension theorem exploits. The candidate that closes the gap is
+$$\textbf{(D)}\qquad\Psi^{X\oplus Y}_{n+m,h}=\Psi^X_{n,h}\oplus\Psi^Y_{m,h}\quad\text{for independent }X,Y.$$
+
+* **What it is.** Verified: $X^{\mathbb R^k}$ in the shuffled realization is literally the $k$-fold
+  **diagonal** $X\oplus\cdots\oplus X$. So closure over $\mathbb R^k$ *is* (D) with the same field in
+  every factor, and (D) is its **multi-field completion** — something base change structurally cannot
+  express, since a base change acts on one field at a time. This is the sharp form of "relating the
+  extension to different vector fields": products of *distinct* fields, not the $\operatorname{Der}(A)$
+  twists (which stay inside one fibre).
+* **Independent of closure, both ways.** The coordinate-wise method $u+hX+h^2(\partial_iX^i)X^i$ (no
+  sum) decouples and is not closed. Conversely **leapfrog with the plain shape "first half | second
+  half"** is a genuine plain-dimension-indexed family (the block realization carries first half to
+  first half) and is closed over the **whole class** — verified over nine algebras including
+  $\mathbb C$ and two members of $A_\lambda$ — yet **fails (D)**: at $2{+}2$ the shape of $\mathbb R^4$
+  is $\{0,1\}|\{2,3\}$ while the factors give $\{0,2\}|\{1,3\}$. So **closure over all of
+  $\mathbf{FCA}$ does not imply (D)**, and this localises leapfrog's escape: it is closed for each
+  single field, not for independent fields in two blocks.
+* **What it costs the extension theorem.** Under closure alone $\Psi_q$ is free for odd $q$; under (D)
+  it is determined on every product locus by strictly lower dimensions. Verified: §5's witness
+  $\operatorname{tower}(D)$ is $T^D$-natural and fails (D) at $1{+}1$, $2{+}2$, $1{+}2$. The free data
+  shrinks to $\Psi_d$ on **irreducible** fields (neither a product nor a lift) — a smaller residue,
+  not an empty one.
+* **Honest negative, do not re-walk.** At $n=1$ the overlap of the two prescriptions is exactly the
+  **affine** fields ($X^D$ is a product iff $X$ is affine, verified), and equating them there yields
+  only **linear rigidity**, which closure already gives. (D) buys nothing at $n=1$.
+* **Conjecture (open).** Algebraically natural over $\mathbf{FCA}$ **+ (D)** $\Rightarrow$ affine
+  equivariant, hence B-series. Survives every witness here, and holds for contraction-type methods
+  (full closure forces $N_0=1$, i.e. trees, which are $GL$-equivariant). **The attack**: can §5's
+  construction be redone respecting (D) on the irreducible locus? If yes, the residue is permanent;
+  if no, this is $[\text{equivariance}]\cap[\text{closure}]$ derived rather than assumed, with (D) —
+  strictly weaker and far more natural — in place of equivariance.
+
 **Beyond the lifts: the $\operatorname{Der}(A)$ twists** (§7, `verify/test_nonweil.py`). The fields
 $\pi_A$-related to $X$ are far more than the lifts: every $\delta\in\operatorname{Der}(A)$ gives a
 vertical linear $\delta_A$ on $A^n$ with $X^A+\delta_A$ still $\pi_A$-related to $X$. Verified:
