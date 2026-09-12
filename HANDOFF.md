@@ -206,6 +206,44 @@ $\otimes$-monoid **is** the cocycle (verified over $D\otimes D$), $\iota$ is the
 identification trap made a datum, and §9's crossed $T^*$ transport **is** stability of the admissible
 class.
 
+**The property, formally, and the NECESSARY conditions** (§7, `verify/test_necessary.py`). On
+$\mathbf{FCA}$ = based finite-dimensional commutative $\mathbb R$-algebras $(A,\iota)$ with data class
+$\mathcal D$: $\Psi$ is *algebraically natural* iff
+$\Psi_{nN}[\iota_{n*}X^A]_h\circ\iota_n=\iota_n\circ(\Psi_n[X]_h)^A$ for all $n,(A,\iota),X,h$.
+Basis, data class and the reality of $h$ are all **data**. Sufficient conditions do not characterise,
+so here are six things a method cannot avoid:
+
+* **P1 module rigidity.** $D\Psi^{X^A}_h(u)$ must lie in $\rho_A(A)'$ — the output must be
+  $A$-differentiable; over $\mathbb C$, *holomorphic in, holomorphic out*. Intrinsic form via the
+  commutant theorem: $\Psi$ must be equivariant for $\mathcal A(Z)$. Necessary and **strictly weaker**:
+  the Laplacian satisfies it over $\mathbb C$ and still fails closure; the marked-coordinate method
+  violates it.
+* **P2 projections.** $\eta:\mathbb R\to A$ always exists (so the real locus does, and $\Psi$ restricts
+  to $\Psi_n$ there); an augmentation $\pi:A\to\mathbb R$ exists iff $A$ has a real point, and
+  $\#\operatorname{Hom}(A,\mathbb R)=p-q$, the **signature** of the trace form ($A/\mathrm{Nil}\cong
+  \mathbb R^r\times\mathbb C^s$ gives signature $(r+s,s)$). $\mathbb C$ has none — so
+  **(T-base)/(T-fibre) is a feature of split algebras, not of the property**. Note `num_real_points`
+  returns $p+q=\dim A/\mathrm{Nil}$; use `real_points` for the honest count.
+* **P3 the locus satisfies PDEs.** $A$-linearity of $DZ$ is Cauchy–Riemann over $\mathbb C$, hence
+  harmonicity, hence the real Laplacian annihilates the $\mathbb C$-locus. Exact identity, verified on
+  nine algebras: $\Delta_{\mathbb R^{nN}}(X^A)=\rho_A(c_A)\,(\Delta_AX)^A$. **§4's liana law is now a
+  consequence, not a table**, and $c_{\mathbb C}=0$ *is* harmonicity.
+* **P4 one family inside one dimension.** $A_\lambda=\mathbb R[x]/(x^2-\lambda)$ based by $(1,x)$:
+  dimension 2 throughout, $\lambda>0$ gives $\mathbb R^2$, $\lambda=0$ gives $D$, $\lambda<0$ gives
+  $\mathbb C$, $c_{A_\lambda}=1+\lambda$ takes **every** real value, and $\lambda=0$ is the unique member
+  with a derivation ($T$ is the singular point). For $\Psi$ analytic in the jet the defect is analytic
+  in $\lambda$; verified, the Laplacian's is a **degree-1 polynomial vanishing only at $\lambda=0$**.
+  So **(T) alone is strictly weaker than closure over dimension 2**, at the same pair of dimensions —
+  killing the Laplacian used to need dimension 3.
+* **P5 the spectrum is analytically closed, hence never the Weil world.** $\mathcal W(\Psi)$ meets an
+  irreducible algebraic family in an analytic subset; on a line that is everything or locally finite;
+  $\{\lambda:A_\lambda$ split$\}=[0,\infty)$ is neither. **No method analytic in the jet has closure
+  spectrum exactly the split algebras.** Sharpest form of "not about Weil algebras": it cannot be.
+* **P6 the ceiling does not move.** Collisions across the family are affine and no more, so the union
+  of lifted loci meets itself only in affine fields: the enlarged class **prunes harder without
+  fattening the locus**. The gluing of §5 survives, affine rigidity is still the ceiling, and the
+  missing axiom still has the shape of P1 extended off the lifted locus.
+
 **Beyond the lifts: the $\operatorname{Der}(A)$ twists** (§7, `verify/test_nonweil.py`). The fields
 $\pi_A$-related to $X$ are far more than the lifts: every $\delta\in\operatorname{Der}(A)$ gives a
 vertical linear $\delta_A$ on $A^n$ with $X^A+\delta_A$ still $\pi_A$-related to $X$. Verified:

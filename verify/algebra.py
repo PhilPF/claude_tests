@@ -501,3 +501,22 @@ def rebase(A, S, name=None):
             v = tab[(b, g)] if b <= g else tab[(g, b)]
             for e in range(N): out.c[b][g][e] = v[e]
     return out
+
+
+def Alam(lam, name=None):
+    """R[x]/(x^2 - lam), based by (1, x): ONE algebraic family of based algebras of
+    dimension 2 sweeping all three types.  lam > 0 gives R^2, lam = 0 gives D, lam < 0
+    gives C; c_A = 1 + lam, so the liana invariant takes every real value inside a
+    single dimension.  lam = 0 is the only member with a nonzero derivation."""
+    return Alg(name or f"R[x]/(x^2 - {lam})", 2, {(1, 1): [F(lam), F(0)]}, [F(1), F(0)])
+
+
+def real_points(A):
+    """#Hom_{R-alg}(A, R).  With A/Nil(A) = R^r x C^s the trace form on the quotient has
+    signature (r+s, s), so r = p - q: the number of real points is the SIGNATURE of the
+    trace form.  (num_real_points above returns dim_R A/Nil = p + q, which counts a
+    complex factor twice -- they agree exactly on the split algebras.)  The unit
+    eta : R -> A always exists; an augmentation pi : A -> R exists iff r > 0, so C has
+    NO base projection and the base/fibre split of section 1 is not universal."""
+    p, q, _ = trace_signature(A)
+    return p - q

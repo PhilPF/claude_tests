@@ -876,6 +876,99 @@ and the closure spectrum $\mathcal W(\Psi)$ should be indexed by the second row,
 matters for the intended application rather than only in principle: jet transport is run on Taylor
 methods with analytic fields, exactly where the larger class is available.
 
+### The property on that class, and what it necessarily forces
+
+Sufficient conditions do not characterise — that was the lesson of the retracted definition. What
+follows is the property stated on the enlarged class, and then the conditions a method **cannot
+avoid**.
+
+> **Definition (algebraic naturality).** Let $\mathbf{FCA}$ denote the *based* finite-dimensional
+> commutative associative unital $\mathbb R$-algebras: pairs $(A,\iota)$ with
+> $\iota:\mathbb R^N\xrightarrow{\sim}A$, $N=\dim_{\mathbb R}A$, the basis part of the data, and write
+> $\iota_n:A^n\xrightarrow{\sim}\mathbb R^{nN}$ for the blockwise realization. Fix a data class
+> $\mathcal D$ (polynomial, or analytic on a domain). A *method* is a family $\Psi=\{\Psi_d\}_{d\ge1}$,
+> local, smooth in $h$, consistent. Then $\Psi$ is **algebraically natural over $\mathcal D$** if for
+> every $n$, every $(A,\iota)\in\mathbf{FCA}$, every $X\in\mathcal D\mathfrak X(\mathbb R^n)$ and every
+> small real $h$,
+> $$\Psi_{nN}\bigl[\iota_{n*}X^A\bigr]_h\circ\iota_n\;=\;\iota_n\circ\bigl(\Psi_n[X]_h\bigr)^A.
+> \tag{AN}$$
+
+Three things are data and must not be left implicit: the **basis** $\iota$ (quantifying over all bases
+states $GL(n)$-equivariance by fiat — the standing trap); the **data class** $\mathcal D$, which by the
+previous subsection is what selects the algebras; and the reality of $h$, which is a real constant
+symbol interpreted as $h\cdot1_A$.
+
+Now the necessary conditions. Each is a consequence of (AN), verified in
+`verify/test_necessary.py`; none is sufficient, and P6 says so.
+
+**P1. Module rigidity — generalized Cauchy–Riemann.** The right-hand side of (AN) is $\iota_n$ of a
+base change, and $D(f^A)(u)=(Df)^A(u)$ is $A$-linear. Hence, necessarily,
+$$D\Psi^{X^A}_h(u)\ \in\ \rho_A(A)'\qquad\text{for all }u,h,$$
+i.e. $\Psi^{X^A}_h$ is $A$-differentiable. For $A=\mathbb C$ this says: **a holomorphic field must go
+to a holomorphic map.** Because the commutant recovers the algebra ($\mathcal A(X^A)=\rho_A(A)$, §7),
+this has an intrinsic form — *$\Psi$ must be equivariant for the commutant of the field it is handed*
+— and that is the shape a dimension-uniformity axiom would have. It is genuinely necessary and
+genuinely weaker: *verified*, the Laplacian method satisfies P1 over $\mathbb C$ and still fails (AN)
+there, while the marked-coordinate method $u+hX+h^2X^{(0)}e_0$ violates P1 outright.
+
+**P2. Which projections exist at all.** The unit $\eta:\mathbb R\to A$ exists for every $A$, so the
+real locus $\eta_n(\mathbb R^n)$ is always present, always $\Psi$-invariant, and $\Psi^{X^A}$ restricted
+to it is $\Psi^X$. An **augmentation** $\pi:A\to\mathbb R$ exists only when $A$ has a real point, and
+$$\#\operatorname{Hom}_{\mathbb R\text{-alg}}(A,\mathbb R)=p-q,$$
+the *signature* of the trace form: with $A/\operatorname{Nil}A\cong\mathbb R^r\times\mathbb C^s$ the form
+on the quotient is $\operatorname{diag}(+^{\,r})\oplus\operatorname{diag}(+,-)^{\oplus s}$, so
+$r=p-q$ and $s=q$. *Verified* against a direct solve on the family, and against
+$\dim_{\mathbb R}A/\operatorname{Nil}A=p+q$, which the two agree with exactly on the split algebras.
+$\mathbb C$ has **no** augmentation. So the **(T-base)/(T-fibre) decomposition of §1 is a feature of
+split algebras, not of the property**: what is universal is the section, not the projection.
+
+**P3. The lifted locus satisfies differential identities, and they are where the invariants live.**
+$A$-linearity of $DZ$ is a linear PDE system; over $\mathbb C$ it is Cauchy–Riemann, whose consequence
+is that every component of a lifted field is **harmonic**. So the real Laplacian annihilates the
+$\mathbb C$-locus. More than a curiosity: the exact identity
+$$\Delta_{\mathbb R^{nN}}\bigl(X^A\bigr)\;=\;\rho_A(c_A)\cdot\bigl(\Delta_AX\bigr)^A$$
+holds on the locus for every based $A$ (*verified* on nine, split and non-split), where
+$\Delta_A=\sum_{j\le n}\partial_{A,j}^2$ and $\partial_{A,j}$ is the derivative along $1_A$ in slot $j$.
+§4's liana law is now a **consequence rather than a table**: a method that writes $\Delta$ at dimension
+$n\dim A$ meets $\rho_A(c_A)$ where transport wants the identity, so it closes iff $c_A=1_A$; and
+$c_{\mathbb C}=1+i^2=0$ is harmonicity.
+
+**P4. One algebraic family, inside one dimension.** The based algebras
+$$A_\lambda=\mathbb R[x]/(x^2-\lambda)\quad\text{based by }(1,x)$$
+all have dimension $2$ and sweep every type: $\lambda>0$ gives $\mathbb R^2$, $\lambda=0$ gives $D$,
+$\lambda<0$ gives $\mathbb C$, with $c_{A_\lambda}=1+\lambda$ taking **every real value inside dimension
+$2$** and $\lambda=0$ the unique member carrying a nonzero derivation — the tangent functor is the
+singular point of the deformation. *Verified* across the family: $c_A$, signature, splitness, real
+points, $\dim\operatorname{Der}$. For a method analytic in the jet the closure defect over $A_\lambda$ is
+analytic — for our polynomial methods, **polynomial** — in $\lambda$, so its zero set is the whole
+family or a discrete set. *Verified*: Euler and Taylor-2 have defect $\equiv0$; the **Laplacian
+method's defect is a degree-1 polynomial in $\lambda$ whose only root is $\lambda=0$**. Hence
+
+> **(T) alone is strictly weaker than closure over dimension $2$**, at the very same pair of
+> dimensions $(n,2n)$.
+
+Killing the Laplacian method previously required going to dimension $3$; a single family inside
+dimension $2$ now does it, and it exhibits closure at a fixed pair of dimensions as an infinite
+sequence of conditions rather than one.
+
+**P5. The spectrum is analytically closed — so it is never the Weil world.** Combining: for $\Psi$
+analytic in the jet, $\mathcal W(\Psi)$ meets any irreducible algebraic family of based algebras in an
+analytic subset. On a one-parameter family that is the whole line or locally finite. But
+$$\{\lambda:A_\lambda\ \text{split}\}=[0,\infty)$$
+is neither. Therefore **no method analytic in the jet has closure spectrum exactly the split (Weil)
+algebras.** That is the sharpest available form of "the property is not about Weil algebras": it
+*cannot* be. The measured spectra in the family are the whole line (Euler) or the single point
+$\lambda=0$ (Laplacian) — never the half-line.
+
+**P6. And the ceiling does not move.** The list prunes harder; it does not make the locus fatter.
+*Verified*: for every pair $\lambda\neq\mu$ in the family, $\mathcal C(A_\lambda,A_\mu)$ is the affine
+maps and no more — the units agree, so the collision trichotomy gives affine and stops. Hence the
+union $\bigcup_\lambda\{X^{A_\lambda}\}$ meets itself only in affine fields, the gluing of §5 still
+goes through locus by locus, and **affine rigidity remains the ceiling of the two-lift mechanism**.
+So the honest status of P1–P5 is that they characterise *what structure a method may use* — which
+tensors, which projections, which contractions — and not which method it is. The residue is still the
+extension-theorem junk, and the missing axiom still has the shape of P1 extended off the lifted locus.
+
 ### Relating the lift to other fields: the $\operatorname{Der}(A)$ twists
 
 The second thing the base-change framing hides is that **the lifts are a thin slice of the fields
@@ -1258,6 +1351,7 @@ All exact over $\mathbb Q$; run `python3 verify/run_all.py`.
 | `verify/test_partitioned.py` | PRK satisfies (T) for the $D$-block lift, fails for the real lifts; not affine equivariant |
 | `verify/test_weil.py` | $\operatorname{div}(T^AX)=3\operatorname{div}X$ for $\dim_\mathbb R A=3$; RK4 is $T^A$-natural |
 | `verify/algebra.py` | based algebras (Weil and products), base change over any of them, recognition of lifts |
+| `verify/test_necessary.py` | the property on $\mathbf{FCA}$ and six necessary conditions: module rigidity ($A$-differentiability of the output, Cauchy–Riemann over $\mathbb C$) and its strictness; $\#\operatorname{Hom}(A,\mathbb R)=p-q$, so $\mathbb C$ has no augmentation; the exact identity $\Delta_{\mathbb R^{nN}}(X^A)=\rho_A(c_A)(\Delta_AX)^A$; the family $A_\lambda$ with $c_A=1+\lambda$ and the Laplacian defect of $\lambda$-degree 1; the spectrum analytically closed, hence never the split algebras; collisions across the family still affine |
 | `verify/test_nonweil.py` | the class is finite-dimensional commutative algebras, not Weil ones: the trace-form signature separates split from non-split on 22 algebras; Euler/Heun/midpoint/RK4 are $T^{\mathbb C}$-natural and §4's trichotomy predicts every non-Weil row; $c_A$ is a unit over every split algebra and $0$ over $\mathbb C$, so the Laplacian dies there and survives over $D$; the collision trichotomy extends; $[\delta_A,X^A]=0$ for every derivation |
 | `verify/test_transport.py` | base change is the $C^\infty$-ring structure: the Taylor formula $(*)$ on the 8 local algebras and functoriality on all 17; the expansion point counted by $\dim A/\mathrm{Nil}(A)$; the lift of $1/x$ equals the algebraic inverse; the implicit-midpoint stage equation transports; $T^{A\otimes B}=T^AT^B$ on the nose and leapfrog's splitting lifted twice by $D$ closed over $D\otimes D$; and the separation of transport from closure — the Laplacian and aromatic methods transport over all 17 algebras yet close only where $c_A=1_A$ / $\dim_{\mathbb R}A=1$ |
 | `verify/test_jettransport.py` | leapfrog is closed for the lifted splitting and for neither other matching; it is not affine equivariant; invertibility in $A$ is exactly unit-hood |
